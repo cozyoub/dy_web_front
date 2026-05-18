@@ -1,0 +1,2 @@
+.admin-layout-wrapper {display: flex;}
+.admin-main-container {margin-left: 250px;flex: 1;padding: 24px;min-height: 100vh; background: #f8f8f8;}

@@ -1,0 +1,11 @@
+/* 팝업 개별 박스 */
+.layer-popup-overlay { position: fixed; z-index: 9999; }
+.layer-popup-box {background: #fff; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden; min-width: 280px; max-width: 300px;}
+.layer-popup-box img { width: 100%; display: block;}
+.layer-popup-box a { display: block; text-decoration: none; color: inherit;}
+.layer-popup-box a img { width: 100%; display: block;}
+.layer-popup-box > div { padding: 10px ; font-size: 14px; color: #333;}
+.layer-popup-footer { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-top: 1px solid #eee; background: #f9f9f9;}
+.layer-popup-footer button { background: none; border: none; font-size: 15px; color: #666; cursor: pointer; padding: 4px 8px;font-family: 'suite', sans-serif; font-weight: 600;}
+.layer-popup-footer button:hover { color: #333; text-decoration: underline; }

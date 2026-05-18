@@ -1,0 +1,13 @@
+.sub-visual { width: 100%; height: 100vh; background-color: #1e293b; display: flex; align-items: center; justify-content: center; position: relative; }
+.sub-visual::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); z-index: 1; }
+.sub-visual-wrap{width: 100%; height: 100vh; overflow: hidden; position: absolute;}
+.sub-visual-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.sub-visual-text { position: relative; z-index: 2; text-align: center; color: #fff; }
+.sub-visual-subtitle { font-size: 0.875rem; letter-spacing: 0.15em; opacity: 0.8; margin-bottom: 10px; }
+.sub-visual-title { font-size: 4.375rem; font-weight: 700; }
+.sub-select-container { position: absolute; bottom: 10%; left: 0; width: 100%; display: flex; justify-content: center; z-index: 9; }
+.sub-content { min-height: 60vh; margin: 50px auto 200px 0; }
+
+@media all and (max-width:1200px){
+    
+}
