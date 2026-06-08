@@ -3,7 +3,6 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import "./SubLayout.css";
 import "@/assets/css/sub.css";
-import "@/assets/css/sub02.css";
 import SubNavi from "@/components/SubNavi";
 import { MENU_LIST } from "@/common/menuData";
 

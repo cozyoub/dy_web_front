@@ -72,12 +72,12 @@ export default function About01() {
       .to(
         ".about01-visual .tit-box li:nth-child(1) .kr span",
         { y: "-100%" },
-        "<",
+        "+=0.3",
       )
       .to(
         ".about01-visual .tit-box li:nth-child(2) .en span",
         { y: 0, stagger: 0.05 },
-        "<",
+        "+=0.3",
       )
       .to(".about01-visual .tit-box li:nth-child(2) .kr span", { y: 0 }, "<");
 
@@ -315,7 +315,7 @@ export default function About01() {
                           <li className="tag">Cloudium</li>
                           <li className="tag">폴라리스 오피스</li>
                           <li className="tag">PDA</li>
-                          <li className="tag">키오스크장비</li>
+                          <li className="tag">키오스크 장비</li>
                         </ul>
                       </div>
                       <div className="img-box">
