@@ -191,11 +191,11 @@ export default function About03() {
     <>
       <div className="history-wrap" ref={sectionRef}>
         <div className="sub-inner">
-          <div className="history-head">
-            <h2 className="history-title">동연에스엔티의 걸어온 길</h2>
-          </div>
           <div className="history-body">
             <div className="hist-yr-track">
+              <div className="history-head">
+                <h2 className="history-title">동연에스엔티의 걸어온 길</h2>
+              </div>
               <div className="hist-yr-num" ref={yearNumRef}>
                 {HISTORY_DATA[0].year}
               </div>
