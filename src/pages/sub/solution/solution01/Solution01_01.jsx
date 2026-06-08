@@ -83,7 +83,6 @@ const bottomRow = [
 const rightSections = [
   {
     col: "인사관리",
-    sub: "인사/급여",
     items: [
       "조직관리",
       "인사관리",
@@ -95,7 +94,6 @@ const rightSections = [
   },
   {
     col: "회계관리",
-    sub: "회계관리",
     items: [
       "전표관리",
       "장부관리",
@@ -108,12 +106,10 @@ const rightSections = [
   },
   {
     col: "경영정보",
-    sub: "경영정보",
     items: ["영업정보", "생산/품질", "구매/자재", "자금정보"],
   },
   {
     col: "원가관리",
-    sub: "사후원가",
     items: ["배부기준", "공정원가", "제조원가", "손익관리"],
   },
 ];
@@ -203,13 +199,13 @@ export default function Solution01_01() {
 
           <div ref={subTitleRef} className="solution-intro-sub-title">
             <p>
-              도입기업 성장과 현안 과제 해결을 위해 필수 요구 사항 반영 및
+              도입기업 성장과 현안 과제 해결을 위해 필수 요구 사항 반영 및 
               시스템 확장성을 고려한 <br />
               기업 맞춤형 효율적이고 안정적인 ERP 구축
             </p>
           </div>
         </div>
-
+        
         <div className="solution-detail">
           <div className="sub-inner">
             <h2 className="sub-title">상세 솔루션</h2>
@@ -349,7 +345,7 @@ export default function Solution01_01() {
                       <div key={s.col} className="erp-right-card">
                         <div className="erp-right-card-header">{s.col}</div>
                         <div className="erp-right-card-body">
-                          <div className="erp-right-card-sub">{s.sub}</div>
+                          {/* <div className="erp-right-card-sub">{s.sub}</div> */}
                           {s.items.map((item) => (
                             <div key={item} className="erp-right-card-item">
                               {item}
@@ -367,26 +363,29 @@ export default function Solution01_01() {
         <div className="solution-effect">
           <div className="sub-inner">
             <h2 className="sub-title">솔루션 도입 기대효과</h2>
-            <ul>
+            <ul className="solution-effect-list">
               <li>
-                모든 Data, 상호 연결된 유기적 구조, 무결성 원칙에 입각한
-                경영관리
+                <i><img src="/images/sub/ico_effect01.svg"/></i>
+                <p>무결성 원칙에 입각한
+                경영관리</p>
               </li>
               <li>
-                모든 Data, 발생 장소에서 발생 주체자가 즉시 전산 시스템 으로
-                Data 입력을 통한 데이터 정합성 확보
+                <i><img src="/images/sub/ico_effect02.svg"/></i>
+                <p>전산 시스템 으로
+                Data 입력을 통한 데이터 정합성 확보</p>
               </li>
               <li>
-                모든 Data, 공유, 통합, 집계 되는 체계 구축을 통한 데이터 신뢰성
-                확보
+                <i><img src="/images/sub/ico_effect03.svg"/></i>
+                <p>모든 Data, 공유, 통합, 집계 되는 체계 구축을 통한 데이터 신뢰성</p>
               </li>
               <li>
-                월 마감 (결산)을 통한 명확한 원가, 손익, 수익이 되는 시스템
-                구축을 통한 경영관리의 투명성 확보
+                <i><img src="/images/sub/ico_effect04.svg"/></i>
+                <p>명확한 원가, 손익, 수익이 되는 시스템
+                구축을 통한 경영관리의 투명성</p>
               </li>
               <li>
-                모든 보고 자료, 회의 자료가 시스템으로 관리되는 구조 실현을 통한
-                업무 생산성 향상 및 의사결정 신속성 확보
+                <i><img src="/images/sub/ico_effect05.svg"/></i>
+                <p>업무 생산성 향상 및 의사결정 신속성 확보</p>
               </li>
             </ul>
           </div>
