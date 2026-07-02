@@ -59,7 +59,20 @@
 .contact-wrapper {  margin: 0 auto; padding: 60px 24px;}
 .contact-form-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 40px; }
 .contact-form-row { display: flex; gap: 24px; margin-bottom: 24px; align-items: flex-start; }
-.contact-label { width: 100px; min-width: 100px; font-size: 0.875rem; font-weight: 600; color: #334155; padding-top: 10px;}
+.contact-type-grid { display: flex; gap: 16px; flex-wrap: wrap; }
+.contact-type-grid.error { outline: 1px solid #ef4444; border-radius: 8px; padding: 4px; }
+.contact-type-card { flex: 1; min-width: 180px; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; background: #fff; }
+.contact-type-card.active { border-color: #3b82f6; }
+.contact-type-header { display: flex; align-items: center; gap: 8px; padding: 14px; border-bottom: 1px solid #e2e8f0; cursor: pointer; font-size: 16px; font-weight: 600; color: #334155; background: #f8fafc; }
+.contact-radio { width: 16px; height: 16px; border-radius: 50%; border: 1px solid #cbd5e1; display: inline-block; position: relative; flex-shrink: 0; background: #fff; }
+.contact-radio.checked { border-color: #3b82f6; }
+.contact-radio.checked::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: #3b82f6; }
+.contact-type-items { list-style: none; padding: 14px; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.contact-type-items li { font-size: 16px; color: #475569; cursor: pointer; padding-left: 12px; position: relative; }
+.contact-type-items li::before { content: "·"; position: absolute; left: 0; color: #94a3b8; }
+.contact-type-items li:hover { color: #3b82f6; }
+.contact-type-items li.selected { color: #3b82f6; font-weight: 600; }
+.contact-label { width: 100px; min-width: 100px; font-size: 16px; font-weight: 600; color: #334155; padding-top: 10px;}
 .contact-label.required::after { content: ' *'; color: #ef4444;}
 .contact-input-wrap { flex: 1;}
 .contact-input-wrap input,
@@ -94,6 +107,13 @@
 .contact-done-icon { font-size: 3rem; color: #22c55e; margin-bottom: 16px;}
 .contact-done-box h3 { font-size: 1.375rem; font-weight: 700; color: #1e293b; margin-bottom: 8px;}
 .contact-done-box p { font-size: 0.875rem; color: #64748b;}
+
+@media all and (max-width:767px){
+  .contact-form-card {padding:0; border:none;}
+  .contact-input-wrap{width:100%;}
+  .contact-form-row{flex-direction: column;align-items: flex-start; gap:10px}
+  
+}
 /* E : QnA */
 
 /* S : 사이트맵 */

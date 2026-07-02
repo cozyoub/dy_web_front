@@ -3,7 +3,7 @@ export default function Float() {
     <>
       <div className="fixed-util">
         <div className="go-inquiry">
-          <a href="/customer/qna" title="">
+          <a href="/contact" title="">
             <img src="/images/ico-inquiry.png" alt="" />
           </a>
           <span className="deco" aria-hidden="true"></span>

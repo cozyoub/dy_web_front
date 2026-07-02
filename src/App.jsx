@@ -26,6 +26,7 @@ import Sitemap from "./pages/sub/Sitemap";
 import DemoScrollEx from "./pages/sub/customer/DemoScroll";
 import Float from "./components/Float";
 import Footer from "./components/Footer";
+import Contact from "./pages/sub/Contact";
 
 const extractRoutes = (menuList) => {
   const routes = [];
@@ -69,6 +70,7 @@ function App() {
               <Route path="/about/notice" element={<NoticeList />} />
               <Route path="/about/notice/:id" element={<NoticeDetail />} />
               <Route path="/customer/animation" element={<DemoScrollEx />} />
+              <Route path="/contact" element={<Contact />} />
               <Route path="/sitemap" element={<Sitemap />} />
             </Route>
           </Route>

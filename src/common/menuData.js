@@ -55,6 +55,8 @@ const About04 = lazy(() => import("@/pages/sub/about/About04"))
 const About05 = lazy(() => import("@/pages/sub/about/About05"))
 const About06 = lazy(() => import("@/pages/sub/about/About06"))
 
+const Contact = lazy(() => import("@/pages/sub/Contact"));
+
 /* 공통 메뉴들 .. */
 export const MENU_LIST = [
   {
@@ -277,18 +279,21 @@ export const MENU_LIST = [
       title:"Career",
       path:"/about/about03",
       component:About03
-    },{
-      title:"Contact Us",
-      path:"/about/about04",
-      component:About04
-    },{
-      title:"Help",
-      path:"/about/about05",
-      component:About05
-    },{
+     },
+    //{
+    //   title:"Contact Us",
+    //   path:"/about/about04",
+    //   component:About04
+    // }
+    // {
+    //   title:"Help",
+    //   // path:"/about/about05",
+    //   // component:About05
+    //   externalLink: "https://support.dkpia.com/login"
+    // }
+    ,{
       title:"Customer Center",
-      path:"/about/about06",
-      component:About06
+      externalLink: "https://support.dkpia.com/login"
     },{
       title:"공지사항",
       path:"/about/notice"
@@ -311,20 +316,24 @@ export const MENU_LIST = [
   //     },
   //   ],
   // },
+  // {
+  //   title: "고객지원",
+  //   path: "/customer/qna",
+  //   subMenu: [{
+  //       title: "1:1 문의",
+  //       path: "/customer/qna"
+  //     },
+  //     {
+  //       title: "데모 스크롤",
+  //       path: "/customer/animation"
+  //     },
+  //   ],
+  // },
   {
-    title: "고객지원",
-    path: "/customer/qna",
-    subMenu: [{
-        title: "1:1 문의",
-        path: "/customer/qna"
-      },
-      {
-        title: "데모 스크롤",
-        path: "/customer/animation"
-      },
-    ],
+    title:"Contact",
+    path:"/contact",
+    component:Contact
   },
-  
 ];
 
 /* 관리자 메뉴*/

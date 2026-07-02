@@ -23,9 +23,9 @@ const TopNavi = () => {
       const currentY = window.scrollY;
 
       if (currentY > lastScrollY.current && currentY > 80) {
-        setHidden(true); // 아래로 스크롤 → 숨김
+        setHidden(true);
       } else {
-        setHidden(false); // 위로 스크롤 → 표시
+        setHidden(false);
       }
 
       setIsTop(currentY === 0);
@@ -41,7 +41,6 @@ const TopNavi = () => {
     setTimeout(() => setMobileOpen(false), 0);
   }, [pathname]);
 
-  // 모바일 열릴때 스크롤 막음
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => {
@@ -51,7 +50,6 @@ const TopNavi = () => {
 
   return (
     <>
-      {/* <nav className={`gnb-wrapper ${isSub ? "gnb-sub" : ""} ${hidden ? "gnb-hidden" : ""} ${!isTop ? "gnb-scrolled" : ""}`}> */}
       <nav
         className={`gnb-wrapper ${activeMenu !== null ? "on" : ""} ${hidden ? "gnb-hidden" : ""} ${!isTop ? "gnb-scrolled" : ""}`}
         onMouseLeave={() => {
@@ -96,10 +94,21 @@ const TopNavi = () => {
                           }
                           onMouseLeave={() => setActiveSubMenu(null)}
                         >
-                          <Link to={sub.defaultPath ?? sub.path}>
-                            {sub.title}
-                            <span className="arrow">›</span>
-                          </Link>
+                          {sub.externalLink ? (
+                            
+                              <a href={sub.externalLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {sub.title}
+                              <span className="arrow">›</span>
+                            </a>
+                          ) : (
+                            <Link to={sub.defaultPath ?? sub.path}>
+                              {sub.title}
+                              <span className="arrow">›</span>
+                            </Link>
+                          )}
                           {sub.subMenu?.length > 0 && (
                             <div
                               className={`sub-sub-menu-pane ${activeSubMenu === `${idx}-${sIdx}` ? "show" : ""}`}
@@ -152,11 +161,6 @@ const TopNavi = () => {
             </button>
           </div>
         </div>
-
-        {/* <div
-          className={`gnb-bg ${activeMenu !== null ? "show" : ""}`}
-          onMouseLeave={() => setActiveMenu(null)}
-        /> */}
       </nav>
 
       {/* 모바일 메뉴 .. */}
@@ -190,8 +194,16 @@ const TopNavi = () => {
                 <ul className="mobile-sub-list">
                   {menu.subMenu.map((sub, sIdx) => (
                     <li key={sIdx}>
-                      {/* 2depth - 3depth 있으면 토글, 없으면 링크 */}
-                      {sub.subMenu?.length > 0 ? (
+                      {sub.externalLink ? (
+                        <a
+                          href={sub.externalLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {sub.title}
+                        </a>
+                      ) : sub.subMenu?.length > 0 ? (
                         <button
                           className="mobile-sub-btn"
                           onClick={() =>
