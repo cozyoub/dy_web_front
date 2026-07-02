@@ -22,7 +22,7 @@ import MainLayout from "./layouts/MainLayout";
 import AdminPopupList from "./pages/Admin/popup/AdminPopupList";
 import AdminPopupWrite from "./pages/Admin/popup/AdminPopupWrite";
 import AdminPopupEdit from "./pages/Admin/popup/AdminPopupEdit";
-import Sitemap from "./pages/sub/sitemap";
+import Sitemap from "./pages/sub/Sitemap";
 import DemoScrollEx from "./pages/sub/customer/DemoScroll";
 import Float from "./components/Float";
 import Footer from "./components/Footer";
