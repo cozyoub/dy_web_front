@@ -1,5 +1,7 @@
 import { lazy } from "react";
 
+const Business01 = lazy(() => import("@/pages/sub/business/Business01"));
+
 const Service01 = lazy(() => import("@/pages/sub/service/Service01"));
 const Service02 = lazy(() => import("@/pages/sub/service/Service02"));
 const Service03 = lazy(() => import("@/pages/sub/service/Service03"));
@@ -54,44 +56,50 @@ const About05 = lazy(() => import("@/pages/sub/about/About05"))
 const About06 = lazy(() => import("@/pages/sub/about/About06"))
 
 /* 공통 메뉴들 .. */
-export const MENU_LIST = [{
-    title: "Service",
-    path: "/service",
-    defaultPath:"/service/service01",
-    subMenu: [{
-      title: "DX/AX 컨설팅",
-      path: "/service/service01",
-      component:Service01
-    }, {
-      title: "AI Platform 구축",
-      path: "/service/service02",
-      component:Service02
-    }, {
-      title: "통합 생산시스템 구축",
-      path: "/service/service03",
-      component:Service03
-    }, {
-      title: "전사 업무시스템 구축",
-      path: "/service/service04",
-      component:Service04
-    }, {
-      title: "통합 설비관제시스템 구축",
-      path: "/service/service05",
-      component:Service05
-    }, {
-      title: "통합 물류운송관리시스템 구축",
-      path: "/service/service06",
-      component:Service06
-    }, {
-      title: "전사 ESG&ESH 시스템 구축",
-      path: "/service/service07",
-      component:Service07
-    }, {
-      title: "IT 서비스 관리시스템 구축",
-      path: "/service/service08",
-      component:Service08
-    }]
+export const MENU_LIST = [
+  {
+    title:"Business",
+    path:"/business",
+    component:Business01
   },
+  // {
+  //   title: "Service",
+  //   path: "/service",
+  //   defaultPath:"/service/service01",
+  //   subMenu: [{
+  //     title: "DX/AX 컨설팅",
+  //     path: "/service/service01",
+  //     component:Service01
+  //   }, {
+  //     title: "AI Platform 구축",
+  //     path: "/service/service02",
+  //     component:Service02
+  //   }, {
+  //     title: "통합 생산시스템 구축",
+  //     path: "/service/service03",
+  //     component:Service03
+  //   }, {
+  //     title: "전사 업무시스템 구축",
+  //     path: "/service/service04",
+  //     component:Service04
+  //   }, {
+  //     title: "통합 설비관제시스템 구축",
+  //     path: "/service/service05",
+  //     component:Service05
+  //   }, {
+  //     title: "통합 물류운송관리시스템 구축",
+  //     path: "/service/service06",
+  //     component:Service06
+  //   }, {
+  //     title: "전사 ESG&ESH 시스템 구축",
+  //     path: "/service/service07",
+  //     component:Service07
+  //   }, {
+  //     title: "IT 서비스 관리시스템 구축",
+  //     path: "/service/service08",
+  //     component:Service08
+  //   }]
+  // },
   {
     title: "Soulution",
     path: "/solution",
@@ -213,46 +221,46 @@ export const MENU_LIST = [{
       }]
     }]
   },
-  {
-    title: "Industry",
-    path: "/industry",
-    defaultPath: "/industry/industry01",
-    subMenu:[{
-      title:"철강",
-      path:"/industry/industry01",
-      component:Industry01
-    },{
-      title:"자동차",
-      path:"/industry/industry02",
-      component:Industry02
-    },{
-      title:"조선/플랜트",
-      path:"/industry/industry03",
-      component:Industry03
-    },{
-      title:"이차전지",
-      path:"/industry/industry04",
-      component:Industry04
-    }]
-  },
-  {
-    title:"DX/AX Insight",
-    path:"/insight",
-    defaultPath: "insight/insight01",
-    subMenu:[{
-      title:"USE CASE",
-      path:"/insight/insight01",
-      component:Insight01
-    },{
-      title:"Trend Report",
-      path:"/insight/insight02",
-      component:Insight02
-    },{
-      title:"Brochure",
-      path:"/insight/insight03",
-      component:Insight03
-    }]
-  },
+  // {
+  //   title: "Industry",
+  //   path: "/industry",
+  //   defaultPath: "/industry/industry01",
+  //   subMenu:[{
+  //     title:"철강",
+  //     path:"/industry/industry01",
+  //     component:Industry01
+  //   },{
+  //     title:"자동차",
+  //     path:"/industry/industry02",
+  //     component:Industry02
+  //   },{
+  //     title:"조선/플랜트",
+  //     path:"/industry/industry03",
+  //     component:Industry03
+  //   },{
+  //     title:"이차전지",
+  //     path:"/industry/industry04",
+  //     component:Industry04
+  //   }]
+  // },
+  // {
+  //   title:"DX/AX Insight",
+  //   path:"/insight",
+  //   defaultPath: "insight/insight01",
+  //   subMenu:[{
+  //     title:"USE CASE",
+  //     path:"/insight/insight01",
+  //     component:Insight01
+  //   },{
+  //     title:"Trend Report",
+  //     path:"/insight/insight02",
+  //     component:Insight02
+  //   },{
+  //     title:"Brochure",
+  //     path:"/insight/insight03",
+  //     component:Insight03
+  //   }]
+  // },
   {
     title:"About US",
     path:"/about",

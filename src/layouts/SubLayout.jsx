@@ -8,6 +8,7 @@ import { MENU_LIST } from "@/common/menuData";
 
 // 각 1뎁스별 대표 비주얼 이미지
 const DEPTH1_VISUAL = {
+  "/business":    "/images/sub/visual-about.jpg",
   "/service":  "/images/sub/visual-service.jpg",
   "/solution": "/images/sub/visual-solution.jpg",
   "/industry": "/images/sub/visual-industry.jpg",

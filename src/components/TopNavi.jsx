@@ -9,7 +9,7 @@ const TopNavi = () => {
   const [activeSubMenu, setActiveSubMenu] = useState(null);
   const [activeMenu, setActiveMenu] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openMobileIdx, setOpenMobileIdx] = useState(null); // ✅ 추가
+  const [openMobileIdx, setOpenMobileIdx] = useState(null);
   const [openMobileSubIdx, setOpenMobileSubIdx] = useState(null);
 
   const lastScrollY = useRef(0);
@@ -52,7 +52,8 @@ const TopNavi = () => {
   return (
     <>
       {/* <nav className={`gnb-wrapper ${isSub ? "gnb-sub" : ""} ${hidden ? "gnb-hidden" : ""} ${!isTop ? "gnb-scrolled" : ""}`}> */}
-       <nav className={`gnb-wrapper ${activeMenu !== null ? "on" : ""} ${hidden ? "gnb-hidden" : ""} ${!isTop ? "gnb-scrolled" : ""}`}
+      <nav
+        className={`gnb-wrapper ${activeMenu !== null ? "on" : ""} ${hidden ? "gnb-hidden" : ""} ${!isTop ? "gnb-scrolled" : ""}`}
         onMouseLeave={() => {
           setActiveMenu(null);
           setActiveSubMenu(null);
@@ -61,7 +62,11 @@ const TopNavi = () => {
         <div className="gnb-container inner">
           <Link to="/" className="logo">
             <img src="/images/common/logo.svg" alt="로고" className="th-dark" />
-            <img src="/images/common/logo_wh.svg" alt="로고" className="th-light" />
+            <img
+              src="/images/common/logo_wh.svg"
+              alt="로고"
+              className="th-light"
+            />
           </Link>
 
           <ul className="main-menu">
@@ -76,41 +81,43 @@ const TopNavi = () => {
               >
                 <Link to={menu.defaultPath ?? menu.path}>{menu.title}</Link>
 
-                <div
-                  className={`sub-menu-pane ${activeMenu === idx ? "show" : ""}`}
-                >
-                  <ul className="sub-menu">
-                    {menu.subMenu.map((sub, sIdx) => (
-                      <li
-                        key={sIdx}
-                        className={`sub-menu-item ${activeSubMenu === `${idx}-${sIdx}` ? "active" : ""}`}
-                        onMouseEnter={() =>
-                          sub.subMenu?.length &&
-                          setActiveSubMenu(`${idx}-${sIdx}`)
-                        }
-                        onMouseLeave={() => setActiveSubMenu(null)}
-                      >
-                        <Link to={sub.defaultPath ?? sub.path}>
-                          {sub.title}
-                          <span className="arrow">›</span>
-                        </Link>
-                        {sub.subMenu?.length > 0 && (
-                          <div
-                            className={`sub-sub-menu-pane ${activeSubMenu === `${idx}-${sIdx}` ? "show" : ""}`}
-                          >
-                            <ul className="sub-sub-menu">
-                              {sub.subMenu.map((subSub, ssIdx) => (
-                                <li key={ssIdx}>
-                                  <Link to={subSub.path}>{subSub.title}</Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {menu.subMenu?.length > 0 && (
+                  <div
+                    className={`sub-menu-pane ${activeMenu === idx ? "show" : ""}`}
+                  >
+                    <ul className="sub-menu">
+                      {menu.subMenu.map((sub, sIdx) => (
+                        <li
+                          key={sIdx}
+                          className={`sub-menu-item ${activeSubMenu === `${idx}-${sIdx}` ? "active" : ""}`}
+                          onMouseEnter={() =>
+                            sub.subMenu?.length &&
+                            setActiveSubMenu(`${idx}-${sIdx}`)
+                          }
+                          onMouseLeave={() => setActiveSubMenu(null)}
+                        >
+                          <Link to={sub.defaultPath ?? sub.path}>
+                            {sub.title}
+                            <span className="arrow">›</span>
+                          </Link>
+                          {sub.subMenu?.length > 0 && (
+                            <div
+                              className={`sub-sub-menu-pane ${activeSubMenu === `${idx}-${sIdx}` ? "show" : ""}`}
+                            >
+                              <ul className="sub-sub-menu">
+                                {sub.subMenu.map((subSub, ssIdx) => (
+                                  <li key={ssIdx}>
+                                    <Link to={subSub.path}>{subSub.title}</Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </li>
             ))}
           </ul>
