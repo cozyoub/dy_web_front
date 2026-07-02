@@ -189,55 +189,57 @@ export default function About03() {
 
   return (
     <>
-      <div className="history-wrap" ref={sectionRef}>
-        <div className="sub-inner">
-          <div className="history-body">
-            <div className="hist-yr-track">
-              <div className="history-head">
-                <h2 className="history-title">동연에스엔티의 걸어온 길</h2>
-              </div>
-              <div className="hist-yr-num" ref={yearNumRef}>
-                {HISTORY_DATA[0].year}
-              </div>
-            </div>
-            <div className="hist-tl">
-              <div className="hist-line-wrap">
-                <div className="hist-line" ref={lineRef}></div>
-              </div>
-              {HISTORY_DATA.map((group) => (
-                <div
-                  className="hist-yg"
-                  key={group.year}
-                  data-year={group.year}
-                >
-                  <div className="hist-dot"></div>
-                  <div className="hist-yg-year">{group.year}</div>
-                  {group.events.map((ev, ei) => (
-                    <div className="hist-ev" key={ei}>
-                      <div className="hist-ev-left">
-                        <div className="hist-ev-dot"></div>
-                        {ei < group.events.length - 1 && (
-                          <div className="hist-ev-line"></div>
-                        )}
-                      </div>
-                      <div className="hist-ev-body">
-                        <div className="hist-ev-month">{ev.month}</div>
-                        <div className="hist-ev-title">{ev.title}</div>
-                        <div className="hist-ev-desc">{ev.desc}</div>
-                        {ev.tags && ev.tags.length > 0 && (
-                          <div className="hist-ev-tags">
-                            {ev.tags.map((t, ti) => (
-                              <span className="hist-ev-tag" key={ti}>
-                                {t}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
+      <div className="about-wrap">
+        <div className="history-wrap" ref={sectionRef}>
+          <div className="sub-inner">
+            <div className="history-body">
+              <div className="hist-yr-track">
+                <div className="history-head">
+                  <h2 className="history-title">동연에스엔티의 걸어온 길</h2>
                 </div>
-              ))}
+                <div className="hist-yr-num" ref={yearNumRef}>
+                  {HISTORY_DATA[0].year}
+                </div>
+              </div>
+              <div className="hist-tl">
+                <div className="hist-line-wrap">
+                  <div className="hist-line" ref={lineRef}></div>
+                </div>
+                {HISTORY_DATA.map((group) => (
+                  <div
+                    className="hist-yg"
+                    key={group.year}
+                    data-year={group.year}
+                  >
+                    <div className="hist-dot"></div>
+                    <div className="hist-yg-year">{group.year}</div>
+                    {group.events.map((ev, ei) => (
+                      <div className="hist-ev" key={ei}>
+                        <div className="hist-ev-left">
+                          <div className="hist-ev-dot"></div>
+                          {ei < group.events.length - 1 && (
+                            <div className="hist-ev-line"></div>
+                          )}
+                        </div>
+                        <div className="hist-ev-body">
+                          <div className="hist-ev-month">{ev.month}</div>
+                          <div className="hist-ev-title">{ev.title}</div>
+                          <div className="hist-ev-desc">{ev.desc}</div>
+                          {ev.tags && ev.tags.length > 0 && (
+                            <div className="hist-ev-tags">
+                              {ev.tags.map((t, ti) => (
+                                <span className="hist-ev-tag" key={ti}>
+                                  {t}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

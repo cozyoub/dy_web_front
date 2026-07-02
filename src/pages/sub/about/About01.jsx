@@ -55,31 +55,33 @@ export default function About01() {
           trigger: ".about01-visual",
           start: "25% top",
           end: "75% top",
-          scrub: true,
+          scrub: 3,
         },
       })
       // 1번 등장
       .to(".about01-visual .tit-box li:nth-child(1) .en span", {
         y: 0,
         stagger: 0.05,
+        
       })
       .to(".about01-visual .tit-box li:nth-child(1) .kr span", { y: 0 })
       // 1번 퇴장 + 2번 등장 동시에
       .to(".about01-visual .tit-box li:nth-child(1) .en span", {
         y: "-100%",
         stagger: 0.05,
+        duration: 3,
       })
       .to(
         ".about01-visual .tit-box li:nth-child(1) .kr span",
-        { y: "-100%" },
-        "+=0.3",
+        { y: "-100%",  duration: 3 },
+        "<",
       )
       .to(
         ".about01-visual .tit-box li:nth-child(2) .en span",
-        { y: 0, stagger: 0.05 },
+        { y: 0, stagger: 0.05, duration: 3, },
         "+=0.3",
       )
-      .to(".about01-visual .tit-box li:nth-child(2) .kr span", { y: 0 }, "<");
+      .to(".about01-visual .tit-box li:nth-child(2) .kr span", { y: 0, duration: 3, }, "<");
 
     // last scene
     gsap

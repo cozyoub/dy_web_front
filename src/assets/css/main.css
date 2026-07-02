@@ -88,10 +88,9 @@ padding:22px 0; font-size: 1rem; border-radius: 50px; gap: 12px; justify-content
 .main-layout .title-box a i{display: flex;}
 
 /* 메인 비쥬얼 */
-.main-layout > .main-video{position: relative; height: 100vh; width:100%; padding: 0;}
+.main-layout > .main-video{position: sticky; top:0; height: 100vh; width:100%; padding: 0;}
 .main-video video{width: 100%; height: 100%; object-fit: cover;}
 .main-video:after{content: ""; display: block; width: 100%; height:100%; position: absolute; top: 0; left: 0; background: rgba(0,0,0,0.3);}
-.main-video .txt .inner{max-width: unset;}
 .main-video .txt{position: absolute; top: 0; left: 0; z-index: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 100%;}
 .main-video .txt h1{color: #fff; font-size: 4.375rem; font-weight: 900; font-family: 'Sweet'; text-align: left; margin-bottom: 30px;}
 .main-video .txt p{color: #fff; font-size: 1.375rem; color: #fff; line-height: 1.8; text-align: left;}
@@ -229,7 +228,7 @@ padding-left: 50px; background: url('images/main/medal.png') no-repeat left cent
 @keyframes bigPulse {0% {width: 18px; height: 18px; opacity: 1;} 100% {width: 400px; height: 400px; opacity: 0;}}
 
 /* 조건 추천받기 */
-.main-sc04{text-align: center;}
+.main-sc04{text-align: center; background:#fff; position: relative; z-index: 1;}
 .main-sc04 .title-box{margin-top: 50px;}
 .main-sc04 .title-box a{margin: 0 auto;}
 .main-sc04 .icon-wrapper{overflow: hidden; width: 100%; padding: 20px 0; margin-top: 70px;}
@@ -250,8 +249,8 @@ padding-left: 50px; background: url('images/main/medal.png') no-repeat left cent
 .main-sc04 .select-options li.selected{background-color: #037fbf; color: #ffffff; font-weight: bold;}
 
 /* 파트너사들 */
-.main-sc05{background: url('/images/main/partner-bg-top.png') no-repeat , url('/images/main/partner-bg-bottom.png') no-repeat #edf2fa;
-background-position: right top, left bottom; overflow: hidden;}
+.main-sc05{background: url('/images/main/partner-bg-top.png')  no-repeat , url('/images/main/partner-bg-bottom.png') no-repeat #edf2fa;
+background-position: right top, left bottom; overflow: hidden;z-index: 1; position: relative }
 .partner .product{margin-bottom: 100px;}
 .partner .product ul{display: flex; gap: 30px;}
 .partner .product ul li{height: 360px; width: 170px; border-radius: 12px; position: relative; transition: flex 0.4s ease, width 0.4s ease;}
@@ -296,7 +295,7 @@ background-position: right top, left bottom; overflow: hidden;}
 .partner .icon-wrapper:hover .icon-box{animation-play-state: paused;}
 
 /* News Section*/
-.main-sc06{overflow: hidden;}
+.main-sc06{overflow: hidden; background: #fff; position: relative; z-index: 1;}
 .main-sc06 .top{display: flex; align-items: center; justify-content: space-between;}
 .main-sc06 .swiper{overflow: visible;}
 .main-sc06 .pager-box{display: flex; gap: 10px;}

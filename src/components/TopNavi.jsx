@@ -13,26 +13,28 @@ const TopNavi = () => {
   const [openMobileSubIdx, setOpenMobileSubIdx] = useState(null);
 
   const lastScrollY = useRef(0);
-  // const [isTop, setIsTop] = useState(() => window.scrollY === 0);
-  // const [hidden, setHidden] = useState(false);
   const { pathname } = useLocation();
-  //const isSub = SUB_PATHS.some((path) => pathname.startsWith(path));
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const currentY = window.scrollY;
-  //     if (currentY > lastScrollY.current && currentY > 80) {
-  //       setHidden(true);
-  //     } else {
-  //       setHidden(false);
-  //     }
-  //     setIsTop(currentY === 0);
-  //     lastScrollY.current = currentY;
-  //   };
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
+  const [isTop, setIsTop] = useState(() => window.scrollY === 0);
+  const [hidden, setHidden] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+
+      if (currentY > lastScrollY.current && currentY > 80) {
+        setHidden(true); // 아래로 스크롤 → 숨김
+      } else {
+        setHidden(false); // 위로 스크롤 → 표시
+      }
+
+      setIsTop(currentY === 0);
+      lastScrollY.current = currentY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
     lastScrollY.current = 0;
@@ -50,8 +52,7 @@ const TopNavi = () => {
   return (
     <>
       {/* <nav className={`gnb-wrapper ${isSub ? "gnb-sub" : ""} ${hidden ? "gnb-hidden" : ""} ${!isTop ? "gnb-scrolled" : ""}`}> */}
-      <nav
-        className={`gnb-wrapper ${activeMenu !== null ? "on" : ""}`}
+       <nav className={`gnb-wrapper ${activeMenu !== null ? "on" : ""} ${hidden ? "gnb-hidden" : ""} ${!isTop ? "gnb-scrolled" : ""}`}
         onMouseLeave={() => {
           setActiveMenu(null);
           setActiveSubMenu(null);
@@ -59,8 +60,8 @@ const TopNavi = () => {
       >
         <div className="gnb-container inner">
           <Link to="/" className="logo">
-            <img src="/images/logo.png" alt="로고" className="th-dark" />
-            <img src="/images/logo_wh.png" alt="로고" className="th-light" />
+            <img src="/images/common/logo.svg" alt="로고" className="th-dark" />
+            <img src="/images/common/logo_wh.svg" alt="로고" className="th-light" />
           </Link>
 
           <ul className="main-menu">
@@ -117,12 +118,12 @@ const TopNavi = () => {
           <div className="gnb-utils">
             <Link to="/sitemap" className="sitemap-btn">
               <img
-                src="/images/menu_dark.svg"
+                src="/images/common/menu_dark.svg"
                 alt="사이트맵 바로가기"
                 className="th-dark"
               />
               <img
-                src="/images/menu_white.svg"
+                src="/images/common/menu_white.svg"
                 alt="사이트맵 바로가기"
                 className="th-light"
               />
@@ -132,12 +133,12 @@ const TopNavi = () => {
               onClick={() => setMobileOpen(true)}
             >
               <img
-                src="/images/menu_dark.svg"
+                src="/images/common/menu_dark.svg"
                 alt="메뉴 열기"
                 className="th-dark"
               />
               <img
-                src="/images/menu_white.svg"
+                src="/images/common//menu_white.svg"
                 alt="메뉴 열기"
                 className="th-light"
               />
@@ -155,7 +156,7 @@ const TopNavi = () => {
       <div className={`mobile-menu ${mobileOpen ? "open" : ""}`}>
         <div className="mobile-menu-header">
           <Link to="/" className="logo" onClick={() => setMobileOpen(false)}>
-            <img src="/images/logo.png" alt="로고" />
+            <img src="/images/common/logo.svg" alt="로고" />
           </Link>
           <button
             className="mobile-close-btn"

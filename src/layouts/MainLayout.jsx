@@ -15,6 +15,7 @@ import "swiper/css/navigation";
 import Demo01 from "@/components/main/Demo01";
 import Demo02 from "@/components/main/Demo02";
 import Demo03 from "@/components/main/Demo03";
+import CircleCardDemo from "@/components/main/CircleCardDemo";
 // import {useScrollReveal } from "@/hooks/useScrollReveal"
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -327,7 +328,7 @@ export default function MainLayout() {
           </div>
         </section>
 
-        <section className="main-sc01">
+        {/* <section className="main-sc01">
           <div className="inner container">
             <div className="title-box">
               <span className="eng">Business</span>
@@ -470,8 +471,9 @@ export default function MainLayout() {
             </div>
           </div>
           <div className="business-cover"></div>
-        </section>
-
+        </section> */}
+        
+        <CircleCardDemo/>
         <Demo01 />
 
         {/* <section className="main-sc02" ref={solutionRef}>

@@ -15,7 +15,7 @@ export default function Demo02() {
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: "+=150%",
+        end: "+=300%",
         pin: true,
         scrub: 1,
       },

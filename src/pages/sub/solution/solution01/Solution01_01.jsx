@@ -1,9 +1,33 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SolutionIntro from "@/components/sub/SolutionIntro";
+import SolutionEffect from "@/components/sub/SolutionEffect";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const erpEffects = [
+  {
+    icon: "/images/sub/ico_effect01.svg",
+    title: "통합 데이터 기반 경영관리",
+    desc: "전사 데이터를 통합 관리하여 신뢰도 높은 경영 환경을 제공합니다.",
+  },
+  {
+    icon: "/images/sub/ico_effect02.svg",
+    title: "데이터 정합성 및 신뢰성 확보",
+    desc: "전산 시스템 기반의 데이터 입력과 통합 체계를 통해 데이터의 정확성과 신뢰성을 확보합니다.",
+  },
+  {
+    icon: "/images/sub/ico_effect04.svg",
+    title: "투명한 경영 의사결정",
+    desc: "원가·손익·수익 분석 체계를 기반으로 투명한 경영관리를 지원합니다.",
+  },
+  {
+    icon: "/images/sub/ico_effect06.svg",
+    title: "업무 생산성 향상",
+    desc: "업무 효율을 높이고 신속한 의사결정을 지원합니다.",
+  },
+];
 const topRow = [
   {
     title: "기준 정보",
@@ -128,84 +152,50 @@ const devices = [
 ];
 
 export default function Solution01_01() {
-  const sectionRef = useRef(null);
-  const imgWrapRef = useRef(null);
-  const imgRef = useRef(null);
-  const overlayRef = useRef(null);
-  const h2MaskRef = useRef(null);
-  const subTitleRef = useRef(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "+=250%",
-          scrub: 1.2,
-          pin: true,
-          anticipatePin: 1,
-        },
-      });
-
-      tl.fromTo(
-        imgWrapRef.current,
-        { width: "55vw", height: "55vh", borderRadius: "20px" },
-        { width: "100vw", height: "100vh", borderRadius: "0px", ease: "none" },
-        0,
-      );
-      tl.fromTo(imgRef.current, { scale: 1.15 }, { scale: 1, ease: "none" }, 0);
-      tl.fromTo(
-        overlayRef.current,
-        { opacity: 0.1 },
-        { opacity: 0.55, ease: "none" },
-        0,
-      );
-      tl.fromTo(
-        h2MaskRef.current,
-        { clipPath: "inset(0 100% 0 0)" },
-        { clipPath: "inset(0 0% 0 0)", ease: "none" },
-        "<",
-      );
-      tl.fromTo(
-        subTitleRef.current,
-        { opacity: 0, y: 60 },
-        { opacity: 1, y: 0, ease: "none" },
-        0.65,
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <>
       <div className="solution-wrap">
-        <div ref={sectionRef} className="solution-intro">
-          <div ref={imgWrapRef} className="solution-intro-img-wrap">
-            <img ref={imgRef} src="/images/sub/solution01-01.jpg" alt="" />
-          </div>
-          <div ref={overlayRef} className="solution-intro-overlay" />
-          <div className="solution-intro-main-title">
-            <h2 className="h2-ghost">
-              <img src="/images/sub/ncore-logo-wh.png" alt="" />{" "}
-              <span>ERP</span>
-            </h2>
-            <h2 ref={h2MaskRef} className="h2-reveal">
-              <img src="/images/sub/ncore-logo-wh.png" alt="" />{" "}
-              <span>ERP</span>
-            </h2>
-          </div>
-
-          <div ref={subTitleRef} className="solution-intro-sub-title">
-            <p>
-              도입기업 성장과 현안 과제 해결을 위해 필수 요구 사항 반영 및 
+        <SolutionIntro
+          imageSrc="/images/sub/solution01-01.jpg"
+          label="ERP"
+          description={
+            <>
+              도입기업 성장과 현안 과제 해결을 위해 필수 요구 사항 반영 및
               시스템 확장성을 고려한 <br />
               기업 맞춤형 효율적이고 안정적인 ERP 구축
-            </p>
+            </>
+          }
+        />
+        <div className="erp-reason">
+          <div className="sub-inner">
+            <div className="solution-title">
+              <h3>왜 기업들은 N·Core ERP를 선택할까요?</h3>
+            </div>
+            <ul>
+              <li className="erp-reason01">
+                <h3>검증된 제조 ERP 구축 역량</h3>
+                <p>
+                  철강·자동차 부품 산업 등 다양한 제조 현장의 ERP 구축 경험을
+                  바탕으로 안정적인 시스템을 제공합니다.
+                </p>
+              </li>
+              <li className="erp-reason02">
+                <h3>고객 중심 프로세스 최적화</h3>
+                <p>
+                  고객사의 업무 환경과 운영 프로세스를 깊이 이해하여 기업별
+                  특성에 최적화된 ERP를 구현합니다.
+                </p>
+              </li>
+              <li className="erp-reason03">
+                <h3>디지털 전환을 이끄는 전문성</h3>
+                <p>
+                  제조, 유통, 서비스 산업 전반의 Digital Transformation 경험을
+                  바탕으로 지속 가능한 혁신을 지원합니다.
+                </p>
+              </li>
+            </ul>
           </div>
         </div>
-        
         <div className="solution-detail">
           <div className="sub-inner">
             <h2 className="sub-title">상세 솔루션</h2>
@@ -360,41 +350,11 @@ export default function Solution01_01() {
             </div>
           </div>
         </div>
-        <div className="solution-effect">
-          <div className="sub-inner">
-            <h2 className="sub-title">솔루션 도입 기대효과</h2>
-            <ul className="solution-effect-list">
-              <li>
-                <i><img src="/images/sub/ico_effect01.svg"/></i>
-                <p>무결성 원칙에 입각한
-                경영관리</p>
-              </li>
-              <li>
-                <i><img src="/images/sub/ico_effect02.svg"/></i>
-                <p>전산 시스템 으로
-                Data 입력을 통한 데이터 정합성 확보</p>
-              </li>
-              <li>
-                <i><img src="/images/sub/ico_effect03.svg"/></i>
-                <p>모든 Data, 공유, 통합, 집계 되는 체계 구축을 통한 데이터 신뢰성</p>
-              </li>
-              <li>
-                <i><img src="/images/sub/ico_effect04.svg"/></i>
-                <p>명확한 원가, 손익, 수익이 되는 시스템
-                구축을 통한 경영관리의 투명성</p>
-              </li>
-              <li>
-                <i><img src="/images/sub/ico_effect05.svg"/></i>
-                <p>업무 생산성 향상 및 의사결정 신속성 확보</p>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="solution-case">
-          <div className="sub-inner">
-            <h2 className="sub-title">구축 사례</h2>
-          </div>
-        </div>
+        <SolutionEffect
+          title="솔루션 도입 기대효과"
+          desc="통합된 데이터와 표준 프로세스를 기반으로 기업의 업무 효율성과 경영 투명성을 향상시킵니다."
+          items={erpEffects}
+        />
       </div>
     </>
   );

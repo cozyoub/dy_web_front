@@ -112,28 +112,32 @@
 :root{
   --primary-color:#1A72E7;
   --sub-color:#6C5CE7;
-  --text-color:#111221;
+  --text-color:#151624;
+  --base-color60:rgba(17, 17, 17, 0.6);
+  --desc-color:#11111199;
   --gray-text:#535354;
   --intro-color:#1b4a75;
   font-size: 16px;
 }
 body {
   font-family: 'Pretendard', sans-serif;
+  color: var(--text-color);
 }
 @media all and (min-width: 1921px) {
     :root{
         font-size: 18px;
+        
     }
 }
 
 @media all and (max-width:1200px) {
     :root{
-        font-size: 14px;
+        font-size: 15px;
     }
 }
 
 @media all and (max-width:768px) {
     :root{
-        font-size: 12px;
+        font-size: 14px;
     }
 }

@@ -145,12 +145,13 @@ html, body {
 }
 
 /* 이미지 리사이징 화질 개선 이미지 렌더링 */
-img[src$=".gif"], img[src$=".png"] {
+img[src$=".gif"], img[src$=".png"] , img[src$=".jpg"], img[src$=".jpeg"]{
     image-rendering: -moz-crisp-edges;         /* Firefox */
     image-rendering:  -o-crisp-edges;         /* Opera */
     image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
     image-rendering: crisp-edges;
-    -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
+    -ms-interpolation-mode: nearest-neighbor;  
+    image-rendering: -webkit-optimize-contrast;/* IE (non-standard property) */
 }
 
 div {

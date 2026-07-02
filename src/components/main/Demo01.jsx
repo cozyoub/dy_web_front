@@ -15,7 +15,7 @@ export default function Demo01() {
     scrollTrigger: {
       trigger: sectionRef.current,
       start: "top top",
-      end: "+=180%",
+      end: "+=300%",
       scrub: 1,
       anticipatePin: 1,
       pinType: "fixed",
@@ -24,7 +24,7 @@ export default function Demo01() {
   });
 
   tl.to(".main-demo01 .mask-text", {
-    scale: 200, 
+    scale: 300, 
     duration: 10,
     ease: "power3.inOut",
     transformOrigin: "30.1% 90%", 
@@ -34,12 +34,12 @@ export default function Demo01() {
     opacity: 1,
     duration: 5,
     ease: "power3.inOut",
-  }, "<");
+  }, "<=");
   
   tl.to(".main-demo01 .bg-con img", {
     scale: 1.3,
     duration: 10,
-    ease: "power2.inOut",
+    ease: "power2.inOu t",
     transformOrigin: "50% 100%",
     force3D: false,
   }, "<");

@@ -125,9 +125,9 @@ export const MENU_LIST = [{
         path: "/solution/solution01_06",
         component:Solution01_06
       }, {
-        title: "내부회계 솔루션(ICS)",
+        title: "내부회계 솔루션(ICMS)",
         path: "/solution/solution01_07",
-        solution:Solution01_07
+        component:Solution01_07
       }, {
         title: "렌탈 솔루션(RS)",
         path: "/solution/solution01_08",
@@ -237,7 +237,8 @@ export const MENU_LIST = [{
   },
   {
     title:"DX/AX Insight",
-    path:"insight",
+    path:"/insight",
+    defaultPath: "insight/insight01",
     subMenu:[{
       title:"USE CASE",
       path:"/insight/insight01",
@@ -255,6 +256,7 @@ export const MENU_LIST = [{
   {
     title:"About US",
     path:"/about",
+    defaultPath: "/about/about01",
     subMenu:[{
       title:"WHo We Are",
       path:"/about/about01",

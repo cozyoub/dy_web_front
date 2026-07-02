@@ -1,18 +1,30 @@
 /* 전체 nav */
-.gnb-wrapper {position: absolute;width: 100%; z-index: 100; transition: all 0.3s ease; }
+.gnb-wrapper {position: fixed; width: 100%; z-index: 100; transition: all 0.3s ease; }
 .gnb-wrapper.gnb-hidden { transform: translateY(-100%);  }
-.gnb-container {margin: 0 auto;padding: 0 24px; display: flex;align-items: center;gap: 60px; z-index: 101;}
+.gnb-scrolled {
+  background:rgba(255,255,255,1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); backdrop-filter: blur(2px); 
+}
+.gnb-container {margin: 0 auto;padding: 0 24px; display: flex;align-items: center; justify-content: space-between; gap: 60px; z-index: 101;}
 .gnb-container .logo img {max-width: 200px;}
 .gnb-container .th-dark{display: none;}
 
+/* scrolled - nav */
+.gnb-scrolled .gnb-container .th-light{display: none;}
+.gnb-scrolled .gnb-container .th-dark{display: block;}
+.gnb-scrolled .gnb-container .menu-item > a{color: #333;}
+
+
 /* 메인메뉴 */
-.gnb-container .main-menu {display: flex;list-style: none;margin: 0;padding: 0; flex: 1; justify-content: center; padding: 0 30px;}
+.gnb-container .main-menu {display: flex;list-style: none;margin: 0;padding: 0; flex: 1; justify-content: center; padding: 0 80px;  transition: all .3s;}
 .gnb-container .main-menu > li{flex:1}
 .gnb-container .menu-item > a {text-align: center; position: relative; line-height: 60px; font-size: 1.125rem;font-weight: 600;color: #fff;text-decoration: none; padding: 24px 0; display: block;}
 .gnb-container .menu-item > a:hover {color: #3b82f6 !important;}
 .gnb-container .menu-item > a:before{content: ""; display: block; width: 0%; height: 2px; background: #3b82f6; position: absolute;
 left: 50%; bottom: 0; transform: translateX(-50%); transition: all .3s;}
 .gnb-container .menu-item.active > a:before{width:100%}
+.gnb-wrapper.on .gnb-container .main-menu{padding: 0 30px;}
+
 /* 서브메뉴 */
 .sub-menu-pane {display: none;position: absolute;top: 108px;left: 0;z-index: 101;min-width: 140px; width: 100%; z-index: 1;}
 .sub-menu-pane:before{position: absolute; width: 100vw; height: 100%; content: ""; background-color: #fff; left: 0; top: 0; z-index: 0;}
@@ -39,7 +51,6 @@ transform: translateY(-50%); border-radius: 12px;}
 /* 배경 오버레이 */
 .gnb-bg {position: absolute;top: 71px;left: 0;width: 100%;height: 0;background: #fff;transition: height 0.3s ease;z-index: 90;}
 .gnb-bg.show {height: 200px; border-top: 1px solid #e2e8f0;}
-.gnb-wrapper.gnb-scrolled {background-color: #fff;border-bottom: 1px solid #e2e8f0;}
 
 /*메뉴 on 됐을 때*/
 .gnb-wrapper.on{background-color: #fff;}

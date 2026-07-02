@@ -6,7 +6,7 @@
 .sub-visual-subtitle { font-size: 0.875rem; letter-spacing: 0.15em; opacity: 0.8; margin-bottom: 10px; }
 .sub-visual-title { font-size: 4.375rem; font-weight: 700; }
 .sub-select-container { position: absolute; bottom: 10%; left: 0; width: 100%; display: flex; justify-content: center; z-index: 9; }
-.sub-content { min-height: 60vh; margin: 50px auto 200px 0; }
+.sub-content { min-height: 60vh; }
 
 @media all and (max-width:1200px){
     
