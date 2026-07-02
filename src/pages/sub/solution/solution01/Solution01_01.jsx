@@ -5,7 +5,6 @@ import SolutionIntro from "@/components/sub/SolutionIntro";
 import SolutionEffect from "@/components/sub/SolutionEffect";
 
 gsap.registerPlugin(ScrollTrigger);
-
 const erpEffects = [
   {
     icon: "/images/sub/ico_effect01.svg",
@@ -152,6 +151,28 @@ const devices = [
 ];
 
 export default function Solution01_01() {
+  const hexRef = useRef();
+
+  useEffect(() => {
+    const cards = gsap.utils.toArray(".erp-hex-diagram .hex-text");
+
+    gsap.set(cards, {
+      y: 80,
+      opacity: 0,
+    });
+
+    gsap.to(cards, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      stagger: 0.2,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: hexRef.current,
+        start: "top 70%",
+      },
+    });
+  }, []);
   return (
     <>
       <div className="solution-wrap">
@@ -169,31 +190,114 @@ export default function Solution01_01() {
         <div className="erp-reason">
           <div className="sub-inner">
             <div className="solution-title">
-              <h3>왜 기업들은 N·Core ERP를 선택할까요?</h3>
+              <h3>ERP 구축으로 실현하는 업무 혁신</h3>
+              <p>
+                업무 프로세스의 표준화와 데이터 통합을 기반으로 기업 전반의 운영
+                효율성과 업무 가시성을 높입니다.
+              </p>
             </div>
             <ul>
               <li className="erp-reason01">
-                <h3>검증된 제조 ERP 구축 역량</h3>
+                <h3>업무 수행 프로세스 표준화</h3>
                 <p>
-                  철강·자동차 부품 산업 등 다양한 제조 현장의 ERP 구축 경험을
-                  바탕으로 안정적인 시스템을 제공합니다.
+                  업무 수행 프로세스와 절차, 규정을 표준화하여 일관된 업무
+                  체계를 구축하고 운영 효율성을 향상시킵니다.
                 </p>
               </li>
+
               <li className="erp-reason02">
-                <h3>고객 중심 프로세스 최적화</h3>
+                <h3>시스템 통합 및 데이터 표준 일원화</h3>
                 <p>
-                  고객사의 업무 환경과 운영 프로세스를 깊이 이해하여 기업별
-                  특성에 최적화된 ERP를 구현합니다.
+                  고객사 내부 시스템을 통합하고 데이터를 표준화·일원화하여
+                  정확하고 신뢰성 있는 정보 관리 환경을 제공합니다.
                 </p>
               </li>
+
               <li className="erp-reason03">
-                <h3>디지털 전환을 이끄는 전문성</h3>
+                <h3>업무 Visibility 확보 및 고도화</h3>
                 <p>
-                  제조, 유통, 서비스 산업 전반의 Digital Transformation 경험을
-                  바탕으로 지속 가능한 혁신을 지원합니다.
+                  실시간 업무 Visibility를 확보하고 지속적인 업무 고도화를 통해
+                  신속하고 정확한 의사결정을 지원합니다.
                 </p>
               </li>
             </ul>
+          </div>
+        </div>
+        <div className="erp-hex-diagram">
+          <div className="sub-inner">
+            <div className="solution-title">
+              <h3>왜 기업들은 N·Core ERP를 선택할까요?</h3>
+              <p>
+                풍부한 프로젝트 경험과 축적된 운영 노하우를 바탕으로 고객에게
+                최적의 ERP 구축과 안정적인 운영 환경을 제공합니다.
+              </p>
+            </div>
+            <div className="hex-diagram">
+              {/* 좌상단 텍스트 */}
+              <div className="hex-text hex-text-tl" ref={hexRef}>
+                <h4>풍부한 프로젝트 경험</h4>
+                <ul>
+                  <li>
+                    동국산업 등 철강 및 자동차부품 업체 제조 현장 ERP 구축 및
+                    운영 프로젝트 수행 경험
+                  </li>
+                  <li>
+                    공금융 (BNK, 라이나생명, AJ네트웍스, 부산시, 한국환경공단
+                    등), 제조 (HD현대중공업, BN그룹, 피플스(LG에너지솔루션),
+                    동국산업그룹 등) 다양한 ERP, 그룹웨어/HR 프로젝트 수행 경험
+                  </li>
+                  <li>
+                    다양한 Source로부터의 I/F, 다양한 UI로의 Data 제공 경험 보유
+                    IT 인력 양성과 꾸준한 투자
+                  </li>
+                </ul>
+              </div>
+
+              {/* 우상단 텍스트 */}
+              <div className="hex-text hex-text-tr">
+                <h4>고객 전사 프로세스에 대한 이해</h4>
+                <ul>
+                  <li>핵심 프로세스 설계/구축 및 Knowledge 확보</li>
+                  <li>프로세스 혁신 관점의 ERP 프로젝트 수행</li>
+                  <li>효율적인 프로젝트 추진</li>
+                  <li>고객별 특화된 프로세스 대응 능력 우수</li>
+                  <li>Risk에 대한 유연한 대처</li>
+                </ul>
+              </div>
+
+              {/* 가운데 - 육각형 로고 + 아이콘 + 연결선 */}
+              <div className="hex-center">
+                <div className="hex-core">
+                  <img src="/images/common/logo_wh.svg" alt="동연에스엔티" />
+                </div>
+              </div>
+
+              {/* 좌하단 텍스트 */}
+              <div className="hex-text hex-text-bl">
+                <h4>시스템 운영에 대한 Know-How</h4>
+                <ul>
+                  <li>
+                    다양한 산업 및 기업에서 축적한 유지보수 Know-how를 기반으로,
+                    구축 이후를 고려한 설계/개발
+                  </li>
+                  <li>대규모 프로젝트 파트너로 참여 및 구축 후 운영 수행</li>
+                </ul>
+              </div>
+
+              {/* 우하단 텍스트 */}
+              <div className="hex-text hex-text-br">
+                <h4>Digital Transformation 경험</h4>
+                <ul>
+                  <li>
+                    제조업, 공급용, 서비스 등 다양한 산업의 DT 프로젝트 수행 및
+                    운영
+                  </li>
+                  <li>Digital Worker 기반 업무 프로세스 혁신 수행</li>
+                  <li>지속 대상 Task 도출, 적용, 고도화 경험</li>
+                </ul>
+              </div>
+            </div>
+            );
           </div>
         </div>
         <div className="solution-detail">
