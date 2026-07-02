@@ -30,6 +30,7 @@ export default function Business01() {
       y: "100%",
     });
 
+    
     // 이미지 펼쳐지기
     gsap
       .timeline({
