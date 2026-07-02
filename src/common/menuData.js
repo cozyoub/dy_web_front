@@ -1,4 +1,6 @@
-import { lazy } from "react";
+import {
+  lazy
+} from "react";
 
 const Business01 = lazy(() => import("@/pages/sub/business/Business01"));
 
@@ -53,16 +55,15 @@ const About02 = lazy(() => import("@/pages/sub/about/About02"))
 const About03 = lazy(() => import("@/pages/sub/about/About03"))
 const About04 = lazy(() => import("@/pages/sub/about/About04"))
 const About05 = lazy(() => import("@/pages/sub/about/About05"))
-const About06 = lazy(() => import("@/pages/sub/about/About06"))
+const NoticeList = lazy(() => import("@/pages/sub/about/NoticeList"))
 
 const Contact = lazy(() => import("@/pages/sub/Contact"));
 
 /* 공통 메뉴들 .. */
-export const MENU_LIST = [
-  {
-    title:"Business",
-    path:"/business",
-    component:Business01
+export const MENU_LIST = [{
+    title: "Business",
+    path: "/business",
+    component: Business01
   },
   // {
   //   title: "Service",
@@ -105,7 +106,7 @@ export const MENU_LIST = [
   {
     title: "Soulution",
     path: "/solution",
-    defaultPath:"/solution/solution01_01",
+    defaultPath: "/solution/solution01_01",
     subMenu: [{
       title: "Management",
       path: "/solution/solution01",
@@ -113,43 +114,43 @@ export const MENU_LIST = [
       subMenu: [{
         title: "전사경영정보 솔루션(ERP)",
         path: "/solution/solution01_01",
-        component:Solution01_01
+        component: Solution01_01
       }, {
         title: "인사관리 솔루션(HR)",
         path: "/solution/solution01_02",
-        component:Solution01_02
+        component: Solution01_02
       }, {
         title: "재무회계 솔루션(FA)",
         path: "/solution/solution01_03",
-        component:Solution01_03
+        component: Solution01_03
       }, {
         title: "구매관리 솔루션(PMS)",
         path: "/solution/solution01_04",
-        component:Solution01_04
+        component: Solution01_04
       }, {
         title: "고객관리 솔루션(CRM)",
         path: "/solution/solution01_05",
-        component:Solution01_05
+        component: Solution01_05
       }, {
         title: "실제 원가관리 솔루션(AC)",
         path: "/solution/solution01_06",
-        component:Solution01_06
+        component: Solution01_06
       }, {
         title: "내부회계 솔루션(ICMS)",
         path: "/solution/solution01_07",
-        component:Solution01_07
+        component: Solution01_07
       }, {
         title: "렌탈 솔루션(RS)",
         path: "/solution/solution01_08",
-        component:Solution01_08
+        component: Solution01_08
       }, {
         title: "IT 서비스관리 솔루션(ITSM)",
         path: "/solution/solution01_09",
-        component:Solution01_09
+        component: Solution01_09
       }, {
         title: "그룹웨어(EKP)&메신저",
         path: "/solution/solution01_10",
-        component:Solution01_10
+        component: Solution01_10
       }]
     }, {
       title: "Manufacturing",
@@ -158,35 +159,35 @@ export const MENU_LIST = [
       subMenu: [{
         title: "통합 생산 솔루션(MES)",
         path: "/solution/solution02_01",
-        component:Solution02_01
+        component: Solution02_01
       }, {
         title: "생산스케쥴 최적화 솔루션(APS)",
         path: "/solution/solution02_02",
-        component:Solution02_02
+        component: Solution02_02
       }, {
         title: "설비관리 솔루션(CMMS)",
         path: "/solution/solution02_03",
-        component:Solution02_03
+        component: Solution02_03
       }, {
         title: "통합 설비관제 솔루션(ICS)",
         path: "/solution/solution02_04",
-        component:Solution02_04
+        component: Solution02_04
       }, {
         title: "운송관리 솔루션(TMS)",
         path: "/solution/solution02_05",
-        component:Solution02_05
+        component: Solution02_05
       }, {
         title: "환경안전 솔루션(ESH)",
         path: "/solution/solution02_06",
-        component:Solution02_06
+        component: Solution02_06
       }, {
         title: "창고관리 솔루션(WMS)",
         path: "/solution/solution02_07",
-        component:Solution02_07
+        component: Solution02_07
       }, {
         title: "에너지관리 솔루션(FEMS)",
         path: "/solution/solution02_08",
-        component:Solution02_08
+        component: Solution02_08
       }]
     }, {
       title: "DX/AX",
@@ -195,31 +196,31 @@ export const MENU_LIST = [
       subMenu: [{
         title: "통합 설비관제 AI",
         path: "/solution/solution03_01",
-        component:Solution03_01
+        component: Solution03_01
       }, {
         title: "통합 설비보전 AI",
         path: "/solution/solution03_02",
-        component:Solution03_02
+        component: Solution03_02
       }, {
         title: "생산공정 최적화 AI",
         path: "/solution/solution03_03",
-        component:Solution03_03
+        component: Solution03_03
       }, {
         title: "통합 품질관리 AI",
         path: "/solution/solution03_04",
-        component:Solution03_04
+        component: Solution03_04
       }, {
         title: "환경안전경영 AI",
         path: "/solution/solution03_05",
-        component:Solution03_05
+        component: Solution03_05
       }, {
         title: "통합 물류운송 AI",
         path: "/solution/solution03_06",
-        component:Solution03_06
+        component: Solution03_06
       }, {
         title: "기업 경영관리 AI",
         path: "/solution/solution03_07",
-        component:Solution03_07
+        component: Solution03_07
       }]
     }]
   },
@@ -264,40 +265,42 @@ export const MENU_LIST = [
   //   }]
   // },
   {
-    title:"About US",
-    path:"/about",
+    title: "About US",
+    path: "/about",
     defaultPath: "/about/about01",
-    subMenu:[{
-      title:"WHo We Are",
-      path:"/about/about01",
-      component:About01
-    },{
-      title:"Location",
-      path:"/about/about02",
-      component:About02
-    },{
-      title:"Career",
-      path:"/about/about03",
-      component:About03
-     },
-    //{
-    //   title:"Contact Us",
-    //   path:"/about/about04",
-    //   component:About04
-    // }
-    // {
-    //   title:"Help",
-    //   // path:"/about/about05",
-    //   // component:About05
-    //   externalLink: "https://support.dkpia.com/login"
-    // }
-    ,{
-      title:"Customer Center",
-      externalLink: "https://support.dkpia.com/login"
-    },{
-      title:"공지사항",
-      path:"/about/notice"
-    }]
+    subMenu: [{
+        title: "WHo We Are",
+        path: "/about/about01",
+        component: About01
+      }, {
+        title: "Location",
+        path: "/about/about02",
+        component: About02
+      }, {
+        title: "Career",
+        path: "/about/about03",
+        component: About03
+      },
+      //{
+      //   title:"Contact Us",
+      //   path:"/about/about04",
+      //   component:About04
+      // }
+      // {
+      //   title:"Help",
+      //   // path:"/about/about05",
+      //   // component:About05
+      //   externalLink: "https://support.dkpia.com/login"
+      // },
+       {
+        title: "Customer Center",
+        externalLink: "https://support.dkpia.com/login"
+      }, {
+        title: "공지사항",
+        path: "/about/notice",
+        component: NoticeList
+      }
+    ]
   },
   // {
   //   title: "회사소개",
@@ -330,9 +333,9 @@ export const MENU_LIST = [
   //   ],
   // },
   {
-    title:"Contact",
-    path:"/contact",
-    component:Contact
+    title: "Contact",
+    path: "/contact",
+    component: Contact
   },
 ];
 
