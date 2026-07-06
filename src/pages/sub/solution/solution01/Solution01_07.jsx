@@ -39,7 +39,10 @@ export default function Solution01_07() {
             </>
           }
         />
-        <SolutionFetures items={icmsFeatures} title="내부통제를 더 체계적이고 스마트하게"/>
+        <SolutionFetures
+          items={icmsFeatures}
+          title="내부통제를 더 체계적이고 스마트하게"
+        />
 
         <div className="solution-mokup-wrapper">
           <div className="sub-inner">
@@ -206,6 +209,20 @@ export default function Solution01_07() {
                   <div className="icms-side-module">회계관리</div>
                   <div className="icms-side-module">원가관리</div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className="sub-inner">
+            <div className="solution-title">
+              <h3>내부전산통제(ITGC) 시스템</h3>
+              <p>
+                2018년 개정 외감법에 대응하기 위해 내부회계관리제도 목성 달성을
+                지워하는 정보기술 일반통제(ITGC)부분을 시스템으로 지원합니다.
+              </p>
+              <div className="flow-img">
+                <img src="/images/sub/itgc_flow.svg" alt="" />
               </div>
             </div>
           </div>

@@ -1,12 +1,23 @@
+import SolutionFlow from "@/components/sub/SoluitionFlow";
 import SolutionFetures from "@/components/sub/SolutionFetures";
 import SolutionIntro from "@/components/sub/SolutionIntro";
+import SolutionMokup from "@/components/sub/SolutionMokup";
 
 const pmsFeatures = [
   "구매요구에서 입고까지 전단계에 걸친 첨부파일 연계를 통한 업무 효율성 향상",
   "다양한 형태의 통계 데이터 표시를 통한 실적관리 편의성 제공",
 ];
 
-
+const pmsMokups = [
+  {
+    title: "하나의 시스템에서 모든 구매 업무 정리",
+    imgSrc: "/images/sub/pms_flow02.svg",
+  },
+  {
+    title: "표준화된 구매업무 프로세스",
+    imgSrc: "/images/sub/pms_flow03.svg",
+  },
+];
 export default function Solution01_04() {
   return (
     <>
@@ -23,7 +34,11 @@ export default function Solution01_04() {
             </>
           }
         />
+       
         <SolutionFetures items={pmsFeatures} title={<>효율적인 구매 관리의 시작</>}/>
+         <SolutionFlow
+        title="사용자 업무 흐름도" imgSrc="/images/sub/pms_flow.svg"/>
+
         <div className="pms-right-wrap">
           <div className="sub-inner">
             <h1>
@@ -64,6 +79,23 @@ export default function Solution01_04() {
             </div>
           </div>
         </div>
+         <div className="solution-mokup-wrapper">
+                  <div className="sub-inner">
+                    <div className="solution-title">
+                      <h3>N·Core PMS 주요기능</h3>
+                    </div>
+                    <div className="solution-mokup-items">
+                      {pmsMokups.map(({ title, desc, imgSrc }, index) => (
+                        <SolutionMokup
+                          key={index}
+                          title={title}
+                          desc={desc}
+                          imgSrc={imgSrc}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
       </div>
     </>
   );

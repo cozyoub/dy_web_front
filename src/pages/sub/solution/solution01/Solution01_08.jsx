@@ -1,3 +1,4 @@
+import SolutionFlow from "@/components/sub/SoluitionFlow";
 import SolutionFetures from "@/components/sub/SolutionFetures";
 import SolutionIntro from "@/components/sub/SolutionIntro";
 import SolutionMokup from "@/components/sub/SolutionMokup";
@@ -74,6 +75,8 @@ export default function Solution01_08() {
           }
         />
         <SolutionFetures items={rsFeatures} title="성공적인 렌탈 비즈니스의 시작"/>
+        <SolutionFlow
+        title="사용자 업무 흐름도" imgSrc="/images/sub/rs_flow.svg"/>
         <div className="solution-mokup-wrapper">
           <div className="sub-inner">
             <div className="solution-title">
@@ -93,6 +96,7 @@ export default function Solution01_08() {
             </div>
           </div>
         </div>
+         
       </div>
     </>
   );

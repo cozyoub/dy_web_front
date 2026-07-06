@@ -18,7 +18,7 @@ export default function SolutionIntro({ imageSrc, label, description }) {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=250%",
+          end: "+=150%",
           scrub: 1.2,
           pin: true,
           anticipatePin: 1,

@@ -1,3 +1,4 @@
+import SolutionFlow from "@/components/sub/SoluitionFlow";
 import SolutionFetures from "@/components/sub/SolutionFetures";
 import SolutionIntro from "@/components/sub/SolutionIntro";
 import SolutionMokup from "@/components/sub/SolutionMokup";
@@ -59,6 +60,8 @@ export default function Solution01_03() {
             재무 데이터를 더 정확하고 스마트하게
           </>
         }/>
+        <SolutionFlow
+        title="사용자 업무 흐름도" imgSrc="/images/sub/fa_flow.svg"/>
         <div className="solution-mokup-wrapper">
           <div className="sub-inner">
             <div className="solution-title">

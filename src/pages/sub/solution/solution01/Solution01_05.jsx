@@ -1,6 +1,7 @@
 import SolutionFetures from "@/components/sub/SolutionFetures";
 import SolutionIntro from "@/components/sub/SolutionIntro";
 import SolutionEffect from "@/components/sub/SolutionEffect";
+import SolutionCard from "@/components/sub/SolutionCard";
 
 const crmFeatures = [
   "제조업 중심의 고객 관계관리 시스템",
@@ -31,6 +32,37 @@ const crmEffects = [
     icon: "/images/sub/ico_effect04.svg",
     title: "프로세스 효율 증대",
     desc: "자동화된 프로세스로 영업, 마케팅, 서비스 팀의 업무량을 줄이고 더 높은 성과를 달성합니다.",
+  },
+];
+
+const crmCard = [
+  {
+    number: 1,
+    title: "고객 관리",
+    imgSrc: "/images/sub/crm_screen01.jpg",
+    bullets: [
+      "기존고객 ERP I/F 및 잠재고객 관리를 통해 데이터 회사 자산화"
+    ],
+  },
+  {
+    number: 2,
+    title: "고객접촉 관리",
+    imgSrc: "/images/sub/crm_screen02.jpg",
+    bullets: [
+      "접촉 유형 및 단계별 진행 관리"
+    ],
+  },
+  {
+    number: 3,
+    title: "메일 관리",
+    imgSrc: "/images/sub/crm_screen03.jpg",
+    bullets: ["메일 송수신을 통해 영업담당자 영업활동으로 임식 기능 제공"],
+  },
+  {
+    number: 4,
+    title: "현황 관리",
+    imgSrc: "/images/sub/crm_screen04.jpg",
+    bullets: [],
   },
 ];
 
@@ -67,7 +99,7 @@ export default function Solution01_05() {
               {/* 좌측: N·Core CRM */}
               <div className="crm-main-box">
                 <div className="crm-main-header">
-                  <div className="crm-main-title">N·Core CRM</div>
+                 <img src="/images/sub/ncore-logo-wh.svg"/> <span>CRM</span>
                 </div>
 
                 <div className="crm-main-content">
@@ -174,6 +206,21 @@ export default function Solution01_05() {
             </div>
           </div>
         </div>
+        <div className="solution-card-wrap">
+                  <div className="sub-inner">
+                    <div className="solution-title">
+                      <h3>CRM 주요 화면 및 기능</h3>
+                      <p>
+                       N·Core CRM 시스템은 강력한 고객관계를 구축하며 매출과 수익을 향상시켜 드립니다.
+                      </p>
+                    </div>
+                    <div className="feature-grid gr-3fr">
+                      {crmCard.map((f) => (
+                        <SolutionCard key={f.number} {...f} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
       </div>
     </>
   );

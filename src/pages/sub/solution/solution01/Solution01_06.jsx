@@ -1,3 +1,4 @@
+import SolutionFlow from "@/components/sub/SoluitionFlow";
 import SolutionEffect from "@/components/sub/SolutionEffect";
 import SolutionFetures from "@/components/sub/SolutionFetures";
 
@@ -68,6 +69,8 @@ export default function Solution01_06() {
           desc="실제원가 분석부터 손익 관리까지, 체계적인 원가관리 환경을 제공합니다."
           items={costEffects}
         />
+        <SolutionFlow
+        title="사용자 업무 흐름도" imgSrc="/images/sub/ac_flow.svg"/>
       </div>
     </>
   );
