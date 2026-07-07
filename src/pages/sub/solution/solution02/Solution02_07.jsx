@@ -106,7 +106,20 @@ export default function Solution02_07() {
             </>
           }
         />
-
+        <div className="solution-diagram-full">
+          <div className="sub-inner">
+            <div className="solution-title">
+              <h3>WMS 시스템 구성도</h3>
+              <p>
+                물류센터의 모든 흐름을 실시간으로 관리하는 WMS 통합
+                구성도입니다.
+              </p>
+            </div>
+            <div className="diagram-img">
+              <img src="/images/sub/wms_flow.jpg" alt="WMS 다이어그램" />
+            </div>
+          </div>
+        </div>
         <div className="wms-improvement">
           <div className="sub-inner">
             <div className="solution-title">
@@ -418,9 +431,7 @@ export default function Solution02_07() {
                             </span>
                           </div>
                           <span className="wms-adong-label">CAN</span>
-                          <span className="wms-adong-flag">
-                            ↳ 잘못된 위치
-                          </span>
+                          <span className="wms-adong-flag">↳ 잘못된 위치</span>
                         </div>
                       </div>
                     </div>

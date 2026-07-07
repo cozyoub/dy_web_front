@@ -1,3 +1,4 @@
+import SolutionFlow from "@/components/sub/SoluitionFlow";
 import SolutionCard from "@/components/sub/SolutionCard";
 import SolutionFetures from "@/components/sub/SolutionFetures";
 import SolutionIntro from "@/components/sub/SolutionIntro";
@@ -52,13 +53,22 @@ export default function Solution02_02() {
             </>
           }
         />
-        <SolutionFetures items={apsFeatues} title="최적의 생산계획을 만드는 핵심 기능"/>
+        <SolutionFetures
+          items={apsFeatues}
+          title="최적의 생산계획을 만드는 핵심 기능"
+        />
+        <SolutionFlow
+          title="APS Optimizer(최적화) 스케줄링 구성"
+          imgSrc="/images/sub/aps_flow.png"
+        />
+
         <div className="solution-card-wrap">
           <div className="sub-inner">
             <div className="solution-title">
               <h3>APS 주요 화면 및 기능</h3>
               <p>
-                실시간 생산계획 관리와 스케줄링 최적화를 지원하는 APS의 주요 화면과 기능을 소개합니다.
+                실시간 생산계획 관리와 스케줄링 최적화를 지원하는 APS의 주요
+                화면과 기능을 소개합니다.
               </p>
             </div>
             <div className="feature-grid">

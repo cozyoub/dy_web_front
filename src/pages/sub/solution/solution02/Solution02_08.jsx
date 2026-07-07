@@ -76,6 +76,17 @@ export default function Solution02_08() {
           }
         />
         <SolutionFetures items={femsFeatures} title={<>실시간 전력 제어로 완성하는 <br/>에너지 최적화 시스템</>}/>
+        <div className="solution-diagram-full">
+          <div className="sub-inner">
+            <div className="solution-title">
+              <h3>FEMS 주요 업무 프로세스</h3>
+             
+            </div>
+            <div className="diagram-img">
+              <img src="/images/sub/fems_flow.jpg" alt="fmes_flow 다이어그램" />
+            </div>
+          </div>
+        </div>
         <div className="solution-card-wrap">
           <div className="sub-inner">
             <div className="solution-title">

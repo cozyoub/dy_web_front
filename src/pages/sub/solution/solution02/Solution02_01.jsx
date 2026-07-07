@@ -1,6 +1,7 @@
 import SolutionFetures from "@/components/sub/SolutionFetures";
 import SolutionIntro from "@/components/sub/SolutionIntro";
 import SolutionCard from "@/components/sub/SolutionCard";
+import SolutionFlow from "@/components/sub/SoluitionFlow";
 
 const mesFeatues = [
   "설비와 장치를 통신으로 연결하여 통합운영이 가능한 실시간 시스템",
@@ -82,6 +83,7 @@ export default function Solution02_01() {
           items={mesFeatues}
           title="생산 현장을 데이터로 연결하다"
         />
+        <SolutionFlow title="프로그램 주요 구성" imgSrc="/images/sub/mes_flow.png"/>
         <div className="solution-card-wrap">
           <div className="sub-inner">
             <div className="solution-title">

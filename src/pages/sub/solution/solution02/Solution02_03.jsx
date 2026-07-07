@@ -1,3 +1,4 @@
+import SolutionFlow from "@/components/sub/SoluitionFlow";
 import SolutionCard from "@/components/sub/SolutionCard";
 import SolutionFetures from "@/components/sub/SolutionFetures";
 import SolutionIntro from "@/components/sub/SolutionIntro";
@@ -91,6 +92,79 @@ export default function Solution02_03() {
           items={cmmsFeatures}
           title="설비 운영의 효율을 높이는 CMMS"
         />
+        <div className="cmms-step">
+          <div className="sub-inner">
+            <div className="solution-title">
+              <h3>CMMS STEP</h3>
+            </div>
+            <ul className="st-list">
+              <li className="st-itm">
+                <span className="label">STEP 01</span>
+                <i>
+                  <img src="/images/sub/cmms-ico01.svg" alt="" />
+                </i>
+                <div className="text">
+                  <h3>수기업무, 점검관리</h3>
+                  <ul>
+                    <li>수기 작업 지시 및 작업 실적 보고</li>
+                    <li>페이퍼 체크리스트 관리</li>
+                    <li>도면 및 관련 문서 수기 공유</li>
+                  </ul>
+                </div>
+              </li>
+              <li className="st-itm">
+                <span className="label">STEP 02</span>
+                <i>
+                  <img src="/images/sub/cmms-ico02.svg" alt="" />
+                </i>
+                <div className="text">
+                  <h3>CMMS</h3>
+                  <ul>
+                    <li>기준 DATA 정비(설비계층)</li>
+                    <li>로드맵 기초단계 구축</li>
+                    <li>통계 업무 관리로 전환</li>
+                    <li>Time-based Management</li>
+                  </ul>
+                </div>
+              </li>
+              <li className="st-itm">
+                <span className="label">STEP 03</span>
+                <i>
+                  <img src="/images/sub/cmms-ico03.svg" alt="" />
+                </i>
+                <div className="text">
+                  <h3>IMC</h3>
+                  <ul>
+                    <li>AI 예지보전 기초단계 구축</li>
+                    <li>설비관제 통합 및 모니터링</li>
+                    <li>CMMS와 연계 모니터링</li>
+                    <li>설비 데이터 관리 기준 확립</li>
+                  </ul>
+                </div>
+              </li>
+              <li className="st-itm">
+                <span className="label">STEP 04</span>
+                <i>
+                  <img src="/images/sub/cmms-ico04.svg" alt="" />
+                </i>
+                <div className="text">
+                  <h3>AI&BIG DATA</h3>
+                  <ul>
+                    <li>빅데이터 센터 구축</li>
+                    <li>설비 데이터 누적 및 분석 모델 구축</li>
+                    <li>고장, 사고, 불량 예지수명 예측</li>
+                    <li>Condition-base Management</li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <SolutionFlow
+          title="프로그램 주요 업무 프로세스"
+          imgSrc="/images/sub/cmms_flow.png"
+        />
+        
         <div className="solution-card-wrap">
           <div className="sub-inner">
             <div className="solution-title">

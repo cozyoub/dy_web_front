@@ -189,14 +189,28 @@ export default function Solution02_04() {
             </>
           }
         />
+
+        <div className="solution-diagram-full">
+          <div className="sub-inner">
+            <h2 className="sub-title">시스템 구성도</h2>
+            <img
+              src="/images/sub/solution03-01-diagram-1.png"
+              alt="N·Core ICS 시스템 구성도"
+            />
+          </div>
+        </div>
+
         <div>
-            <div className="sub-inner">
-                <div className="solution-title">
-                    <h3>업종별 N·Core ICS 적용 사례</h3>
-                    <p>철강, 자동차부품, 화학, 물류 등 다양한 산업 현장에 디지털트윈과 AI 기반 설비제어를 실제로 적용한 사례</p>
-                </div>
-                <SolutionTabDetail categories={icsCategories} />
+          <div className="sub-inner">
+            <div className="solution-title">
+              <h3>업종별 N·Core ICS 적용 사례</h3>
+              <p>
+                철강, 자동차부품, 화학, 물류 등 다양한 산업 현장에 디지털트윈과
+                AI 기반 설비제어를 실제로 적용한 사례
+              </p>
             </div>
+            <SolutionTabDetail categories={icsCategories} />
+          </div>
         </div>
       </div>
     </>

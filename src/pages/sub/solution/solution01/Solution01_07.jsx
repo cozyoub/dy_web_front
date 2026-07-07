@@ -221,9 +221,9 @@ export default function Solution01_07() {
                 2018년 개정 외감법에 대응하기 위해 내부회계관리제도 목성 달성을
                 지워하는 정보기술 일반통제(ITGC)부분을 시스템으로 지원합니다.
               </p>
-              <div className="flow-img">
-                <img src="/images/sub/itgc_flow.svg" alt="" />
-              </div>
+            </div>
+            <div className="flow-img">
+              <img src="/images/sub/itgc_flow.svg" alt="" />
             </div>
           </div>
         </div>

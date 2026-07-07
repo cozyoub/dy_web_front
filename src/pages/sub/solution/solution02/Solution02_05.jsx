@@ -70,7 +70,7 @@ export default function Solution02_05() {
           items={tmsFeatures}
           title="스마트 물류 시스템의 핵심 기능"
         />
-        <div className="tms-diagram-wrap">
+        <div className="solution-diagram-full">
           <div className="sub-inner">
             <div className="solution-title">
               <h3>TMS 시스템 구성도</h3>
