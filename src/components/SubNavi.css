@@ -8,3 +8,6 @@
 .sub-select-wrap .select-list li:last-child { padding-bottom: 20px; }
 .sub-select-wrap .select-list a { display: block; color: #fff; padding: 4px 28px; font-size: 1rem; white-space: nowrap; text-decoration: none; }
 .sub-select-wrap .select-list a:hover { color: var(--primary-color); }
+@media all and (max-width:767px){
+    .sub-select-wrap {display: none;}
+}

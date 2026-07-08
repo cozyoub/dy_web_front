@@ -268,12 +268,14 @@ export const MENU_LIST = [{
   {
     title: "About US",
     path: "/about",
-    defaultPath: "/about/about01",
-    subMenu: [{
-        title: "WHo We Are",
-        path: "/about/about01",
-        component: About01
-      }, {
+    defaultPath: "/about/about02",
+    subMenu: [
+      // {
+      //   title: "WHo We Are",
+      //   path: "/about/about01",
+      //   component: About01
+      // }, 
+      {
         title: "Location",
         path: "/about/about02",
         component: About02

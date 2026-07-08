@@ -96,13 +96,13 @@
     -webkit-box-direction: normal; cursor: pointer; transition:background .3s;
     -ms-flex-direction: column;flex-direction: column;}
 .webzine-card-grid .webzine-card:nth-child(3n){border-right: 0 none;}
-.webzine-card .webzine-card-thumb{position: relative;   flex: 0 0 20rem; overflow: hidden; height: 180px; border-radius: 0 0 20px 0;}
+.webzine-card .webzine-card-thumb{position: relative;   flex: 0 0 20rem; overflow: hidden; height: 180px; border: 1px solid #dfdfdf;}
 .webzine-card .webzine-card-thumb img{width: 100%; height: 100%; object-fit: cover; transition: transform .3s;}
 .webzine-card-grid .webzine-card:hover .webzine-card-thumb img{transform: scale(1.1);}
 .webzine-card .webzine-card-thumb-default{display: flex; align-items: center; justify-content: center; background: #f1f5f9; width: 100%; height: 100%; }
 .webzine-card .webzine-card-thumb-default img{width: 200px; height: auto;}
 .webzine-card .webzine-card-body{margin-top: 2.4em;}
-.webzine-card .webzine-card-issue{display: flex; width: 40px; height: 40px; border-radius: 0; background: var(--intro-color); align-items: center; justify-content: center; color: #fff;
+.webzine-card .webzine-card-issue{display: flex; width: 40px; height: 40px; border-radius: 0; background: #1a1a1a; align-items: center; justify-content: center; color: #fff;
 font-family: 'Sweet'; position: absolute; top: 0 ; left: 0;}
 .webzine-card  .webzine-card-category{ display: inline-block; padding: 4px 12px; color: var(--base-color60); border: 1px solid var(--base-color60); border-radius: 30px;}
 .webzine-card .webzine-card-title{font-size: 18px; color: #000; font-weight: 600; margin: 12px 0;}
@@ -192,7 +192,7 @@ font-family: 'Sweet'; position: absolute; top: 0 ; left: 0;}
 /* E : QnA */
 
 /* S : 사이트맵 */
-.sitemap-wrapper { max-width: 1240px; margin: 0 auto; display: flex; width:100%; padding-bottom:50px;}
+.sitemap-wrapper { max-width: 1240px; margin: 0 auto; display: flex; width:100%; padding: 100px 12px;}
 .sitemap-wrapper .grid{display: flex; gap: 50px; width: 100%; flex-wrap: wrap;}
 .sitemap-wrapper .grid .item{width: calc((100% - 150px) / 4);}
 .sitemap-wrapper .parent-link{font-size: 1.875rem; padding-bottom: 20px; display: block; margin-bottom: 20px; border-bottom: 2px solid #1e293b;}
@@ -201,6 +201,15 @@ font-family: 'Sweet'; position: absolute; top: 0 ; left: 0;}
 .sitemap-wrapper .grid .item > ul > li > ul{margin: 20px 0;}
 .sitemap-wrapper .grid .item > ul > li > ul > li a{padding: 10px 12px 12px 20px; font-size: 14px; color: #475569; position: relative;}
 .sitemap-wrapper .grid .item > ul > li > ul > li a:after{content: ""; display: block; width: 3px; height: 3px; background: #475569; left: 0; top: 50%; position: absolute; transform: translateY(-50%);}
+@media all and (max-width:1000px){
+ .sitemap-wrapper .grid .item{width: calc((100% - 50px) / 2);}
+}
+@media all and (max-width:767px){
+  .sitemap-wrapper {padding: 50px 12px;}
+}
+@media all and (max-width:500px){
+ .sitemap-wrapper .grid .item{width: 100%;}
+}
 /* E : 사이트맵*/
 
 

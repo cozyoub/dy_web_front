@@ -95,8 +95,8 @@ const TopNavi = () => {
                           onMouseLeave={() => setActiveSubMenu(null)}
                         >
                           {sub.externalLink ? (
-                            
-                              <a href={sub.externalLink}
+                            <a
+                              href={sub.externalLink}
                               target="_blank"
                               rel="noopener noreferrer"
                             >
@@ -179,16 +179,28 @@ const TopNavi = () => {
         <ul className="mobile-menu-list">
           {MENU_LIST.map((menu, idx) => (
             <li key={idx} className="mobile-menu-item">
-              <button
-                className="mobile-parent"
-                onClick={() => {
-                  setOpenMobileIdx(openMobileIdx === idx ? null : idx);
-                  setOpenMobileSubIdx(null);
-                }}
-              >
-                {menu.title}
-                <span>{openMobileIdx === idx ? "-" : "+"}</span>
-              </button>
+              {menu.subMenu?.length > 0 ? (
+                // 서브메뉴 있음 → 기존 그대로 토글(아코디언)
+                <button
+                  className="mobile-parent"
+                  onClick={() => {
+                    setOpenMobileIdx(openMobileIdx === idx ? null : idx);
+                    setOpenMobileSubIdx(null);
+                  }}
+                >
+                  {menu.title}
+                  <span>{openMobileIdx === idx ? "-" : "+"}</span>
+                </button>
+              ) : (
+                // 서브메뉴 없음 → 바로 이동
+                <Link
+                  to={menu.defaultPath ?? menu.path}
+                  className="mobile-parent"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {menu.title}
+                </Link>
+              )}
 
               {openMobileIdx === idx && menu.subMenu?.length > 0 && (
                 <ul className="mobile-sub-list">

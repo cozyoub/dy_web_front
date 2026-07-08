@@ -19,8 +19,8 @@ const DEPTH1_VISUAL = {
 
 // 특수 페이지 따로 관리
 const SPECIAL_PAGES = {
-  "/sitemap": { title: "사이트맵", subtitle: "Sitemap", bg: "/images/visual-sitemap.jpg" },
-  "/contact": { title: "Contact", subtitle: "Contact Us", bg: "/images/visual-contact.jpg" },
+  "/sitemap": { title: "사이트맵", subtitle: "Sitemap", bg: "/images/sub/visual-service.jpg" },
+  "/contact": { title: "Contact", subtitle: "Contact Us", bg: "/images/sub/visual-service.jpg" },
 };
 
 const findMenuTitle = (menus, pathname) => {

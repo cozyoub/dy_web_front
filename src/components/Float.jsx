@@ -1,4 +1,8 @@
 export default function Float() {
+  const handleGoTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <>
       <div className="fixed-util">
@@ -8,9 +12,14 @@ export default function Float() {
           </a>
           <span className="deco" aria-hidden="true"></span>
         </div>
-        <div className="go-top">
+        <button
+          type="button"
+          className="go-top"
+          onClick={handleGoTop}
+          aria-label="맨 위로 이동"
+        >
           <img src="/images/ico-up.png" alt="" />
-        </div>
+        </button>
       </div>
       <style>{`
                 .fixed-util{
@@ -19,7 +28,8 @@ export default function Float() {
                 .go-top {
                     background-color: #fff; width:60px; height:60px;
                     padding: 20px; border:1px solid #ddd;
-                    font-weight: bold; display:flex; aligh-items:center; justify-content:center; border-radius:50px;
+                    font-weight: bold; display:flex; align-items:center; justify-content:center; border-radius:50px;
+                    cursor:pointer;
                 }
                 .go-inquiry {position:relative;}
                 .go-inquiry > a{display:block; width:60px; height:60px;  border-radius:50%;  background: linear-gradient( 45deg, #0cd4bc, #1550e6 );  display: flex; flex-wrap: wrap; flex-direction: column; align-items: center;justify-content: center; position: absolute; top:50%; left:50%; transform:translate(-50%, -50%); transition: all .3s; z-index: 1;}

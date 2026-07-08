@@ -84,15 +84,15 @@ transform: translateY(-50%); border-radius: 12px;}
 .mobile-parent {display: flex;align-items: center;justify-content: space-between;
   width: 100%;padding: 16px 24px;font-size: 1rem;font-weight: 600;
   color: #1e293b;background: none;border: none;
-  cursor: pointer;text-align: left;}
+  cursor: pointer;text-align: left; font-family: 'Sweet'; font-weight: 700; font-size: 18px;}
 .mobile-sub-list {list-style: none;margin: 0;padding: 0 0 12px;}
 .mobile-sub-btn {display: flex; align-items: center; justify-content: space-between; width: 100%;
-  padding: 10px 24px 10px 36px; font-size: 0.875rem; color: #475569; background: none; border: none; cursor: pointer; text-align: left;}
+  padding: 10px 24px 10px 36px; font-size: 0.875rem; color: #475569; background: none; border: none; cursor: pointer; text-align: left; font-size: 17px; font-family: 'Sweet';}
 .mobile-sub-btn:hover { color: #3b82f6; }
-.mobile-sub-list li a {display: block;padding: 10px 24px 10px 36px;font-size: 0.875rem;color: #475569;text-decoration: none;}
+.mobile-sub-list li a {display: block;padding: 10px 24px 10px 36px;font-size: 17px;color: #475569;text-decoration: none; font-family: 'Sweet';}
 .mobile-sub-list li a:hover {color: #3b82f6;}
 .mobile-sub-sub-list { list-style: none; margin: 0; padding: 0 0 8px; background: #f8fafc; }
-.mobile-sub-sub-list li a { display: block; padding: 8px 24px 8px 48px; font-size: 0.8125rem; color: #64748b; text-decoration: none; }
+.mobile-sub-sub-list li a { display: block; padding: 8px 24px 8px 48px; font-size: 0.8125rem; color: #64748b; text-decoration: none; font-family: 'Sweet'; font-size: 15px;}
 .mobile-sub-sub-list li a:hover { color: #3b82f6; }
 .mobile-overlay {position: fixed;inset: 0;background: rgba(0,0,0,0.4);z-index: 199;}
 

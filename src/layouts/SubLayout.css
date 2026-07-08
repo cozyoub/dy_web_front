@@ -9,5 +9,5 @@
 .sub-content { min-height: 60vh; }
 
 @media all and (max-width:1200px){
-    
+    .sub-visual-title{font-size: 3rem;}
 }
