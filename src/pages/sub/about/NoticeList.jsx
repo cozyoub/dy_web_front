@@ -2,13 +2,18 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllNotiService } from "@/services/noti.service";
 import { BASE_API_URL } from "@/common/constants";
+import Pagination from "@/components/sub/Pagination";
+
+const PAGE_SIZE = 9;
 
 export default function NoticeList() {
   const [list, setList] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [sfl, setSfl] = useState("title");
   const [stx, setStx] = useState("");
+  const [page, setPage] = useState(1);
   const navigate = useNavigate();
+
   const getThumb = (item) => {
     if (item.sfile) return `${BASE_API_URL}/uploads/${item.sfile}`;
     if (item.imageUrl) return item.imageUrl;
@@ -18,13 +23,18 @@ export default function NoticeList() {
   useEffect(() => {
     getAllNotiService()
       .then((res) => {
-        setList(res.data);
-        setFiltered(res.data);
+        // 최신순(createdAt 내림차순) 정렬
+        const sorted = [...res.data].sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+        );
+        setList(sorted);
+        setFiltered(sorted);
       })
       .catch(() => alert("목록 불러오기 실패"));
   }, []);
 
   const handleSearch = () => {
+    setPage(1);
     if (!stx.trim()) {
       setFiltered(list);
       return;
@@ -40,15 +50,15 @@ export default function NoticeList() {
 
   const handleReset = () => {
     setStx("");
+    setPage(1);
     setFiltered(list);
   };
 
+  // filtered(필터링된 전체 결과)에서 현재 페이지 분량만 잘라서 화면에 렌더링
+  const pageItems = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
   return (
     <div className="notice-list-wrapper sub-inner">
-      {/* <div className="notice-list-header">
-        <h2>공지사항</h2>
-      </div> */}
-
       {/* 검색 */}
       <div className="notice-search-bar">
         <span className="notice-total">Total {filtered.length}</span>
@@ -75,10 +85,10 @@ export default function NoticeList() {
       </div>
 
       <div className="notice-card-grid">
-        {filtered.length === 0 && (
+        {pageItems.length === 0 && (
           <p className="notice-empty">검색 결과가 없습니다.</p>
         )}
-        {filtered.map((item) => (
+        {pageItems.map((item) => (
           <div
             key={item.id}
             className="notice-card"
@@ -89,7 +99,7 @@ export default function NoticeList() {
                 <img src={getThumb(item)} alt={item.title} />
               ) : (
                 <div className="notice-card-thumb-default">
-                    <img src="/images/logo.png" alt="" />
+                  <img src="/images/logo.png" alt="" />
                 </div>
               )}
             </div>
@@ -99,6 +109,13 @@ export default function NoticeList() {
           </div>
         ))}
       </div>
+
+      <Pagination
+        page={page}
+        totalItems={filtered.length}
+        pageSize={PAGE_SIZE}
+        onPageChange={setPage}
+      />
     </div>
   );
 }

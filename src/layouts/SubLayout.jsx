@@ -25,10 +25,12 @@ const SPECIAL_PAGES = {
 
 const findMenuTitle = (menus, pathname) => {
   for (const menu of menus) {
-    if (menu.path === pathname) return menu.title;
     if (menu.subMenu) {
       const found = findMenuTitle(menu.subMenu, pathname);
       if (found) return found;
+    }
+    if (menu.path && (pathname === menu.path || pathname.startsWith(menu.path + "/"))) {
+      return menu.title;
     }
   }
   return null;

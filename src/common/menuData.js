@@ -56,6 +56,7 @@ const About03 = lazy(() => import("@/pages/sub/about/About03"))
 const About04 = lazy(() => import("@/pages/sub/about/About04"))
 const About05 = lazy(() => import("@/pages/sub/about/About05"))
 const NoticeList = lazy(() => import("@/pages/sub/about/NoticeList"))
+const WebzineList = lazy(() => import("@/pages/sub/about/WebzineList"))
 
 const Contact = lazy(() => import("@/pages/sub/Contact"));
 
@@ -299,6 +300,11 @@ export const MENU_LIST = [{
         title: "공지사항",
         path: "/about/notice",
         component: NoticeList
+      },
+      {
+        title: "웹진",
+        path: "/about/webzine",
+        component: WebzineList
       }
     ]
   },
@@ -374,6 +380,20 @@ export const ADMIN_MENU_LIST = [{
       {
         title: '팝업 등록',
         path: '/admin/popup/write'
+      }
+    ]
+  },
+  {
+    title: '웹진 관리',
+    path: '/admin/webzine',
+    icon: 'NoticeIcon',
+    subMenu: [{
+        title: '웹진 목록',
+        path: '/admin/webzine/list'
+      },
+      {
+        title: '웹진 등록',
+        path: '/admin/webzine/write'
       }
     ]
   },

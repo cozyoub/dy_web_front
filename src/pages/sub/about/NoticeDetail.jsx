@@ -16,32 +16,32 @@ export default function NoticeDetail() {
       .catch(() => alert('불러오기 실패'));
   }, [id]);
 
-  if (!item) return <div className="notice-loading">로딩 중...</div>;
+  if (!item) return <div className="board-loading">로딩 중...</div>;
 
   return (
-    <div className="notice-detail-wrapper sub-inner">
-      <div className="notice-detail-header">
+    <div className="board-detail-wrapper sub-inner">
+      <div className="board-detail-header">
         <h2>{item.title}</h2>
-        <div className="notice-detail-meta">
+        <div className="board-detail-meta">
           <span>{item.writer}</span>
           <span>{item.createdAt?.slice(0, 10)}</span>
           <span>조회 {item.count}</span>
         </div>
       </div>
 
-      {item.sfile && (
-        <div className="notice-detail-thumb">
+      {/* {item.sfile && (
+        <div className="board-detail-thumb">
           <img src={`${BASE_API_URL}/uploads/${item.sfile}`} alt={item.title} />
         </div>
-      )}
+      )} */}
 
-      <div className="notice-detail-content">
+      <div className="board-detail-content">
         {/* {item.content} */}
         <Viewer initialValue={item.content} />
       </div>
 
       {item.ofile && (
-        <div className="notice-detail-file">
+        <div className="board-detail-file">
           첨부파일:
           <a href={`${BASE_API_URL}/uploads/${item.sfile}`} download={item.ofile}>
             {item.ofile}
@@ -49,8 +49,8 @@ export default function NoticeDetail() {
         </div>
       )}
 
-      <div className="notice-detail-footer">
-        <button className="notice-back-btn" onClick={() => navigate('/about/notice')}>
+      <div className="board-detail-footer">
+        <button className="board-back-btn" onClick={() => navigate('/about/notice')}>
           목록으로
         </button>
       </div>

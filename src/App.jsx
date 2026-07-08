@@ -27,6 +27,10 @@ import DemoScrollEx from "./pages/sub/customer/DemoScroll";
 import Float from "./components/Float";
 import Footer from "./components/Footer";
 import Contact from "./pages/sub/Contact";
+import AdminWebzineList from "./pages/Admin/webzine/AdminWebzineList";
+import AdminWebzineWrite from "./pages/Admin/webzine/AdminWebzineWrite";
+import AdminWebzineEdit from "./pages/Admin/webzine/AdminWebzineEdit";
+import WebzineDetail from "./pages/sub/about/WebzineDetail";
 
 const extractRoutes = (menuList) => {
   const routes = [];
@@ -69,6 +73,7 @@ function App() {
               <Route path="/customer/qna" element={<QnA />} />
               <Route path="/about/notice" element={<NoticeList />} />
               <Route path="/about/notice/:id" element={<NoticeDetail />} />
+              <Route path="/about/webzine/:id" element={<WebzineDetail />} />
               <Route path="/customer/animation" element={<DemoScrollEx />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/sitemap" element={<Sitemap />} />
@@ -96,6 +101,10 @@ function App() {
             <Route path="popup/list" element={<AdminPopupList />} />
             <Route path="popup/write" element={<AdminPopupWrite />} />
             <Route path="popup/edit/:id" element={<AdminPopupEdit />} />
+            {/* 웹진 관리 */}
+            <Route path="webzine/list" element={<AdminWebzineList />} />
+            <Route path="webzine/write" element={<AdminWebzineWrite />} />
+            <Route path="webzine/edit/:id" element={<AdminWebzineEdit />} />
           </Route>
         </Routes>
       </BrowserRouter>
