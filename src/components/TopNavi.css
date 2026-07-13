@@ -1,11 +1,40 @@
+.inner{max-width: 1640px; margin: 0 auto; width:100%; padding: 0 12px;}
 /* 전체 nav */
 .gnb-wrapper {position: fixed; width: 100%; z-index: 100; transition: all 0.3s ease; }
-.gnb-wrapper.gnb-hidden { transform: translateY(-100%);  }
+.gnb-wrapper.gnb-hidden { transform: translateY(-100%); opacity: 0; }
 .gnb-scrolled {
   background:rgba(255,255,255,1);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1); backdrop-filter: blur(2px); 
 }
-.gnb-container {margin: 0 auto;padding: 0 24px; display: flex;align-items: center; justify-content: space-between; gap: 60px; z-index: 101;}
+@keyframes slideDown {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+     transform: translateY(-100px);
+    opacity: 0;
+  }
+}
+
+.gnb-wrapper.is-pre-reveal{transform:translateY(-100%);opacity:0;transition:transform 1s cubic-bezier(.4,0,.2,1), opacity 1s ease;}
+.gnb-wrapper.is-revealed{transform:translateY(0);opacity:1;}
+.gnb-wrapper.is-revealed.gnb-hidden{transform:translateY(-100%);}
+
+.gnb-container {margin: 0 auto;padding: 0 24px; display: flex;align-items: center; justify-content: space-between; gap: 0px; z-index: 101; max-width: 1624px;}
 .gnb-container .logo img {max-width: 200px;}
 .gnb-container .th-dark{display: none;}
 

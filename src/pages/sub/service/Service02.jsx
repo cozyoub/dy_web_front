@@ -682,15 +682,10 @@ export default function Service02() {
                 <div className="ncore-detail-bottom">
                   <div className="ncore-detail-img">
                     {d.img.map((src, i) => (
-                      <div>
-                        <img
-                          key={i}
-                          src={src}
-                          alt=""
-                          className="ncore-detail-img-item"
-                        />
-                      </div>
-                    ))}
+  <div key={i}>
+    <img src={src} alt="" className="ncore-detail-img-item" />
+  </div>
+))}
                   </div>
                   <div className="ncore-detail-text">
                     <div className="ncore-detail-body">{d.body}</div>

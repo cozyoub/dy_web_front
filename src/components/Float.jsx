@@ -8,7 +8,7 @@ export default function Float() {
       <div className="fixed-util">
         <div className="go-inquiry">
           <a href="/contact" title="">
-            <img src="/images/ico-inquiry.png" alt="" />
+            <img src="/images/common/ico-inquiry.png" alt="" />
           </a>
           <span className="deco" aria-hidden="true"></span>
         </div>
@@ -18,7 +18,7 @@ export default function Float() {
           onClick={handleGoTop}
           aria-label="맨 위로 이동"
         >
-          <img src="/images/ico-up.png" alt="" />
+          <img src="/images/common/ico-up.png" alt="" />
         </button>
       </div>
       <style>{`
@@ -36,7 +36,7 @@ export default function Float() {
                 .go-inquiry > a img{max-width:24px;}
                 .go-inquiry > a:focus{border: 3px dashed #14FF00 !important;}
                 .go-inquiry > a > span{color:#fff; font-size:14px; line-height:1.375; font-family:'Gmarket';}
-                .go-inquiry .deco{content:""; display:block; width:107px; height:107px; background:url(/images/inquiry-deco.png) no-repeat; animation: rotate 10s infinite;}
+                .go-inquiry .deco{content:""; display:block; width:107px; height:107px; background:url(/images/common/inquiry-deco.png) no-repeat; animation: rotate 10s infinite;}
                 .go-inquiry > a:hover + .deco, .go-inquiry > a:focus + .deco {animation-play-state: running;}
                 @keyframes rotate {
                     from {

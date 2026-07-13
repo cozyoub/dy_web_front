@@ -1,7 +1,6 @@
 import "./App.css";
 import "@/assets/css/reset.css";
 import "@/assets/css/global.css";
-import { Suspense } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { MENU_LIST } from "@/common/menuData";
 import TopNavi from "./components/TopNavi";
@@ -10,7 +9,6 @@ import SubLayout from "./layouts/SubLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import Admin from "./pages/Admin";
 import PrivateRoute from "./routes/PrivateRoute";
-/* 관리자 페이지*/
 import AdminNoticeList from "./pages/Admin/Notice/AdminNoticeList";
 import AdminNoticeWrite from "./pages/Admin/Notice/AdminNoticeWrite";
 import AdminContactList from "./pages/Admin/contact/AdminContactList";
@@ -51,64 +49,58 @@ const subRoutes = extractRoutes(MENU_LIST);
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            element={
-              <>
-                <TopNavi />
-                <Float />
-                <Outlet />
-                <Footer />
-              </>
-            }
-          >
-            <Route path="/" element={<MainLayout />} />
-            {/* SubLayout*/}
-            <Route element={<SubLayout />}>
-              {subRoutes.map(({ path, element }) => (
-                <Route key={path} path={path} element={element} />
-              ))}
-              <Route path="/customer/qna" element={<QnA />} />
-              <Route path="/about/notice" element={<NoticeList />} />
-              <Route path="/about/notice/:id" element={<NoticeDetail />} />
-              <Route path="/about/webzine/:id" element={<WebzineDetail />} />
-              <Route path="/customer/animation" element={<DemoScrollEx />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/sitemap" element={<Sitemap />} />
-            </Route>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          element={
+            <>
+              <TopNavi />
+              <Float />
+              <Outlet />
+              <Footer />
+            </>
+          }
+        >
+          <Route path="/" element={<MainLayout />} />
+          {/* SubLayout*/}
+          <Route element={<SubLayout />}>
+            {subRoutes.map(({ path, element }) => (
+              <Route key={path} path={path} element={element} />
+            ))}
+            <Route path="/customer/qna" element={<QnA />} />
+            <Route path="/about/notice" element={<NoticeList />} />
+            <Route path="/about/notice/:id" element={<NoticeDetail />} />
+            <Route path="/about/webzine/:id" element={<WebzineDetail />} />
+            <Route path="/customer/animation" element={<DemoScrollEx />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/sitemap" element={<Sitemap />} />
           </Route>
+        </Route>
 
-          {/* Admin 페이지 */}
-          <Route path="/admin-login" element={<Login />} />
-          <Route
-            path="/admin"
-            element={
-              <PrivateRoute>
-                <AdminLayout />
-              </PrivateRoute>
-            }
-          >
-            <Route index element={<Admin />} />
-            {/* 공지사항 관리 */}
-            <Route path="notice/list" element={<AdminNoticeList />} />
-            <Route path="notice/write" element={<AdminNoticeWrite />} />
-            <Route path="notice/edit/:id" element={<AdminNoticeEdit />} />
-            {/* 문의하기 관리 */}
-            <Route path="contact/list" element={<AdminContactList />} />
-            {/* 팝업 관리 */}
-            <Route path="popup/list" element={<AdminPopupList />} />
-            <Route path="popup/write" element={<AdminPopupWrite />} />
-            <Route path="popup/edit/:id" element={<AdminPopupEdit />} />
-            {/* 웹진 관리 */}
-            <Route path="webzine/list" element={<AdminWebzineList />} />
-            <Route path="webzine/write" element={<AdminWebzineWrite />} />
-            <Route path="webzine/edit/:id" element={<AdminWebzineEdit />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </>
+        {/* Admin 페이지 */}
+        <Route path="/admin-login" element={<Login />} />
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              <AdminLayout />
+            </PrivateRoute>
+          }
+        >
+          <Route index element={<Admin />} />
+          <Route path="notice/list" element={<AdminNoticeList />} />
+          <Route path="notice/write" element={<AdminNoticeWrite />} />
+          <Route path="notice/edit/:id" element={<AdminNoticeEdit />} />
+          <Route path="contact/list" element={<AdminContactList />} />
+          <Route path="popup/list" element={<AdminPopupList />} />
+          <Route path="popup/write" element={<AdminPopupWrite />} />
+          <Route path="popup/edit/:id" element={<AdminPopupEdit />} />
+          <Route path="webzine/list" element={<AdminWebzineList />} />
+          <Route path="webzine/write" element={<AdminWebzineWrite />} />
+          <Route path="webzine/edit/:id" element={<AdminWebzineEdit />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

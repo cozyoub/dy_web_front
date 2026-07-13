@@ -5,7 +5,7 @@ import "./TopNavi.css";
 
 const SUB_PATHS = ["/about", "/customer", "/sitemap"];
 
-const TopNavi = () => {
+const TopNavi = ({ revealed = true }) => {
   const [activeSubMenu, setActiveSubMenu] = useState(null);
   const [activeMenu, setActiveMenu] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -51,7 +51,7 @@ const TopNavi = () => {
   return (
     <>
       <nav
-        className={`gnb-wrapper ${activeMenu !== null ? "on" : ""} ${hidden ? "gnb-hidden" : ""} ${!isTop ? "gnb-scrolled" : ""}`}
+        className={`gnb-wrapper ${activeMenu !== null ? "on" : ""} ${hidden ? "gnb-hidden" : ""} ${!isTop ? "gnb-scrolled" : ""} `}
         onMouseLeave={() => {
           setActiveMenu(null);
           setActiveSubMenu(null);
@@ -95,8 +95,8 @@ const TopNavi = () => {
                           onMouseLeave={() => setActiveSubMenu(null)}
                         >
                           {sub.externalLink ? (
-                            <a
-                              href={sub.externalLink}
+                            
+                              <a href={sub.externalLink}
                               target="_blank"
                               rel="noopener noreferrer"
                             >
@@ -180,7 +180,6 @@ const TopNavi = () => {
           {MENU_LIST.map((menu, idx) => (
             <li key={idx} className="mobile-menu-item">
               {menu.subMenu?.length > 0 ? (
-                // 서브메뉴 있음 → 기존 그대로 토글(아코디언)
                 <button
                   className="mobile-parent"
                   onClick={() => {
@@ -192,7 +191,6 @@ const TopNavi = () => {
                   <span>{openMobileIdx === idx ? "-" : "+"}</span>
                 </button>
               ) : (
-                // 서브메뉴 없음 → 바로 이동
                 <Link
                   to={menu.defaultPath ?? menu.path}
                   className="mobile-parent"
@@ -207,8 +205,8 @@ const TopNavi = () => {
                   {menu.subMenu.map((sub, sIdx) => (
                     <li key={sIdx}>
                       {sub.externalLink ? (
-                        <a
-                          href={sub.externalLink}
+                        
+                          <a href={sub.externalLink}
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={() => setMobileOpen(false)}
