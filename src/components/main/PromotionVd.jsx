@@ -50,7 +50,6 @@ export default function PromotionVd() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
 
-      // 모바일 애니메이션 없앰
       mm.add("(min-width: 851px)", () => {
         const pinHeight = section.offsetHeight * 0.4;
 
@@ -71,11 +70,46 @@ export default function PromotionVd() {
         tl.to(desc, { opacity: 0, duration: 1 }, 0);
         tl.to(txt, { y: 30, duration: 1 }, 0);
 
+        const firstImg = firstItem.querySelector(".pv-img");
+        const firstThumb = firstItem.querySelector(".thum");
+        const firstPlayBtn = firstItem.querySelector(".btn-play");
+        const firstTit = firstItem.querySelector(".pv-tit");
+
+        gsap.set(firstImg, { clipPath: "inset(0% 50% 0% 50%)" });
+        gsap.set(firstThumb, { scale: 1.25 });
+        gsap.set(firstTit, { y: 24, opacity: 0 });
+        gsap.set(firstPlayBtn, { scale: 0, opacity: 0 });
+
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: firstItem,
+              start: "top 82%",
+            },
+          })
+          .to(firstImg, {
+            clipPath: "inset(0% 0% 0% 0%)",
+            duration: 1,
+            ease: "power4.inOut",
+          })
+          .to(firstThumb, { scale: 1, duration: 1.3, ease: "power3.out" }, 0)
+          .to(
+            firstPlayBtn,
+            { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" },
+            "-=0.5"
+          )
+          .to(
+            firstTit,
+            { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
+            "-=0.4"
+          );
+
         return () => tl.scrollTrigger?.kill();
       });
 
-      // 카드 진입 리빌 애니메이션 (모바일 포함 공통)
-      const items = gsap.utils.toArray(".pv-item");
+      const items = gsap.utils
+        .toArray(".pv-item")
+        .filter((item) => item !== firstItem);
 
       items.forEach((item) => {
         const img = item.querySelector(".pv-img");
@@ -101,11 +135,7 @@ export default function PromotionVd() {
           duration: 1,
           ease: "power4.inOut",
         })
-          .to(
-            thumb,
-            { scale: 1, duration: 1.3, ease: "power3.out" },
-            0
-          )
+          .to(thumb, { scale: 1, duration: 1.3, ease: "power3.out" }, 0)
           .to(
             playBtn,
             { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" },
