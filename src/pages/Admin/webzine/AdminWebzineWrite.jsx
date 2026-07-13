@@ -13,7 +13,6 @@ export default function AdminWebzineWrite() {
     title: "",
     writer: "관리자",
     imageUrl: "",
-    issueNo: "",
     category: "",
     publishedDate: "",
   });
@@ -38,7 +37,6 @@ export default function AdminWebzineWrite() {
     const payload = {
       ...form,
       content,
-      issueNo: form.issueNo ? Number(form.issueNo) : null,
       publishedDate: form.publishedDate || null,
     };
     saveWebzineService(payload, file)
@@ -63,17 +61,6 @@ export default function AdminWebzineWrite() {
               value={form.title}
               onChange={handleChange}
               required
-            />
-          </div>
-
-          <div className="admin-form-group">
-            <label>호수</label>
-            <input
-              type="number"
-              name="issueNo"
-              value={form.issueNo}
-              onChange={handleChange}
-              placeholder="예: 12"
             />
           </div>
 

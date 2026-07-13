@@ -4,6 +4,7 @@ import {
   getAllWebzineService,
   deleteWebzineService,
 } from "@/services/webzine.service";
+import { formatIssueLabel } from "@/common/webzineUtils";
 
 export default function AdminWebzineList() {
   const [list, setList] = useState([]);
@@ -38,7 +39,7 @@ export default function AdminWebzineList() {
           <thead>
             <tr>
               <th>번호</th>
-              <th>호수</th>
+              <th>발행호</th>
               <th>카테고리</th>
               <th>제목</th>
               <th>작성자</th>
@@ -51,7 +52,7 @@ export default function AdminWebzineList() {
             {list.map((item) => (
               <tr key={item.id}>
                 <td>{item.id}</td>
-                <td>{item.issueNo}</td>
+                <td>{formatIssueLabel(item.publishedDate)}</td>
                 <td>{item.category}</td>
                 <td>{item.title}</td>
                 <td>{item.writer}</td>

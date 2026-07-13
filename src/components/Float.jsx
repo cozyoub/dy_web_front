@@ -23,7 +23,7 @@ export default function Float() {
       </div>
       <style>{`
                 .fixed-util{
-                    position:fixed; bottom:2%; right:2%; z-index: 3; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:30px;
+                    position:fixed; bottom:2%; right:2%; z-index: 11; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:30px;
                 }   
                 .go-top {
                     background-color: #fff; width:60px; height:60px;

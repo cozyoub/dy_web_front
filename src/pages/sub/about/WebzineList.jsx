@@ -4,6 +4,7 @@ import { getAllWebzineService } from "@/services/webzine.service";
 import { BASE_API_URL } from "@/common/constants";
 import { WEBZINE_CATEGORIES } from "@/common/webzineCategories";
 import Pagination from "@/components/sub/Pagination";
+import { formatIssueLabel } from "@/common/webzineUtils";
 
 const PAGE_SIZE = 9;
 
@@ -11,7 +12,7 @@ export default function WebzineList() {
   const [list, setList] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [category, setCategory] = useState("all");
-  const [issueNo, setIssueNo] = useState("all");
+  const [issue, setIssue] = useState("all");
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
@@ -21,7 +22,6 @@ export default function WebzineList() {
     return null;
   };
 
-  // content(HTML)에서 태그/이미지 다 걷어내고 순수 텍스트만 뽑아서 길이 자르기
   const getExcerpt = (html, length = 80) => {
     if (!html) return "";
     const div = document.createElement("div");
@@ -46,13 +46,32 @@ export default function WebzineList() {
   }, []);
 
   const categories = ["all", ...WEBZINE_CATEGORIES];
-  const issues = [...new Set(list.map((i) => i.issueNo).filter((n) => n !== null && n !== undefined))]
-    .sort((a, b) => b - a);
+  const issues = [...list]
+    .filter((item) => item.publishedDate)
+    .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate))
+    .filter(
+      (item, index, self) =>
+        index ===
+        self.findIndex(
+          (v) =>
+            formatIssueLabel(v.publishedDate) ===
+            formatIssueLabel(item.publishedDate),
+        ),
+    );
 
   const applyFilter = (cat, issue) => {
     let result = list;
-    if (cat !== "all") result = result.filter((item) => item.category === cat);
-    if (issue !== "all") result = result.filter((item) => item.issueNo === issue);
+
+    if (cat !== "all") {
+      result = result.filter((item) => item.category === cat);
+    }
+
+    if (issue !== "all") {
+      result = result.filter(
+        (item) => formatIssueLabel(item.publishedDate) === issue,
+      );
+    }
+
     setFiltered(result);
     setPage(1);
   };
@@ -63,9 +82,8 @@ export default function WebzineList() {
   };
 
   const handleIssueFilter = (value) => {
-    const issue = value === "all" ? "all" : Number(value);
-    setIssueNo(issue);
-    applyFilter(category, issue);
+    setIssue(value);
+    applyFilter(category, value);
   };
 
   // filtered(필터링된 전체 결과)에서 현재 페이지 분량만 잘라서 화면에 렌더링
@@ -90,13 +108,17 @@ export default function WebzineList() {
       <div className="webzine-filter-issue">
         <span className="webzine-total">Total {filtered.length}</span>
         <select
-          value={issueNo}
+          value={issue}
           onChange={(e) => handleIssueFilter(e.target.value)}
         >
           <option value="all">전체보기</option>
-          {issues.map((issue) => (
-            <option key={issue} value={issue}>
-              {issue}호
+
+          {issues.map((item) => (
+            <option
+              key={item.publishedDate}
+              value={formatIssueLabel(item.publishedDate)}
+            >
+              {formatIssueLabel(item.publishedDate)}
             </option>
           ))}
         </select>
@@ -120,16 +142,15 @@ export default function WebzineList() {
                   <img src="/images/common/logo.svg" alt="" />
                 </div>
               )}
-              {item.issueNo && (
-                <span className="webzine-card-issue">{item.issueNo}호</span>
-              )}
             </div>
             <div className="webzine-card-body">
-              {item.category && (
-                <span className="webzine-card-category">{item.category}</span>
-              )}
+              <span className="webzine-card-issue">
+                {formatIssueLabel(item.publishedDate)}
+              </span>
+
               <p className="webzine-card-title">{item.title}</p>
               <p className="webzine-card-desc">{getExcerpt(item.content)}</p>
+
               <div className="webzine-card-util">
                 <span className="webzine-card-date">
                   {item.publishedDate ?? item.createdAt?.slice(0, 10)}

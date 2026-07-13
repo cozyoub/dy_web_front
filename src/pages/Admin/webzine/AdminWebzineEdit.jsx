@@ -16,7 +16,6 @@ export default function AdminWebzineEdit() {
     title: "",
     writer: "관리자",
     imageUrl: "",
-    issueNo: "",
     category: "",
     publishedDate: "",
   });
@@ -33,7 +32,6 @@ export default function AdminWebzineEdit() {
           writer,
           ofile,
           imageUrl,
-          issueNo,
           category,
           publishedDate,
         } = res.data;
@@ -42,7 +40,6 @@ export default function AdminWebzineEdit() {
           content: content ?? "",
           writer: writer ?? "",
           imageUrl: imageUrl ?? "",
-          issueNo: issueNo ?? "",
           category: category ?? "",
           publishedDate: publishedDate ?? "",
         });
@@ -65,7 +62,6 @@ export default function AdminWebzineEdit() {
     const payload = {
       ...form,
       content,
-      issueNo: form.issueNo ? Number(form.issueNo) : null,
       publishedDate: form.publishedDate || null,
     };
     updateWebzineService(id, payload, file)
@@ -90,16 +86,6 @@ export default function AdminWebzineEdit() {
               value={form.title}
               onChange={handleChange}
               required
-            />
-          </div>
-
-          <div className="admin-form-group">
-            <label>호수</label>
-            <input
-              type="number"
-              name="issueNo"
-              value={form.issueNo}
-              onChange={handleChange}
             />
           </div>
 
