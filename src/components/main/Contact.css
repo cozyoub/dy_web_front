@@ -1,6 +1,6 @@
 .main-contact{padding:6.25rem 0;}
 .contact-inquiry{position:relative; display:flex; align-items:center; justify-content:space-between; padding:3rem 6rem; box-sizing:border-box; background:url('/images/main/contact_bg.jpg') no-repeat center / cover;
-     border-radius:20px;}
+     border-radius:20px; gap:1.25rem;}
 .contact-inquiry:before{content:""; position:absolute; inset:0; border-radius:inherit; padding:1px; z-index:9; pointer-events:none; background:linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.01) 40%, rgba(255,255,255,0.01) 60%, rgba(255,255,255,0.15) 100%); -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude;}
 .contact-inquiry .contact-inquiry-txt-box{width:50%;}
 .contact-inquiry .contact-inquiry-txt-box .inquiry-tit{font-size:3rem; line-height:1.4; letter-spacing:-0.03em; color:#fff; font-weight:700;}
