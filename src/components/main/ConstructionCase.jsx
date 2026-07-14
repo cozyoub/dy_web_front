@@ -196,8 +196,8 @@ function CaseLinkBtn() {
   const linkFill = useFillPointer();
 
   return (
-    
-      <a href="/solution/solution02_04"
+    <a
+      href="/solution/solution02_04"
       ref={linkFill.ref}
       onMouseEnter={linkFill.onMouseEnter}
       onMouseMove={linkFill.onMouseMove}
@@ -237,15 +237,17 @@ export default function ConstructionCase() {
       <div className="case-bg">
         <img src="/images/main/case_bg.jpg" alt="" />
       </div>
-      <MainTitle
-        title={
-          <>
-            <span>통합설비 구축 사례</span>를 통한 <br />
-            검증된 기술력
-          </>
-        }
-        desc="현장을 이해한 기술, 구축 사례로 증명합니다."
-      />
+      <div className="inner">
+        <MainTitle
+          title={
+            <>
+              <span>통합설비 구축 사례</span>를 통한 <br />
+              검증된 기술력
+            </>
+          }
+          desc="현장을 이해한 기술, 구축 사례로 증명합니다."
+        />
+      </div>
       <CaseLinkBtn />
       {/* <div ref={cursorRef} className={`case-cursor ${showCursor ? "on" : ""}`}>
         <span>

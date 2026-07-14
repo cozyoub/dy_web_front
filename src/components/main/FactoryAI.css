@@ -51,18 +51,16 @@
   .factory-ai-wrap{padding:4rem 0;}
   .factory-ai-wrap .ncore-ai-node{max-width:100%; height:auto; aspect-ratio:1/1;}
   .factory-ai-wrap .ncore-ai-node img{width:180px;}
-  .factory-ai-wrap .ncore-ai-node p{font-size:32px;}
+  .factory-ai-wrap .ncore-ai-node p{font-size:50px;}
   .factory-ai-wrap .ai-diagram-card{padding:16px 20px;}
   .factory-ai-wrap .ai-diagram-card .card-title{font-size:18px;}
   .factory-ai-wrap .ai-diagram-card .card-desc{font-size:13px;}
   .factory-ai-wrap .diagram-col{gap:16px;}
-   .factory-ai-wrap .ncore-ring{display: none;}
 }
 
 @media (max-width:480px){
-    .factory-ai-wrap .ncore-ai-diagram-wrap{flex-direction: column;}
+    .factory-ai-wrap .ncore-ai-diagram-wrap{flex-direction: column; padding:0;}
     .factory-ai-wrap .diagram-col{width:100%;}
+    .factory-ai-wrap .ncore-ai-diagram{height: 320px;}
   .factory-ai-wrap .ncore-ai-node{max-width:300px; height:300px;}
-  .factory-ai-wrap .ncore-ai-node img{width:140px;}
-  .factory-ai-wrap .ncore-ai-node p{font-size:24px;}
 }
