@@ -22,14 +22,6 @@ export default function WebzineList() {
     return null;
   };
 
-  const getExcerpt = (html, length = 80) => {
-    if (!html) return "";
-    const div = document.createElement("div");
-    div.innerHTML = html;
-    const text = div.textContent || div.innerText || "";
-    return text.length > length ? text.slice(0, length) + "..." : text;
-  };
-
   useEffect(() => {
     getAllWebzineService()
       .then((res) => {
@@ -59,16 +51,16 @@ export default function WebzineList() {
         ),
     );
 
-  const applyFilter = (cat, issue) => {
+  const applyFilter = (cat, issueValue) => {
     let result = list;
 
     if (cat !== "all") {
       result = result.filter((item) => item.category === cat);
     }
 
-    if (issue !== "all") {
+    if (issueValue !== "all") {
       result = result.filter(
-        (item) => formatIssueLabel(item.publishedDate) === issue,
+        (item) => formatIssueLabel(item.publishedDate) === issueValue,
       );
     }
 
@@ -78,7 +70,7 @@ export default function WebzineList() {
 
   const handleCategoryFilter = (cat) => {
     setCategory(cat);
-    applyFilter(cat, issueNo);
+    applyFilter(cat, issue);
   };
 
   const handleIssueFilter = (value) => {
@@ -86,7 +78,6 @@ export default function WebzineList() {
     applyFilter(category, value);
   };
 
-  // filtered(필터링된 전체 결과)에서 현재 페이지 분량만 잘라서 화면에 렌더링
   const pageItems = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
@@ -136,7 +127,7 @@ export default function WebzineList() {
           >
             <div className="webzine-card-thumb">
               {getThumb(item) ? (
-                <img src={getThumb(item)} alt={item.title} />
+                <img src={getThumb(item)} alt={formatIssueLabel(item.publishedDate)} />
               ) : (
                 <div className="webzine-card-thumb-default">
                   <img src="/images/common/logo.svg" alt="" />
@@ -147,16 +138,6 @@ export default function WebzineList() {
               <span className="webzine-card-issue">
                 {formatIssueLabel(item.publishedDate)}
               </span>
-
-              <p className="webzine-card-title">{item.title}</p>
-              <p className="webzine-card-desc">{getExcerpt(item.content)}</p>
-
-              <div className="webzine-card-util">
-                <span className="webzine-card-date">
-                  {item.publishedDate ?? item.createdAt?.slice(0, 10)}
-                </span>
-                <span className="webzine-card-count">{item.count}</span>
-              </div>
             </div>
           </div>
         ))}

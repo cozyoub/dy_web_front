@@ -1,8 +1,8 @@
 .business-area {position: relative;height: 100vh;overflow: hidden;}
-.business-area .main-title{ position: absolute; top:150px; width: 100%;}
+.business-area .main-title{ padding-top: 100px; top:150px; width: 100%;}
 .business-area .main-title .inner{padding:0 12px;}
-.business-area .main-title h3, .business-area .main-title p{color: #fff;text-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);}
-.business-area .img {position: absolute;inset: 0;}
+.business-area .main-title h3, .business-area .main-title p{color: #fff;}
+.business-area .img {position: absolute;inset: 0; overflow: hidden;}
 .business-area .img .itm {position: absolute;inset: 0;overflow: hidden;}
 .business-area .img .itm:not(:first-child) {clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);}
 .business-area .img img {width: 100%;height: 100%;object-fit: cover;}

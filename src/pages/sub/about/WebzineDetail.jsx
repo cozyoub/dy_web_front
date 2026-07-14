@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getWebzineByIdService } from "@/services/webzine.service";
+import { formatIssueLabel } from "@/common/webzineUtils";
 import { BASE_API_URL } from "@/common/constants";
 import { Viewer } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
@@ -24,9 +25,8 @@ export default function WebzineDetail() {
         {item.category && (
           <span className="board-detail-category">{item.category}</span>
         )}
-        <h2>{item.title}</h2>
+        {item.publishedDate && <h2>{formatIssueLabel(item.publishedDate)}</h2>}
         <div className="board-detail-meta">
-          {item.issueNo && <span>{item.issueNo}호</span>}
           <span>{item.publishedDate ?? item.createdAt?.slice(0, 10)}</span>
           <span>조회 {item.count}</span>
         </div>

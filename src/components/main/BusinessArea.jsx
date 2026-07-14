@@ -11,6 +11,36 @@ export default function BusinessArea() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      gsap.set(".business-area .img", {
+        scale: 0,
+        borderRadius: "40px",
+        transformOrigin: "center center",
+      });
+      gsap.set(
+        ".business-area .main-title h3, .business-area .main-title p",
+        { color: "#111" , textShadow: "none"},
+      );
+
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "top top",
+            scrub: 1,
+          },
+        })
+        .to(
+          ".business-area .img",
+          { scale: 1, borderRadius: 0, ease: "none" },
+          0,
+        )
+        .to(
+          ".business-area .main-title h3, .business-area .main-title p",
+          { color: "#fff", ease: "none",},
+          0,
+        );
+
       gsap.set(".txt .itm", {
         opacity: 0,
       });
@@ -23,7 +53,7 @@ export default function BusinessArea() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=3000",
+          end: "+=2000",
           pin: true,
           scrub: 1,
         },

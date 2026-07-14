@@ -50,7 +50,7 @@ export default function Login() {
     <div className="login-full-screen">
       <div className={`login-card ${submitted ? 'was-validated' : ''}`}>
         <div className="login-header">
-          <img src="/images/logo.png" alt="LOGO" className="login-logo" 
+          <img src="/images/common/logo.svg" alt="LOGO" className="login-logo" 
                onError={(e) => e.target.style.display='none'} />
           <h2>Admin Login</h2>
         </div>

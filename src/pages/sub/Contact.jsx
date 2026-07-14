@@ -95,10 +95,14 @@ export default function Contact() {
   if (done)
     return (
       <div className="contact-done">
-        <div className="contact-done-box">
-          <p className="contact-done-icon">✓</p>
-          <h3>문의가 접수되었습니다</h3>
-          <p>빠른 시일 내에 답변 드리겠습니다.</p>
+        <div className="sub-inner">
+          <div className="contact-done-box">
+            <p className="contact-done-icon">
+              <img src="/images/sub/contact-done-icon.svg" alt="" />
+            </p>
+            <h3>문의가 접수되었습니다</h3>
+            <p>빠른 시일 내에 답변 드리겠습니다.</p>
+          </div>
         </div>
       </div>
     );
@@ -107,8 +111,8 @@ export default function Contact() {
     <div className="contact-wrapper">
       <div className="sub-inner">
         <div className="solution-title">
-            <h3>도입문의</h3>
-            <p>문의를 남겨주시면 담당자가 빠르게 안내해 드리겠습니다</p>
+          <h3>도입문의</h3>
+          <p>문의를 남겨주시면 담당자가 빠르게 안내해 드리겠습니다</p>
         </div>
         <form onSubmit={handleSubmit} noValidate>
           <div className="contact-form-card">
