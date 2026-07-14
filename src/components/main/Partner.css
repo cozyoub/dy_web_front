@@ -3,8 +3,6 @@
 .partner .icon-track div img{width:100px; height:auto;}
 .partner .icon-track{display:flex; align-items:center; gap:30px; padding-right:30px;}
 .partner .icon-wrapper{overflow:hidden; width:100%; padding:20px 0;}
-.partner .icon-wrapper-left{margin-top:70px;}
-.partner .icon-wrapper-right{margin-top:30px;}
 .partner .icon-box{display:flex; width:max-content; }
 .partner .icon-box-left{animation:rollingLeft 30s linear infinite;}
 .partner .icon-box-right{animation:rollingRight 30s linear infinite;}
