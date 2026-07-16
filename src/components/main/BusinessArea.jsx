@@ -16,10 +16,10 @@ export default function BusinessArea() {
         borderRadius: "40px",
         transformOrigin: "center center",
       });
-      gsap.set(
-        ".business-area .main-title h3, .business-area .main-title p",
-        { color: "#111" , textShadow: "none"},
-      );
+      gsap.set(".business-area .main-title h3, .business-area .main-title p", {
+        color: "#111",
+        textShadow: "none",
+      });
 
       gsap
         .timeline({
@@ -37,7 +37,7 @@ export default function BusinessArea() {
         )
         .to(
           ".business-area .main-title h3, .business-area .main-title p",
-          { color: "#fff", ease: "none",},
+          { color: "#fff", ease: "none" },
           0,
         );
 
@@ -187,7 +187,12 @@ export default function BusinessArea() {
       );
     }, sectionRef);
 
-    return () => ctx.revert();
+    const t = setTimeout(() => ScrollTrigger.refresh(true), 300);
+
+    return () => {
+      clearTimeout(t);
+      ctx.revert();
+    };
   }, []);
   return (
     <>

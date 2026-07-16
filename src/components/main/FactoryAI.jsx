@@ -10,16 +10,16 @@ gsap.registerPlugin(ScrollTrigger);
 const leftData = [
   {
     category: "통합관제",
-    title: "생상공정최적화 시스템",
-    desc: "공정변수 기반 종속 변수에 대한 생순 / 품질 최적화 모델",
-    tags: [{ label: "ICS", href: "/solution/solution03_01" }],
+    title: "통합설비보전 시스템",
+    desc: "산업표준프로토콜 기반 현장 설비 관제",
+    tags: [{ label: "ICS", href: "/solution/solution02_04" }],
   },
   {
     category: "경영",
     title: "기업경영핵심 시스템",
     desc: "제조업 기반의 전사적 기업 경영 코어 솔루션",
     tags: [
-      { label: "ERP", href: "/solution/solution02_04" },
+      { label: "ERP", href: "/solution/solution01_01" },
       { label: "MES", href: "/solution/solution02_01" },
       { label: "FA", href: "/solution/solution01_03" },
       { label: "HR", href: "/solution/solution01_02" },
@@ -31,7 +31,7 @@ const leftData = [
     category: "설비",
     title: "통합설비보전 시스템",
     desc: "설비 상태에 대한 데이터 기반의 통합설비 관리 시스템",
-    tags: [{ label: "CMMS", href: "/solution03_02" }],
+    tags: [{ label: "CMMS", href: "/solution/solution02_03" }],
   },
 ];
 
@@ -52,7 +52,7 @@ const rightData = [
     category: "환경안전",
     title: "환경안전경영 시스템",
     desc: "중재재해 예방 및 현장 위험을 최소화 하기 위한 모델",
-    tags: [{ label: "ESH", href: "/solution/solution/solution03_05" }],
+    tags: [{ label: "ESH", href: "/solution/solution03_05" }],
   },
   {
     category: "물류",

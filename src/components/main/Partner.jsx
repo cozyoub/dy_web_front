@@ -11,8 +11,16 @@ const partners = [
   "partner07.png",
   "partner08.png",
   "partner09.png",
-  "partner10.jpg",
-  "partner11.jpg",
+  "partner10.png",
+  "partner11.png",
+  "partner12.png",
+  "partner13.png",
+  "partner14.png",
+  "partner15.png",
+  "partner16.png",
+  "partner17.png",
+  "partner18.png",
+  "partner19.png",
 ];
 
 function IconTrack() {

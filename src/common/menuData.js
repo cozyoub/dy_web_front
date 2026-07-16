@@ -105,7 +105,7 @@ export const MENU_LIST = [{
   //   }]
   // },
   {
-    title: "Soulution",
+    title: "Solution",
     path: "/solution",
     defaultPath: "/solution/solution01_01",
     subMenu: [{
@@ -113,7 +113,7 @@ export const MENU_LIST = [{
       path: "/solution/solution01",
       defaultPath: "/solution/solution01_01",
       subMenu: [{
-        title: "전사경영정보 솔루션(ERP)",
+        title: "통합경영관리 솔루션(ERP)",
         path: "/solution/solution01_01",
         component: Solution01_01
       }, {
