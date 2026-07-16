@@ -223,19 +223,19 @@ export default function About03() {
     const handleTabClick = [];
 
     const ctx = gsap.context(() => {
-      gsap.set(".about-ov ul li", { scale: 0.75, opacity: 0 });
-      gsap.to(".about-ov ul li", {
-        scale: 1,
-        opacity: 1,
-        stagger: 0.1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ".overview-wrap",
-          start: "top 75%",
-          end: "top 20%",
-          scrub: true,
-        },
-      });
+      // gsap.set(".about-ov ul li", { scale: 0.75, opacity: 0 });
+      // gsap.to(".about-ov ul li", {
+      //   scale: 1,
+      //   opacity: 1,
+      //   stagger: 0.1,
+      //   ease: "power2.out",
+      //   scrollTrigger: {
+      //     trigger: ".overview-wrap",
+      //     start: "top 75%",
+      //     end: "top 20%",
+      //     scrub: true,
+      //   },
+      // });
 
       const groups = Array.from(wrap.querySelectorAll(".hist-yg"));
       const animatedGroups = new Set();
@@ -319,33 +319,33 @@ export default function About03() {
       };
     }, wrap);
 
-    mm.add("(min-width: 851px)", () => {
-      const dkCtx = gsap.context(() => {
-        gsap.set(".dk-gr-wrap .dk-list", { opacity: 0, y: 40 });
+    // mm.add("(min-width: 851px)", () => {
+    //   const dkCtx = gsap.context(() => {
+    //     gsap.set(".dk-gr-wrap .dk-list", { opacity: 0, y: 40 });
 
-        const dkTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: ".dk-gr-wrap",
-            start: "top top",
-            end: "+=1200",
-            pin: true,
-            scrub: 1,
-            invalidateOnRefresh: true,
-          },
-        });
+    //     const dkTl = gsap.timeline({
+    //       scrollTrigger: {
+    //         trigger: ".dk-gr-wrap",
+    //         start: "top top",
+    //         end: "+=1200",
+    //         pin: true,
+    //         scrub: 1,
+    //         invalidateOnRefresh: true,
+    //       },
+    //     });
 
-        dkTl
-          .to(
-            ".dk-gr-wrap .intro p, .dk-gr-wrap .intro span, .dk-gr-wrap .con > img",
-            { opacity: 0, y: -30, duration: 0.4 },
-            0.3,
-          )
-          .to(".dk-gr-wrap .dk-list", { opacity: 1, y: 0, duration: 0.5 }, 0.45)
-          .to({}, { duration: 0.3 });
-      }, wrap);
+    //     dkTl
+    //       .to(
+    //         ".dk-gr-wrap .intro p, .dk-gr-wrap .intro span, .dk-gr-wrap .con > img",
+    //         { opacity: 0, y: -30, duration: 0.4 },
+    //         0.3,
+    //       )
+    //       .to(".dk-gr-wrap .dk-list", { opacity: 1, y: 0, duration: 0.5 }, 0.45)
+    //       .to({}, { duration: 0.3 });
+    //   }, wrap);
 
-      return () => dkCtx.revert();
-    });
+    //   return () => dkCtx.revert();
+    // });
 
     awardSwiper = new Swiper(".award-slider", {
       modules: [Navigation, Pagination, Autoplay],
@@ -409,7 +409,7 @@ export default function About03() {
   return (
     <>
       <div className="about-wrap" ref={wrapRef}>
-        <div className="overview-wrap">
+        {/* <div className="overview-wrap">
           <div className="sub-inner">
             <SubTitle title="동연에스엔티 개요" desc="Overview" />
             <div className="about-ov">
@@ -445,8 +445,8 @@ export default function About03() {
               </ul>
             </div>
           </div>
-        </div>
-        <div className="dk-gr-wrap">
+        </div> */}
+        {/* <div className="dk-gr-wrap">
           <div className="img">
             <img src="/images/sub/dk_gr_bg.jpg" alt="" />
           </div>
@@ -482,7 +482,7 @@ export default function About03() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* <div className="business-area-wrap">
           <div className="sub-inner">
             <SubTitle
