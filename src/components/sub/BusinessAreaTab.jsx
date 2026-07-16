@@ -155,7 +155,7 @@ export default function BusinessAreaTab() {
                 </p>
                 <ul className="tag-box">
                   <li className="tag">빅데이터기반 AI 분석</li>
-                  <li className="tag">통합설비제어관제(IMS)</li>
+                  <li className="tag">통합설비제어관제</li>
                   <li className="tag">
                     DX/AX(통합설비관제, 통합설비보전, 생산공정최적화,
                     통합품질관리, 환경안전경영, 통합물류운송, 기업경영관리)
