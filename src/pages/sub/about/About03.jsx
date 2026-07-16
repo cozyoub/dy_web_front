@@ -483,7 +483,7 @@ export default function About03() {
             </div>
           </div>
         </div>
-        <div className="business-area-wrap">
+        {/* <div className="business-area-wrap">
           <div className="sub-inner">
             <SubTitle
               title="통합 IT솔루션 개발 및 서비스 사업"
@@ -491,7 +491,7 @@ export default function About03() {
             />
             <BusinessAreaTab />
           </div>
-        </div>
+        </div> */}
         <div className="history-wrap">
           <div className="sub-inner">
             <div className="history-body">
