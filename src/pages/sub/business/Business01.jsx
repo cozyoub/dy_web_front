@@ -63,15 +63,14 @@ export default function Business01() {
         .to(".about01-visual .tit-box li:nth-child(1) .en span", {
           y: 0,
           stagger: 0.05,
-          duration: 1, // 등장 속도 조금 여유있게
+          duration: 1, 
         })
         .to(
           ".about01-visual .tit-box li:nth-child(1) .kr span",
           { y: 0, duration: 1 },
           "<",
         )
-        // 잠깐 머무름
-        .to({}, { duration: 3 }) // 3초만큼 정지 상태 유지
+        .to({}, { duration: 3 }) 
         .to(".about01-visual .tit-box li:nth-child(1) .en span", {
           y: "-100%",
           stagger: 0.05,
@@ -93,7 +92,6 @@ export default function Business01() {
           "<",
         );
 
-      // ctx 안으로 이동: cleanup 시 같이 revert 되도록
       gsap.set(".about-ov ul li", { scale: 0.75, opacity: 0 });
       gsap.to(".about-ov ul li", {
         scale: 1,
