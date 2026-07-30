@@ -22,7 +22,7 @@ export default function MainTitle({ title, desc }) {
       tl.fromTo(
         titleRef.current,
         { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
       );
 
       if (descRef.current) {
@@ -30,7 +30,7 @@ export default function MainTitle({ title, desc }) {
           descRef.current,
           { y: 30, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" },
-          "-=0.4"
+          "-=0.4",
         );
       }
     }, wrapRef);
@@ -40,10 +40,8 @@ export default function MainTitle({ title, desc }) {
 
   return (
     <div className="main-title" ref={wrapRef}>
-      <div className="inner">
-        <h3 ref={titleRef}>{title}</h3>
-        {desc && <p ref={descRef}>{desc}</p>}
-      </div>
+      <h3 ref={titleRef}>{title}</h3>
+      {desc && <p ref={descRef}>{desc}</p>}
     </div>
   );
 }

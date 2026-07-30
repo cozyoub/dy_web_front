@@ -35,7 +35,7 @@
 .gnb-wrapper.is-revealed.gnb-hidden{transform:translateY(-100%);}
 
 .gnb-container {margin: 0 auto;padding: 0 24px; display: flex;align-items: center; justify-content: space-between; gap: 0px; z-index: 101; max-width: 1624px;}
-.gnb-container .logo img {max-width: 200px;}
+.gnb-container .logo img {max-width: 160px;}
 .gnb-container .th-dark{display: none;}
 
 /* scrolled - nav */
@@ -45,9 +45,9 @@
 
 
 /* 메인메뉴 */
-.gnb-container .main-menu {display: flex;list-style: none;margin: 0;padding: 0; flex: 1; justify-content: center; padding: 0 10rem;  transition: all .3s;}
+.gnb-container .main-menu {display: flex;list-style: none;margin: 0;padding: 0; flex: 1; justify-content: center; padding: 0 10rem;  transition: all .3s; max-width: 1000px;}
 .gnb-container .main-menu > li{flex:1}
-.gnb-container .menu-item > a {text-align: center; position: relative; line-height: 60px; font-size: 1.125rem;font-weight: 600;color: #fff;text-decoration: none; padding: 24px 0; display: block;}
+.gnb-container .menu-item > a {text-align: center; position: relative; line-height: 40px; font-size: 1rem;font-weight: 500;color: #fff;text-decoration: none; padding: 24px 0; display: block;}
 .gnb-container .menu-item > a:hover {color: var(--primary-color) !important;}
 .gnb-container .menu-item > a:before{content: ""; display: block; width: 0%; height: 2px; background: var(--primary-color); position: absolute;
 left: 50%; bottom: 0; transform: translateX(-50%); transition: all .3s;}
@@ -55,7 +55,7 @@ left: 50%; bottom: 0; transform: translateX(-50%); transition: all .3s;}
 .gnb-wrapper.on .gnb-container .main-menu{padding: 0 5rem;}
 
 /* 서브메뉴 */
-.sub-menu-pane {display: none;position: absolute;top: 108px;left: 0;z-index: 101;min-width: 140px; width: 100%; z-index: 1;}
+.sub-menu-pane {display: none;position: absolute;top: 88px;left: 0;z-index: 101;min-width: 140px; width: 100%; z-index: 1;}
 .sub-menu-pane:before{position: absolute; width: 100vw; height: 100%; content: ""; background-color: #fff; left: 0; top: 0; z-index: 0;}
 .sub-menu-pane.show {display: block;}
 .sub-menu {list-style: none;padding: 16px 0;margin: 0; display: flex; gap: 10px; padding: 30px; z-index: 1; position: relative; flex-wrap: wrap;

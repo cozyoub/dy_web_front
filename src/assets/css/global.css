@@ -46,6 +46,7 @@
     font-weight: 900;
     font-display: swap;
 }
+
 @font-face {
     font-family: 'Pretendard';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2') format('woff2');
@@ -109,35 +110,60 @@
     font-display: swap;
 }
 
-:root{
-  --primary-color:#09539F;
-  --sub-color:#6C5CE7;
-  --text-color:#151624;
-  --base-color60:rgba(17, 17, 17, 0.6);
-  --desc-color:#11111199;
-  --gray-text:#535354;
-  --intro-color:#1b4a75;
-  font-size: 16px;
-}
-body {
-  font-family: 'Pretendard', sans-serif;
-  color: var(--text-color);
-}
-@media all and (min-width: 1921px) {
-    :root{
-        font-size: 18px;
-        
-    }
+:root {
+    --primary-color: #09539F;
+    --sub-color: #6C5CE7;
+    --text-color: #151624;
+    --base-color60: rgba(17, 17, 17, 0.6);
+    --desc-color: #11111199;
+    --gray-text: #535354;
+    --intro-color: #1b4a75;
+
+    --blue-100: #48CEFF;
+    --blue-200: #1EB0FF;
+    --blue-300: #0693FF;
+
+    --accent-blue: #49CFFF;
+
+    --mint-100: #23DEC0;
+    --mint-200: #0BC1A7;
+    --mint-300: #059C89;
+
+    --text-white:#fff;
+    --text-sub: rgba(255,255,255,.7);
+
+    --bg-dark-100:#0C0C0C;
+    --bg-dark-200:#020204;
+
+    --bg-navy-100:#101F33;
+    --bg-navy-200:#111C2B;
+    --bg-navy-300:#101F33;
+    --bg-nay-400:#102033;
+    --bg-nay-500:#111C2B;
+
+
+    font-size: 16px;
 }
 
-@media all and (max-width:1200px) {
-    :root{
+body {
+    font-family: 'Pretendard', sans-serif;
+    color: var(--text-color);
+}
+
+@media (max-width:1440px) {
+    :root {
         font-size: 15px;
     }
 }
 
-@media all and (max-width:768px) {
-    :root{
+@media (max-width:1024px) {
+    :root {
         font-size: 14px;
+    }
+}
+
+@media (max-width:768px) {
+    :root {
+        font-size: 13px;
     }
 }
