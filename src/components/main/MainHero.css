@@ -1,0 +1,45 @@
+.main-hero{padding:15.625rem 1.2em 3.125rem; background: var(--bg-dark-200) url('/images/main/hero_bg.png') top  no-repeat;
+height: 100vh; overflow: visible;}
+.hero-content{display: flex; gap: 5rem; flex-direction: column; justify-content: center; align-items: center;}
+.hero-headline-group{text-align: center; display: flex; flex-direction: column; gap: 30px; }
+.hero-headline{
+  color: var(--text-white);
+  font-size: clamp(1.75rem, 2.33vw + 1.2rem, 4rem);
+  line-height: 1.4;
+  font-weight: 700;
+}
+.hero-subheadline{
+  color: var(--text-white);
+  line-height: 1.4;
+  font-size: clamp(1.125rem, 0.52vw + 1rem, 1.625rem);
+  font-weight: 400;
+}
+.hero-cta-group{display: flex; gap: 12px;}
+
+.hero-cta{white-space: nowrap;border-radius: .5rem;justify-content: center;align-items: center;min-width: 170px;padding: 16px 24px;font-size: 1.25rem;font-weight: 700;line-height: 24px;display: flex;}
+.hero-cta.primary{background:transparent;border:none; color: #fff;}
+.hero-cta.primary::before{
+    content:"";position:absolute;inset:0;border-radius:inherit;padding:2px;pointer-events:none;
+    background:linear-gradient(
+        108deg,
+        #35a7ff 0%,
+        #6f09e4 25%,
+        #ffffff 50%,
+        #13e5ec 80%,
+        #98f0fc 100%
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    opacity: 1;
+}
+.hero-cta.primary:hover{background:#121f34;}
+.hero-cta.primary::after{opacity: 1;}
+.hero-cta.secondary {color: #fff;
+    background: #131a22;border: 2px solid #525d6e;transition: background .3s, border-color .3s; }
+.hero-cta.secondary:hover {background: #0b163b;border-color: #fffc;}
+.hero-background-group{position: absolute; top: 0; left: 0; width: 100%; height: 100%;  mix-blend-mode: hard-light; overflow: hidden; display: flex; align-items: center; justify-content: end;}
+.hero-background{width:100%; height:100%;}
+.hero-background-group video{width: 100%; height: 150%; object-fit: cover; opacity: 0.12;}

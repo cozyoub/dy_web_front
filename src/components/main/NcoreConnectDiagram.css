@@ -1,0 +1,193 @@
+.ncore-connect article{
+position: absolute;
+    width: clamp(20rem, 39.3442622951vw + 4.4590163934rem, 50rem);
+    height: 70%;
+    background-color: var(--mint-200);
+    border-radius: 50%;
+    filter: blur(60rem);
+    left: -10%;
+    bottom: 30%;
+    z-index: 2; opacity: 0.5;
+}
+.ncore-connect{
+  position: relative;
+  background: linear-gradient(to bottom, var(--bg-nay-400) 0%, var(--bg-nay-500) 100%);
+  padding: 7.5rem 0; 
+}
+@media (max-width: 1024px) {
+  .ncore-connect{ padding: 16rem 0; }
+}
+@media (max-width: 544px) {
+  .ncore-connect{ padding: 8rem 0; }
+}
+
+.ncore-connect .rotate-bg{
+  position: relative;
+  aspect-ratio: 1;
+  width: 100%;
+  max-width: 68.75rem; 
+  min-width: 68.75rem;
+  margin: 0 auto;
+}
+@media (max-width: 1024px) {
+  .ncore-connect .rotate-bg{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.ncore-connect .rotate-bg svg{ overflow: visible; }
+
+.ncore-connect .rotate-bg svg .orb{
+  transform-box: view-box;
+  transform-origin: 615px 615px;
+  animation: ncoreSpin 18s linear infinite;
+}
+.ncore-connect .rotate-bg svg .orb rect[stroke]{
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: ncoreSpinSelf 3s linear infinite;
+}
+.ncore-connect .rotate-bg svg .orb1 rect[stroke]{ animation-duration: 3.2s; }
+.ncore-connect .rotate-bg svg .orb2 rect[stroke]{ animation-duration: 2.4s; animation-direction: reverse; }
+.ncore-connect .rotate-bg svg .orb2{ animation-duration: 22s; animation-delay: -5s; }
+
+@keyframes ncoreSpin{ to{ transform: rotate(360deg); } }
+@keyframes ncoreSpinSelf{ to{ transform: rotate(360deg); } }
+
+.ncore-connect-inner{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 100rem;   /* ← 추가: rotate-bg(56.25rem)보다 넉넉하게, 그러나 무한 확장 방지 */
+  z-index: 2;
+}
+@media (max-width: 1024px) {
+  .ncore-connect-inner{
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: translate(0);
+  }
+}
+
+/* 상단 카피 영역 */
+.ncore-connect-head{
+  text-align: center;
+}
+.ncore-connect-eyebrow{
+  color: rgba(255,255,255,0.65);
+  font-size: clamp(1.4rem, 0.5vw + 1.2rem, 1.8rem);
+}
+.ncore-connect-title{
+  color: #fff;
+  font-size: clamp(2rem, 1.5vw + 1.6rem, 4rem);
+  font-weight: 500;
+  margin-top: 1rem;
+  line-height: 1.4;
+}
+.ncore-connect-accent{
+  color: var(--accent-blue);
+  font-weight: 700;
+}
+
+/* 원 겹침 배치 */
+.ncore-connect .process-wrap{
+  position: relative;
+  width: 100%;
+  max-width: 95rem;      /* ← 추가 */
+  margin: 3rem auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ncore-connect .process-wrap .cir + .cir{ margin-left: -2.4rem; } /* 4.8rem → 2.4rem */
+@media (max-width: 1640px) { .ncore-connect .process-wrap .cir + .cir{ margin-left: -1.2rem; } }
+@media (max-width: 1024px) { .ncore-connect .process-wrap .cir + .cir{ margin-left: 0; } }
+@media (max-width: 544px)  { .ncore-connect .process-wrap .cir + .cir{ margin-top: -2.4rem; } }
+
+@media (max-width: 1024px) {
+  .ncore-connect .process-wrap{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 80%;
+    margin-top: 4rem;
+  }
+}
+@media (max-width: 768px) { .ncore-connect .process-wrap{ width: 95%; } }
+@media (max-width: 544px) { .ncore-connect .process-wrap{ grid-template-columns: repeat(1, 1fr); } }
+
+.ncore-connect .process-wrap .cir{
+  position: relative;
+  width: calc(20% + clamp(1.6rem, 1.05vw + 1.2rem, 3.2rem));
+  aspect-ratio: 1;
+  z-index: 2;
+  display: flex;
+}
+@media (max-width: 1024px) {
+  .ncore-connect .process-wrap .cir{ width: 100%; align-items: center; justify-content: center; }
+  .ncore-connect .process-wrap .cir:nth-child(even){ transform: translateX(-2.4rem); }
+}
+@media (max-width: 1024px) and (max-width: 544px) {
+  .ncore-connect .process-wrap .cir:nth-child(even){ transform: translateX(0); }
+}
+@media (max-width: 544px) {
+  .ncore-connect .process-wrap .cir{ width: 85%; margin-left: auto !important; margin-right: auto !important; }
+}
+
+.ncore-connect .process-wrap .cir svg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+.ncore-connect .process-wrap .cir svg circle{
+  fill: none;
+  stroke: rgba(255,255,255,0.4);
+  stroke-width: 1;
+  transition: stroke .25s ease, stroke-width .25s ease, filter .35s ease, opacity .25s ease;
+  stroke-linecap: round;
+}
+
+.ncore-connect .process-wrap .cir:hover svg circle{
+  stroke: #48CEFF;
+  stroke-width: 2;
+  filter:
+    drop-shadow(0 0 2px rgba(72,206,255,.9))
+    drop-shadow(0 0 8px rgba(72,206,255,.6))
+    drop-shadow(0 0 18px rgba(103,232,249,.4));
+}
+
+/* 카드 내부 텍스트 */
+.ncore-connect .process-wrap .cir .txt{
+  padding: 0 1.2rem;
+  max-width: 85%;
+  text-align: center;
+  margin: 60px auto auto;
+}
+.ncore-connect .process-wrap .cir .txt-no{
+  display: block;
+  color: var(--accent-blue);
+  font-weight: 600;
+  font-size: clamp(1.2rem, 0.39vw + 1.04rem, 1.6rem);
+}
+.ncore-connect .process-wrap .cir .txt-title{
+  color: #fff;
+  font-size: clamp(1.6rem, 1.05vw + 1.19rem, 1.8rem);
+  font-weight: 600;
+  margin-top: 1.2rem;
+}
+.ncore-connect .process-wrap .cir .txt-desc{
+  color: rgba(255,255,255,0.65);
+  font-size: clamp(1rem, 0.3vw + 0.9rem, 1.3rem); /* 기존보다 살짝 축소 */
+  margin-top: 0.6rem;
+  line-height: 1.45;
+  word-break: keep-all;
+}
