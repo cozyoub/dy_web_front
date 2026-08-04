@@ -157,7 +157,7 @@ position: absolute;
 }
 
 .ncore-connect .process-wrap .cir:hover svg circle{
-  stroke: #48CEFF;
+  stroke: var(--accent-blue);
   stroke-width: 2;
   filter:
     drop-shadow(0 0 2px rgba(72,206,255,.9))

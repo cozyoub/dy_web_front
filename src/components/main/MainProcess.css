@@ -1,0 +1,212 @@
+.main-process article {
+  position: absolute;
+  width: clamp(20rem, 45.9016393443vw + 1.868852459rem, 90rem);
+  aspect-ratio: 1;
+  background: linear-gradient(to bottom right, #2979ff 0%, #093277 50%) bottom
+      right / 50% 50% no-repeat,
+    linear-gradient(to bottom left, #2979ff 0%, #093277 50%) bottom left / 50%
+      50% no-repeat,
+    linear-gradient(to top left, #2979ff 0%, #093277 50%) top left / 50% 50%
+      no-repeat,
+    linear-gradient(to top right, #2979ff 0%, #093277 50%) top right / 50% 50%
+      no-repeat;
+  border-radius: 50%;
+  filter: blur(48rem);
+  left: -10%;
+  top: 12rem;
+}
+
+.main-process {
+  padding: 7.5rem 0;
+  background: linear-gradient(180deg, var(--bg-nay-700) 0%, var(--bg-nay-800) 100%);
+  position: relative;
+  z-index: 2;
+}
+
+/* 리스트 */
+.mp-list {
+  max-width: 1120px;
+  margin: 80px auto 0;
+  padding: 0 2rem;
+}
+
+.mp-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: clamp(3rem, 4vw, 6rem);
+  position: relative;
+}
+
+.mp-item + .mp-item {
+  margin-top: 0;
+}
+
+/* 텍스트 */
+.mp-item__txt {
+  max-width: 360px;
+  width: 100%;
+  padding-top: 8px;
+}
+
+.mp-item__step {
+  color: var(--accent-blue);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.mp-item__title {
+  color: #fff;
+  font-size: clamp(2.6rem, 1.2vw + 2.1rem, 4.4rem);
+  margin: 8px 0 16px; font-weight: 600;
+}
+
+.mp-item__desc {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: clamp(1.2rem, 2.5vw + 0.5rem, 1.3rem);
+  line-height: 1.6;
+  margin: 0;
+  word-break: keep-all;
+}
+
+/* 중앙 라인 */
+.mp-item__line-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: none;
+}
+
+.mp-item__circle-wrap {
+  width: 24px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mp-item__circle {
+  width: 10px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.mp-item__circle.is-active {
+  background-color: #fff;
+}
+
+.mp-item__line {
+  position: relative;
+  width: 2px;
+  height: 400px;
+  background-color: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.mp-item__progress {
+  width: 100%;
+  height: 0;
+  background: linear-gradient(180deg, var(--accent-blue), var(--accent-blue));
+}
+
+/* 아이콘 영역 */
+.mp-item__geometry {
+  width: 260px;
+  flex: none;
+}
+
+.mp-item__geometry svg {
+  width: 100%;
+  height: auto;
+}
+
+.mp-icon__line {
+  stroke: rgba(255, 255, 255, 0.25);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.mp-icon__line--path {
+  stroke: #0693ff;
+  stroke-width: 2;
+}
+
+.mp-icon__shape {
+  stroke: #23dec0;
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.mp-icon__dot {
+  fill: #0693ff;
+}
+
+.mp-icon__dot--core {
+  fill: #23dec0;
+}
+
+/* 회전 애니메이션 (기존 데모 아이콘용) */
+.mp-icon__spin-cw {
+  animation: mp-spin-cw 20s linear infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.mp-icon__spin-ccw {
+  animation: mp-spin-ccw 20s linear infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes mp-spin-cw {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes mp-spin-ccw {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.mp-icon__orbit-spin {
+  animation: mp-orbit-spin 24s linear infinite;
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+}
+
+@keyframes mp-orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mp-icon__spin-cw,
+  .mp-icon__spin-ccw,
+  .mp-icon__orbit-spin {
+    animation: none;
+  }
+}
+
+@media (max-width: 851px) {
+  .mp-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+
+  .mp-item__line-wrap {
+    display: none; /* 모바일에선 라인 숨기거나 별도 처리 */
+  }
+
+  .mp-item__geometry {
+    align-self: center;
+    width: 200px;
+  }
+}

@@ -15,7 +15,6 @@ export default function MainTitle({ title, desc }) {
         scrollTrigger: {
           trigger: wrapRef.current,
           start: "top 85%",
-          // markers: true, // 디버깅할 때만 켜세요
         },
       });
 

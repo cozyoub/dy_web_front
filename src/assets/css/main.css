@@ -9,7 +9,7 @@
 .main-section-title__eyebrow {
   margin: 0;
   color: rgba(255, 255, 255, 0.65);
-  font-size: clamp(1.4rem, 0.5vw + 1.2rem, 1.8rem);
+  font-size: clamp(1.4rem, 0.5vw + 1.2rem, 1.5rem);
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: -0.02em;
@@ -18,8 +18,8 @@
 .main-section-title__heading {
   margin: 1rem 0 0;
   color: #fff;
-  font-size: clamp(2rem, 1.5vw + 1.6rem, 4rem);
-  font-weight: 500;
+  font-size: clamp(2.8rem, 1.3114754098vw + 2.2819672131rem, 4.8rem);
+  font-weight: 700;
   line-height: 1.4;
   letter-spacing: -0.03em;
 }
@@ -58,3 +58,11 @@
 @keyframes spin{from{transform:translate(-50%,-50%) rotate(0deg);} to{transform:translate(-50%,-50%) rotate(360deg);}}
 @property --agree-border-angle{syntax:'<angle>'; inherits:false; initial-value:0deg;}
 
+.glass-effect{
+ background: rgba(0, 0, 0, 0.03); /* Ultra-low opacity white acts as an illumination layer */
+  backdrop-filter: blur(16px);            /* Blurs the elements directly underneath */
+  -webkit-backdrop-filter: blur(16px);    /* Crucial for Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Fine, subtle highlight border */
+  border-radius: 12px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Deep shadow for physical depth */
+}
