@@ -1,5 +1,10 @@
 import "./MainCase.css";
 import MainSectionTitle from "./MainSectionTitle";
+import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
 
 const caseItems = [
   {
@@ -80,8 +85,53 @@ const caseItems = [
 ];
 
 export default function MainCase() {
+  const rootRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 851px)", () => {
+        gsap.set(".main-case__text", { opacity: 0, x: -60 });
+        gsap.to(".main-case__text", {
+          opacity: 1,
+          x: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".main-case",
+            start: "top 75%",
+            once: true,
+          },
+        });
+
+        gsap.set(".main-case__card", { opacity: 0, x: 80 });
+        gsap.to(".main-case__card", {
+          opacity: 1,
+          x: 0,
+          duration: 1,
+          ease: "power3.out",
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: ".main-case__content",
+            start: "top 80%",
+            once: true,
+          },
+        });
+
+        return () => {
+          gsap.set([".main-case__text", ".main-case__card"], {
+            clearProps: "opacity,transform",
+          });
+        };
+      });
+    }, rootRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="main-case">
+    <div className="main-case" ref={rootRef}>
       <div className="inner">
         <div className="main-case__text">
           <MainSectionTitle
@@ -90,7 +140,7 @@ export default function MainCase() {
               <>
                 현장의 변화를
                 <br />
-                구축 결과로 증명합니다.
+                <b>구축 결과</b>로 증명합니다
               </>
             }
             eyebrow={

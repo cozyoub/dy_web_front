@@ -4,14 +4,14 @@ position: absolute;
     height: 70%;
     background-color: var(--mint-200);
     border-radius: 50%;
-    filter: blur(60rem);
+    filter: blur(10rem);
     left: -10%;
     bottom: 30%;
-    z-index: 2; opacity: 0.5;
+    z-index: 2; opacity: 0.3;
 }
 .ncore-connect{
   position: relative;
-  background: linear-gradient(to bottom, var(--bg-nay-400) 0%, var(--bg-nay-500) 100%);
+  background: var(--bg-navy-200);
   padding: 7.5rem 0; 
 }
 @media (max-width: 1024px) {
@@ -126,6 +126,7 @@ position: absolute;
   aspect-ratio: 1;
   z-index: 2;
   display: flex;
+  transition: transform .4s ease, z-index .4s ease;
 }
 @media (max-width: 1024px) {
   .ncore-connect .process-wrap .cir{ width: 100%; align-items: center; justify-content: center; }
@@ -156,7 +157,9 @@ position: absolute;
   stroke-linecap: round;
 }
 
-.ncore-connect .process-wrap .cir:hover svg circle{
+/* hover(수동) 와 is-active(자동 순환) 둘 다 같은 강조 스타일 사용 */
+.ncore-connect .process-wrap .cir:hover svg circle,
+.ncore-connect .process-wrap .cir.is-active svg circle{
   stroke: var(--accent-blue);
   stroke-width: 2;
   filter:
@@ -164,6 +167,27 @@ position: absolute;
     drop-shadow(0 0 8px rgba(72,206,255,.6))
     drop-shadow(0 0 18px rgba(103,232,249,.4));
 }
+
+/* 자동 순환 중인 원은 살짝 확대 + 맨 위로 */
+.ncore-connect .process-wrap .cir.is-active{
+  transform: scale(1.04);
+  z-index: 3;
+}
+@media (max-width: 1024px) {
+  .ncore-connect .process-wrap .cir.is-active{ transform: none; }
+  .ncore-connect .process-wrap .cir.is-active:nth-child(even){ transform: translateX(-2.4rem); }
+}
+@media (max-width: 544px) {
+  .ncore-connect .process-wrap .cir.is-active:nth-child(even){ transform: none; }
+}
+
+/* 자동 순환 중인 원의 텍스트도 살짝 강조 */
+.ncore-connect .process-wrap .cir.is-active .txt-no,
+.ncore-connect .process-wrap .cir.is-active .txt-title{
+  color: var(--accent-blue);
+  transition: color .35s ease;
+}
+.ncore-connect .process-wrap .cir.is-active .txt-title{ color: #fff; }
 
 /* 카드 내부 텍스트 */
 .ncore-connect .process-wrap .cir .txt{

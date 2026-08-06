@@ -6,12 +6,12 @@ export default function Float() {
   return (
     <>
       <div className="fixed-util">
-        <div className="go-inquiry">
+        {/* <div className="go-inquiry">
           <a href="/contact" title="">
             <img src="/images/common/ico-inquiry.png" alt="" />
           </a>
           <span className="deco" aria-hidden="true"></span>
-        </div>
+        </div> */}
         <button
           type="button"
           className="go-top"

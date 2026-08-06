@@ -1,5 +1,8 @@
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function MainSectionTitle({
   eyebrow,
@@ -40,14 +43,57 @@ export default function MainSectionTitle({
       };
 
       if (reverse) {
-        // title 먼저, eyebrow가 겹치며 뒤따라옴
         animateTitle();
         animateEyebrow("-=0.25");
       } else {
-        // eyebrow 먼저, title이 겹치며 뒤따라옴
         animateEyebrow();
         animateTitle("-=0.25");
       }
+
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 851px)", () => {
+        const parallaxTweens = [];
+
+        if (eyebrowRef.current) {
+          parallaxTweens.push(
+            gsap.to(eyebrowRef.current, {
+              yPercent: -18,
+              ease: "none",
+              scrollTrigger: {
+                trigger: wrapRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1,
+              },
+            }),
+          );
+        }
+
+        if (titleRef.current) {
+          parallaxTweens.push(
+            gsap.to(titleRef.current, {
+              yPercent: -8,
+              ease: "none",
+              scrollTrigger: {
+                trigger: wrapRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1,
+              },
+            }),
+          );
+        }
+
+        return () => {
+          const targets = [eyebrowRef.current, titleRef.current].filter(
+            Boolean,
+          );
+          if (targets.length) {
+            gsap.set(targets, { clearProps: "transform" });
+          }
+        };
+      });
     }, wrapRef);
 
     return () => ctx.revert();

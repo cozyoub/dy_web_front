@@ -11,16 +11,14 @@
     linear-gradient(to top right, #2979ff 0%, #093277 50%) top right / 50% 50%
       no-repeat;
   border-radius: 50%;
-  filter: blur(48rem);
+  filter: blur(20rem);
   left: -10%;
   top: 12rem;
 }
 
 .main-process {
   padding: 7.5rem 0;
-  background: linear-gradient(180deg, var(--bg-nay-700) 0%, var(--bg-nay-800) 100%);
-  position: relative;
-  z-index: 2;
+  background: linear-gradient(180deg, var(--bg-navy-200) 0%, var(--bg-nay-700) 100%);
 }
 
 /* 리스트 */

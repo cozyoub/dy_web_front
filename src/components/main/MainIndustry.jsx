@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MainSectionTitle from "./MainSectionTitle";
 import "./MainIndustry.css";
+gsap.registerPlugin(ScrollTrigger);
 
 const industryData = {
   auto: {
@@ -186,19 +189,92 @@ const industryData = {
 export default function MainIndustry() {
   const industryKeys = Object.keys(industryData);
   const [activeTab, setActiveTab] = useState(industryKeys[0]);
+  const rootRef = useRef(null);
+  const gridRef = useRef(null);
 
   const activeCards = industryData[activeTab].cards;
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 851px)", () => {
+        gsap.set(".main-industry__tabs, .main-industry__grid", {
+          opacity: 0,
+          y: 40,
+        });
+
+        gsap.to(".main-industry__tabs", {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: rootRef.current,
+            start: "top 75%",
+            once: true,
+          },
+        });
+
+        gsap.to(".main-industry__grid", {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power3.out",
+          delay: 0.15,
+          scrollTrigger: {
+            trigger: rootRef.current,
+            start: "top 75%",
+            once: true,
+          },
+        });
+      });
+
+      gsap.utils.toArray(".main-industry__icon-wrap").forEach((el, i) => {
+        gsap.to(el, {
+          y: i % 2 === 0 ? 6 : -6,
+          duration: 2.2 + i * 0.25,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: i * 0.2,
+        });
+      });
+    }, rootRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    if (!gridRef.current) return;
+
+    const cards = gridRef.current.querySelectorAll(".main-industry__card");
+    if (cards.length === 0) return;
+
+    gsap.fromTo(
+      cards,
+      { opacity: 0, y: 100 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        stagger: 0.08,
+      },
+    );
+  }, [activeTab]);
+
   return (
-    <div className="main-industry">
+    <div className="main-industry" ref={rootRef}>
       <MainSectionTitle
-                eyebrow="어떤 산업이든, 제조 현장의 특성에 맞는 구축 경험"
-                title={
-                  <>
-                    산업별 구축범위
-                  </>
-                }
-              />
+        eyebrow="산업별 구축범위"
+        title={
+          <>
+            어떤 산업이든, 제조 현장의 <br />
+            <b>특성에 맞는</b> 구축 경험
+          </>
+        }
+      />
 
       <div className="main-industry__tabs">
         {industryKeys.map((key) => (
@@ -213,13 +289,13 @@ export default function MainIndustry() {
         ))}
       </div>
 
-      <div className="main-industry__grid">
+      <div className="main-industry__grid inner" ref={gridRef}>
         {activeCards.length > 0 ? (
           activeCards.map((card) => (
             <div key={card.id} className="main-industry__card">
               <div className="main-industry__icon-wrap">
                 <i>
-                    <img src={card.icon} alt="" />
+                  <img src={card.icon} alt="" />
                 </i>
               </div>
               <h3 className="main-industry__card-title">{card.title}</h3>

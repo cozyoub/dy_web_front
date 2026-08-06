@@ -35,14 +35,8 @@ const SLIDES = [
   },
   {
     thumb: "/images/main/promotion_thumb03.jpg",
-    title: "AI 품질 검사 솔루션",
-    desc: (
-      <>
-        AI 비전 검사로 불량을 자동 판별하고
-        <br />
-        품질 데이터를 실시간으로 축적합니다.
-      </>
-    ),
+    title: "동국산업 설비 점검 데모",
+    desc: <>동국산업 설비 점검 데모</>,
     videoUrl: "/images/main/promotion03.mp4",
   },
 ];
@@ -52,121 +46,141 @@ export default function PromotionSlider() {
   const [progress, setProgress] = useState((1 / SLIDES.length) * 100);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+  const swiperRef = useRef(null);
 
   const handleSlideChange = (swiper) => {
-    // loop 모드에서는 realIndex를 써야 실제 원본 슬라이드 기준으로 정확해요
     const current = swiper.realIndex;
     setProgress(((current + 1) / SLIDES.length) * 100);
   };
 
+  // 썸네일 이미지 로드가 끝난 뒤 실제 크기 기준으로 센터 위치 재계산
+  const handleThumbLoad = () => {
+    swiperRef.current?.update();
+    swiperRef.current?.slideToLoop(swiperRef.current.realIndex, 0);
+  };
+
   return (
     <>
-    <section className="promotion-slider">
-      <div className="inner">
-        <MainSectionTitle
-          eyebrow="데모영상"
-          title={
-            <>
-              AI가 <b>실제 현장</b>을 어떻게
-              <br />
-              연결하는지 확인하세요
-            </>
-          }
-        />
+      <section className="promotion-slider">
+        <div className="inner">
+          <MainSectionTitle
+            eyebrow="데모영상"
+            title={
+              <>
+                AI가 <b>실제 현장</b>을 어떻게
+                <br />
+                연결하는지 확인하세요
+              </>
+            }
+          />
 
-        <div className="video-slider">
-          <Swiper
-            modules={[Navigation, Autoplay]}
-            speed={1000}
-            slidesPerView={1}
-            spaceBetween={10}
-            centeredSlides
-            loop
-            loopAdditionalSlides={3}
-            autoplay={{ delay: 5000, disableOnInteraction: false }}
-            breakpoints={{
-              544: { slidesPerView: 1, spaceBetween: 60 },
-              768: { slidesPerView: 1.5, spaceBetween: 10 },
-            }}
-            navigation={{
-              prevEl: prevRef.current,
-              nextEl: nextRef.current,
-            }}
-            onBeforeInit={(swiper) => {
-              swiper.params.navigation.prevEl = prevRef.current;
-              swiper.params.navigation.nextEl = nextRef.current;
-            }}
-            onSlideChange={handleSlideChange}
-            onInit={handleSlideChange}
-            className="ps-swiper"
-          >
-            {SLIDES.map((slide, idx) => (
-              <SwiperSlide key={idx} className="ps-slide">
-                <figure>
-                  
-                    <a href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setActiveVideo(slide.videoUrl);
-                    }}
-                  >
-                    <span className="ps-play-ring">
-                      <img src="/images/main/icon_play.svg" alt="" />
-                    </span>
-                    <img
-                      src={slide.thumb}
-                      className="thum"
-                      alt=""
-                      loading="lazy"
-                    />
-                  </a>
-                </figure>
+          <div className="video-slider">
+            <Swiper
+              modules={[Navigation, Autoplay]}
+              speed={1000}
+              slidesPerView={1}
+              spaceBetween={10}
+              centeredSlides
+              loop
+              loopAdditionalSlides={3}
+              observer
+              observeParents
+              // autoplay={{ delay: 5000, disableOnInteraction: false }}
+              breakpoints={{
+                544: { slidesPerView: 1, spaceBetween: 60 },
+                768: { slidesPerView: 1.5, spaceBetween: 10 },
+              }}
+              navigation={{
+                prevEl: prevRef.current,
+                nextEl: nextRef.current,
+              }}
+              onBeforeInit={(swiper) => {
+                swiper.params.navigation.prevEl = prevRef.current;
+                swiper.params.navigation.nextEl = nextRef.current;
+              }}
+              onSwiper={(swiper) => {
+                swiperRef.current = swiper;
+              }}
+              onSlideChange={handleSlideChange}
+              onInit={handleSlideChange}
+              // 브레이크포인트가 바뀌면서 슬라이드 폭이 달라질 때도 다시 센터 정렬
+              onBreakpoint={(swiper) => {
+                swiper.update();
+                swiper.slideToLoop(swiper.realIndex, 0);
+              }}
+              className="ps-swiper"
+            >
+              {SLIDES.map((slide, idx) => (
+                <SwiperSlide key={idx} className="ps-slide">
+                  <figure>
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setActiveVideo(slide.videoUrl);
+                      }}
+                    >
+                      <span className="ps-play-ring">
+                        <img src="/images/main/icon_play.svg" alt="" />
+                      </span>
+                      <img
+                        src={slide.thumb}
+                        className="thum"
+                        alt=""
+                        loading="lazy"
+                        onLoad={handleThumbLoad}
+                      />
+                    </a>
+                  </figure>
 
-                <div className="ps-txt">
-                  <strong className="ps-tit">{slide.title}</strong>
-                  <p className="ps-desc">{slide.desc}</p>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                  <div className="ps-txt">
+                    <strong className="ps-tit">{slide.title}</strong>
+                    <p className="ps-desc">{slide.desc}</p>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
 
-          <div className="swiper-controller">
-            <div className="swiper-pagination-progressbar">
-              <div
-                className="swiper-pagination-progressbar-fill"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-            <div className="group">
-              <div className="arrow arrow--prev" ref={prevRef}>
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M15 6L9 12L15 18"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+            <div className="swiper-controller">
+              <div className="swiper-pagination-progressbar">
+                <div
+                  className="swiper-pagination-progressbar-fill"
+                  style={{ width: `${progress}%` }}
+                />
               </div>
-              <div className="arrow arrow--next" ref={nextRef}>
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M9 6L15 12L9 18"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+              <div className="group">
+                <div className="arrow arrow--prev" ref={prevRef}>
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M15 6L9 12L15 18"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+                <div className="arrow arrow--next" ref={nextRef}>
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M9 6L15 12L9 18"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <VideoModal videoUrl={activeVideo} onClose={() => setActiveVideo(null)} />
-    </section>
+        <VideoModal
+          videoUrl={activeVideo}
+          onClose={() => setActiveVideo(null)}
+        />
+      </section>
     </>
   );
 }

@@ -1,5 +1,5 @@
 .footer{
-    padding: 80px 0; background: #0F0F0F;
+    padding: 80px 0; background: var(--bg-dark-200);  position: relative;
 }
 .ft-top {display: flex; justify-content: space-between; width:100%; margin-bottom:50px;}
 .ft-top > ul {display: flex; gap:2rem;}

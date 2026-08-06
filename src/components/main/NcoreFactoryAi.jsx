@@ -1,11 +1,19 @@
 import MainSectionTitle from "./MainSectionTitle";
 import "./NcoreFactoryAi.css";
+import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom";
+gsap.registerPlugin(ScrollTrigger);
 
 const nodeCards = [
   {
     id: "ics",
     title: "현장 데이터 연결",
-    tags: ["ICS", "FA"],
+    tags: [
+      { label: "ICS", href: "/solution/solution02_04" },
+      { label: "FA", href: "/solution/solution01_03" },
+    ],
     active: true,
     icon: (
       <svg
@@ -140,7 +148,10 @@ const nodeCards = [
   {
     id: "mes",
     title: "생산 및 설비 운영",
-    tags: ["MES", "CMMS"],
+    tags: [
+      { label: "MES", href: "/solution/solution02_01" },
+      { label: "CMMS", href: "/solution/solution02_03" },
+    ],
     icon: (
       <svg
         width="100%"
@@ -209,7 +220,12 @@ const nodeCards = [
   {
     id: "erp",
     title: "기업 경영",
-    tags: ["ERP", "HR", "GW", "PMS"],
+    tags: [
+      { label: "ERP", href: "/solution/solution01_01" },
+      { label: "HR", href: "/solution/solution01_02" },
+      { label: "GW", href: "/solution/solution01_10" },
+      { label: "PMS", href: "/solution/solution01_04" },
+    ],
     icon: (
       <svg
         width="100%"
@@ -270,7 +286,10 @@ const nodeCards = [
   {
     id: "ai",
     title: "AI 및 품질",
-    tags: ["AI", "Qeye"],
+    tags: [
+      { label: "AI", href: "/solution/solution03_03" },
+      { label: "Qeye", href: "/solution/solution03_04" },
+    ],
     icon: (
       <svg
         width="100%"
@@ -334,7 +353,10 @@ const nodeCards = [
   {
     id: "esh",
     title: "환경 및 물류",
-    tags: ["ESH", "TMS"],
+    tags: [
+      { label: "ESH", href: "/solution/solution03_05" },
+      { label: "TMS", href: "/solution/solution03_06" },
+    ],
     icon: (
       <svg
         width="100%"
@@ -425,8 +447,149 @@ const platformItems = [
 ];
 
 export default function NcoreFactoryAi() {
+  const rootRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 851px)", () => {
+        gsap.set(".nf-card", { opacity: 0, y: 60 });
+        gsap.to(".nf-card", {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          stagger: 0.12,
+          scrollTrigger: {
+            trigger: ".nf-card-row",
+            start: "top 80%",
+            once: true,
+          },
+        });
+
+        const cardEls = gsap.utils.toArray(".nf-card");
+        const allLines = [];
+        const allDots = [];
+
+        cardEls.forEach((card, i) => {
+          const iconWrap = card.querySelector(".nf-card-icon-wrap");
+          const lines = iconWrap.querySelectorAll("path[stroke]");
+          const dots = iconWrap.querySelectorAll("path[fill]:not([stroke])");
+
+          allLines.push(...lines);
+          allDots.push(...dots);
+
+          lines.forEach((path) => {
+            const length = path.getTotalLength();
+            path.style.strokeDasharray = length;
+            path.style.strokeDashoffset = length;
+          });
+          gsap.set(dots, { opacity: 0, scale: 0, transformOrigin: "center" });
+
+          ScrollTrigger.create({
+            trigger: card,
+            start: "top 80%",
+            once: true,
+            onEnter: () => {
+              const tl = gsap.timeline({ delay: 0.15 + i * 0.1 });
+
+              tl.to(lines, {
+                strokeDashoffset: 0,
+                duration: 1.1,
+                ease: "power2.inOut",
+                stagger: 0.025,
+              }).to(
+                dots,
+                {
+                  opacity: 1,
+                  scale: 1,
+                  duration: 0.35,
+                  ease: "back.out(2)",
+                  stagger: 0.02,
+                },
+                "-=0.3",
+              );
+            },
+          });
+        });
+
+        gsap.set([".nf-platform-bar", ".nf-pill"], { opacity: 0, y: 40 });
+        gsap.to(".nf-platform-bar", {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".ncore-factory-diagram",
+            start: "top 60%",
+            once: true,
+          },
+        });
+        gsap.to(".nf-pill", {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power3.out",
+          stagger: 0.08,
+          scrollTrigger: {
+            trigger: ".ncore-factory-diagram",
+            start: "top 55%",
+            once: true,
+          },
+        });
+        gsap.to(".ncore-factory-diagram", {
+          yPercent: -5,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".ncore-factory-diagram",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+        gsap.to(".nf-card-bg-wrap", {
+          yPercent: 30,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".ncore-factory-diagram",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+
+        return () => {
+          gsap.set(".nf-card", { clearProps: "opacity,transform" });
+          gsap.set([".nf-platform-bar", ".nf-pill"], {
+            clearProps: "opacity,transform",
+          });
+          gsap.set(allDots, { clearProps: "opacity,transform" });
+
+          allLines.forEach((path) => {
+            path.style.strokeDasharray = "";
+            path.style.strokeDashoffset = "";
+          });
+        };
+      });
+
+      gsap.utils.toArray(".nf-card-icon-wrap").forEach((el, i) => {
+        gsap.to(el, {
+          y: i % 2 === 0 ? 8 : -8,
+          duration: 2.5 + (i % 3) * 0.4,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: i * 0.2,
+        });
+      });
+    }, rootRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="ncore-factory-ai">
+    <div className="ncore-factory-ai" ref={rootRef}>
       <MainSectionTitle
         eyebrow={<>현장 데이터 수집부터 자동화까지</>}
         title={
@@ -436,55 +599,53 @@ export default function NcoreFactoryAi() {
           </>
         }
       />
-
-      <div className="ncore-factory-diagram ">
-        <div className="nf-card-bg-wrap">
-          <img src="/images/main/ncore_factory_bg.svg" />
-        </div>
-        <div className="nf-card-row ">
-          {nodeCards.map((card) => (
-            <div
-              key={card.id}
-              className={`glass-effect nf-card`}
-            >
-              <p className="nf-card-title">{card.title}</p>
-              <div className="nf-card-icon-wrap">{card.icon}</div>
-              <div className="nf-card-tags">
-                {card.tags.map((tag) => (
-                  <a key={tag} className="nf-tag">
-                    {tag}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="15"
-                      height="15"
-                      viewBox="0 0 15 15"
-                      fill="none"
-                    >
-                      <path
-                        d="M1.66667 15C1.20833 15 0.815972 14.8368 0.489583 14.5104C0.163194 14.184 0 13.7917 0 13.3333V1.66667C0 1.20833 0.163194 0.815972 0.489583 0.489583C0.815972 0.163194 1.20833 0 1.66667 0H7.5V1.66667H1.66667V13.3333H13.3333V7.5H15V13.3333C15 13.7917 14.8368 14.184 14.5104 14.5104C14.184 14.8368 13.7917 15 13.3333 15H1.66667ZM5.58333 10.5833L4.41667 9.41667L12.1667 1.66667H9.16667V0H15V5.83333H13.3333V2.83333L5.58333 10.5833Z"
-                        fill="white"
-                      />
-                    </svg>
-                  </a>
-                ))}
+      <div className="ncore-factory-diagram-wrap">
+        <div className="ncore-factory-diagram ">
+          <div className="nf-card-bg-wrap">
+            <img src="/images/main/ncore_factory_bg.svg" />
+          </div>
+          <div className="nf-card-row ">
+            {nodeCards.map((card) => (
+              <div key={card.id} className={`glass-effect nf-card`}>
+                <p className="nf-card-title">{card.title}</p>
+                <div className="nf-card-icon-wrap">{card.icon}</div>
+                <div className="nf-card-tags">
+                  {card.tags.map((tag) => (
+                    <Link key={tag.label} to={tag.href} className="nf-tag">
+                      {tag.label}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="15"
+                        height="15"
+                        viewBox="0 0 15 15"
+                        fill="none"
+                      >
+                        <path
+                          d="M1.66667 15C1.20833 15 0.815972 14.8368 0.489583 14.5104C0.163194 14.184 0 13.7917 0 13.3333V1.66667C0 1.20833 0.163194 0.815972 0.489583 0.489583C0.815972 0.163194 1.20833 0 1.66667 0H7.5V1.66667H1.66667V13.3333H13.3333V7.5H15V13.3333C15 13.7917 14.8368 14.184 14.5104 14.5104C14.184 14.8368 13.7917 15 13.3333 15H1.66667ZM5.58333 10.5833L4.41667 9.41667L12.1667 1.66667H9.16667V0H15V5.83333H13.3333V2.83333L5.58333 10.5833Z"
+                          fill="white"
+                        />
+                      </svg>
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className="nf-platform-bar glass-effect">
-          <span className="nf-platform-logo">
-            <img src="/images/common/ncore_wh.svg" />
-          </span>
-          <span className="nf-platform-text">통합 데이터 플랫폼</span>
-        </div>
-
-        <div className="nf-platform-pills glass-effect">
-          {platformItems.map((item) => (
-            <span key={item} className="nf-pill glass-effect">
-              {item}
+          <div className="nf-platform-bar glass-effect">
+            <span className="nf-platform-logo">
+              <img src="/images/common/ncore_wh.svg" />
             </span>
-          ))}
+            <span className="nf-platform-text">통합 데이터 플랫폼</span>
+          </div>
+
+          <div className="nf-platform-pills glass-effect">
+            {platformItems.map((item) => (
+              <span key={item} className="nf-pill glass-effect">
+                {item}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -55,7 +55,7 @@ function App() {
           element={
             <>
               <TopNavi />
-              {/* <Float /> */}
+              <Float />
               <Outlet />
               <Footer />
             </>

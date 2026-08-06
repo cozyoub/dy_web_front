@@ -40,6 +40,7 @@ export default function NcoreInteAni() {
           value: 100,
           ease: "none",
           onUpdate: () => {
+            if (!revealImgRef.current) return; 
             const v = progress.value;
             const maskValue = `linear-gradient(to right, #000 ${v}%, transparent ${v + FEATHER}%)`;
             revealImgRef.current.style.webkitMaskImage = maskValue;

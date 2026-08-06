@@ -3,7 +3,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
+  text-align: center; padding:0 12px;
+  max-width:1640px; margin:0 auto; z-index:1; position:relative;
 }
 
 .main-section-title__eyebrow {
@@ -12,7 +13,7 @@
   font-size: clamp(1.4rem, 0.5vw + 1.2rem, 1.5rem);
   font-weight: 500;
   line-height: 1.5;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.02em; word-break: keep-all;
 }
 
 .main-section-title__heading {
@@ -21,11 +22,11 @@
   font-size: clamp(2.8rem, 1.3114754098vw + 2.2819672131rem, 4.8rem);
   font-weight: 700;
   line-height: 1.4;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.03em;  word-break: keep-all;
 }
 
 .main-section-title__heading b {
-  color: var(--accent-blue);
+  /* color: var(--accent-blue); */
   font-weight: 700;
 }
 
@@ -65,4 +66,8 @@
   border: 1px solid rgba(255, 255, 255, 0.08); /* Fine, subtle highlight border */
   border-radius: 12px;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Deep shadow for physical depth */
+}
+
+@media (max-width: 851px) {
+ .main-section-title__heading br{display:none;}
 }

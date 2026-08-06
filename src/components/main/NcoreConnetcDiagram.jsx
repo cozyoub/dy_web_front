@@ -1,5 +1,9 @@
 import MainSectionTitle from "./MainSectionTitle";
 import "./NcoreConnectDiagram.css";
+import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const PROCESS = [
   {
@@ -29,9 +33,94 @@ const PROCESS = [
   },
 ];
 
+// 원 하나씩 자동으로 active 시키는 간격 (ms)
+const AUTO_ACTIVE_INTERVAL = 2400;
+
 export default function NcoreConnectDiagram() {
+  const rootRef = useRef(null);
+
+  useEffect(() => {
+    let intervalId = null;
+
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 851px)", () => {
+        gsap.set(".cir", { opacity: 0, y: 80, scale: 0.85 });
+
+        gsap.to(".cir", {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: ".process-wrap",
+            start: "top 80%",
+            once: true,
+          },
+        });
+
+        return () => {
+          gsap.set(".cir", { clearProps: "opacity,transform" });
+        };
+      });
+
+      gsap.to(".ncore-connect article", {
+        yPercent: -100,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".ncore-connect",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
+
+      gsap.to(".process-wrap", {
+        yPercent: -10,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".ncore-connect",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
+
+      // 일정 시간 간격으로 원을 하나씩 자동 active
+      ScrollTrigger.create({
+        trigger: ".process-wrap",
+        start: "top 80%",
+        once: true,
+        onEnter: () => {
+          const circles = gsap.utils.toArray(".cir");
+          if (!circles.length) return;
+
+          let idx = 0;
+          const activate = (i) => {
+            circles.forEach((el, n) =>
+              el.classList.toggle("is-active", n === i),
+            );
+          };
+
+          activate(idx);
+          intervalId = setInterval(() => {
+            idx = (idx + 1) % circles.length;
+            activate(idx);
+          }, AUTO_ACTIVE_INTERVAL);
+        },
+      });
+    }, rootRef);
+
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+      ctx.revert();
+    };
+  }, []);
   return (
-    <div className="ncore-connect">
+    <div className="ncore-connect" ref={rootRef}>
       <article></article>
       <div className="rotate-bg">
         <svg
@@ -94,14 +183,14 @@ export default function NcoreConnectDiagram() {
 
       <div className="ncore-connect-inner">
         <MainSectionTitle
-          eyebrow="하나로 연결되는 스마트 팩토리 솔루션"
-          title={
+          eyebrow={
             <>
               사무업무부터 실시간 관제, 의사결정까지
               <br />
-              <b>N·Core</b>가 하나로 연결합니다
+              <b> N·Core </b>가 하나로 연결합니다
             </>
           }
+          title={<>하나로 연결되는 스마트 팩토리 솔루션</>}
         />
         <ul className="process-wrap">
           {PROCESS.map((item) => (
@@ -128,8 +217,6 @@ export default function NcoreConnectDiagram() {
           ))}
         </ul>
       </div>
-
     </div>
-
   );
 }

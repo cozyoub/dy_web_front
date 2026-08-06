@@ -219,8 +219,9 @@ const steps = [
         <path
           d="M141.414 206.586C140.633 205.805 139.367 205.805 138.586 206.586C137.805 207.367 137.805 208.633 138.586 209.414L140 208L141.414 206.586ZM184 252L182.586 253.414C182.977 253.805 183.511 254.017 184.064 253.999C184.616 253.981 185.136 253.736 185.501 253.321L184 252ZM273.501 153.321C274.231 152.492 274.15 151.228 273.321 150.499C272.492 149.769 271.228 149.85 270.499 150.679L272 152L273.501 153.321ZM140 208L138.586 209.414L182.586 253.414L184 252L185.414 250.586L141.414 206.586L140 208ZM184 252L185.501 253.321L273.501 153.321L272 152L270.499 150.679L182.499 250.679L184 252Z"
           fill="white"
-          fillOpacity="0.3"
-          mask="url(#path-2-outside-1_382_877)" strokeWidth="5"
+          fillOpacity="1"
+          mask="url(#path-2-outside-1_382_877)"
+          strokeWidth="5"
         />
         <path
           d="M200 68C206.627 68 212 62.6274 212 56C212 49.3726 206.627 44 200 44C193.373 44 188 49.3726 188 56C188 62.6274 193.373 68 200 68Z"
@@ -310,7 +311,7 @@ const steps = [
           stroke="#49CFFF"
           strokeWidth="5"
           strokeLinecap="round"
-          strokeLinejoin="round" 
+          strokeLinejoin="round"
         />
         <path
           d="M240 120H280V160"
@@ -345,13 +346,25 @@ const steps = [
 ];
 
 export default function MainProcess() {
-  const listRef = useRef(null);
+  const sectionRef = useRef(null);
   const circleRefs = useRef([]);
   const progressRefs = useRef([]);
   const iconRefs = useRef([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      gsap.to(".main-process article", {
+        yPercent: 25,
+        xPercent: 8,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".main-process",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.2,
+        },
+      });
+
       const items = gsap.utils.toArray(".mp-item");
 
       items.forEach((li, i) => {
@@ -362,12 +375,10 @@ export default function MainProcess() {
 
         gsap.set(progress, { height: 0 });
 
-        // --- 아이콘 안의 라인/도트 선별 ---
         const svg = iconWrap?.querySelector("svg");
         const lines = svg ? svg.querySelectorAll('path[stroke="white"]') : [];
         const dots = svg ? svg.querySelectorAll('path[fill="#49CFFF"]') : [];
 
-        // 라인: 길이 계산해서 dasharray/dashoffset 초기화 (그려지기 전 상태)
         lines.forEach((line) => {
           const length = line.getTotalLength();
           gsap.set(line, {
@@ -376,10 +387,67 @@ export default function MainProcess() {
           });
         });
 
-        // 도트: 초기값 0 스케일
         gsap.set(dots, { scale: 0, transformOrigin: "center center" });
+        if (svg) gsap.set(svg, { filter: "drop-shadow(0 0 0px rgba(73,207,255,0))" });
 
-        const iconTl = gsap.timeline({ paused: true });
+        let ambientTl = null;
+
+        // ★ 라인은 지우지 않고 유지한 채로, 점이 은은하게 맥동 + 아이콘 전체 글로우가 숨쉬는 앰비언트 루프
+        const startAmbientLoop = () => {
+          stopAmbientLoop();
+
+          ambientTl = gsap.timeline({ repeat: -1 });
+
+          if (dots.length) {
+            ambientTl.to(
+              dots,
+              {
+                scale: 1.22,
+                duration: 1,
+                ease: "sine.inOut",
+                yoyo: true,
+                repeat: 1,
+                stagger: {
+                  each: 0.14,
+                  yoyo: true,
+                },
+              },
+              0,
+            );
+          }
+
+          if (svg) {
+            ambientTl.to(
+              svg,
+              {
+                filter: "drop-shadow(0 0 16px rgba(73,207,255,0.6))",
+                duration: 1.6,
+                ease: "sine.inOut",
+                yoyo: true,
+                repeat: 1,
+              },
+              0,
+            );
+          }
+        };
+
+        const stopAmbientLoop = () => {
+          if (ambientTl) {
+            ambientTl.kill();
+            ambientTl = null;
+          }
+          gsap.set(dots, { scale: 1 });
+          if (svg) {
+            gsap.set(svg, {
+              filter: "drop-shadow(0 0 0px rgba(73,207,255,0))",
+            });
+          }
+        };
+
+        const iconTl = gsap.timeline({
+          paused: true,
+          onComplete: startAmbientLoop, // ★ 다 그려지면 은은한 맥동 루프 시작
+        });
         iconTl
           .to(lines, {
             strokeDashoffset: 0,
@@ -413,6 +481,7 @@ export default function MainProcess() {
           },
           onLeaveBack: () => {
             circle.classList.remove("is-active");
+            stopAmbientLoop();
             iconTl.reverse();
           },
         });
@@ -434,21 +503,20 @@ export default function MainProcess() {
           },
         );
       });
-    }, listRef);
+    }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section className="main-process">
-      <article></article>
+    <section className="main-process" ref={sectionRef}>
+      {/* <article></article> */}
       <MainSectionTitle
         className="main-process__title"
         title={
           <>
-            현장 진단부터 자율제조팩토리 운영까지
-            <br />
-            동연에스엔티가 함께합니다.
+            설계, 구축, 운영, 고도화까지
+            <br /> 안정적인 <b>디지털 전환</b>을 제공합니다
           </>
         }
         eyebrow={
@@ -458,7 +526,7 @@ export default function MainProcess() {
         }
       />
 
-      <ul className="mp-list" ref={listRef}>
+      <ul className="mp-list">
         {steps.map((item, i) => (
           <li key={item.id} className="mp-item">
             <div className="mp-item__txt">

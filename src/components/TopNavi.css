@@ -34,7 +34,7 @@
 .gnb-wrapper.is-revealed{transform:translateY(0);opacity:1;}
 .gnb-wrapper.is-revealed.gnb-hidden{transform:translateY(-100%);}
 
-.gnb-container {margin: 0 auto;padding: 0 24px; display: flex;align-items: center; justify-content: space-between; gap: 0px; z-index: 101; max-width: 1624px;}
+.gnb-container {margin: 0 auto;padding: 0 24px; display: flex;align-items: center; justify-content: space-between; gap: 0px; z-index: 101; max-width: 1640px;}
 .gnb-container .logo img {max-width: 160px;}
 .gnb-container .th-dark{display: none;}
 

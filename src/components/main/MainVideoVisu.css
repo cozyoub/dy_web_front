@@ -1,0 +1,146 @@
+.main-video-visu {
+  background: var(--bg-dark-100);
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-video-visu__vd {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: center center;
+}
+
+.main-video-visu video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  position: relative;
+}
+
+.main-video-visu__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 17, 32, 0.75) 0%,
+    rgba(8, 17, 32, 0.15) 35%,
+    rgba(0,0,0,.5) 60%,
+    var(--bg-dark-100) 100%
+  );
+}
+
+/* 텍스트 영역 */
+.main-video-visu__txt {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 40%;
+  z-index: 3;
+  padding: 0 2rem;
+  text-align: center;
+  color: #fff;
+}
+
+.mvv-eyebrow {
+  overflow: hidden;
+  display: inline-block;
+}
+
+.mvv-eyebrow-inner {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent-blue, #48ceff);
+  text-transform: uppercase;
+}
+
+.mvv-title {
+  margin: 16px 0 20px;
+}
+
+.mvv-title-line {
+  display: block;
+  overflow: hidden;
+}
+
+.mvv-title-line-inner {
+  display: block;
+  font-size: clamp(2.8rem, 1.3114754098vw + 2.2819672131rem, 4.8rem);
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.mvv-title-line-inner b {
+  color: var(--accent-blue, #48ceff);
+  font-weight: 700;
+}
+
+.mvv-desc {
+  font-size: clamp(1.1rem, 0.6vw + 1rem, 1.3rem);
+  color: rgba(255, 255, 255, 1);
+  line-height: 1.6;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.mvv-scroll-cue {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.mvv-scroll-cue__line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    transparent 100%
+  );
+  animation: mvv-scroll-bounce 2s ease-in-out infinite;
+}
+
+.mvv-scroll-cue__text {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+@keyframes mvv-scroll-bounce {
+  0%,
+  100% {
+    transform: scaleY(0.6);
+    transform-origin: top;
+  }
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+}
+
+@media (max-width: 851px) {
+
+  .main-video-visu__txt {
+    bottom: 15%;
+  }
+
+  .mvv-scroll-cue {
+    display: none;
+  }
+}
