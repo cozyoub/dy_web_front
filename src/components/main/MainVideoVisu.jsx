@@ -67,7 +67,7 @@ export default function MainVideoVisu() {
     <div className="main-video-visu" ref={rootRef}>
       <div className="main-video-visu__vd">
         <video
-          src="/images/main/mainVisu.mp4"
+          src="/images/main/mainVisu02.mp4"
           autoPlay
           loop
           muted
