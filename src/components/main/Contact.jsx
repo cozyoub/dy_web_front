@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Contact.css";
+import MainSectionTitle from "./MainSectionTitle";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -143,13 +144,18 @@ export default function Contact() {
       <div className="inner">
         <div className="contact-inquiry">
           <div className="contact-inquiry-txt-box">
-            <h4 className="inquiry-tit">
-              산업에 맞는 솔루션 제안부터<br />도입 컨설팅까지
-            </h4>
-            <p className="inquiry-txt">
-              기업의 업무 환경을 분석하여<br />
-              도입부터 구축, 운영까지 최적의 서비스를 제공합니다.
-            </p>
+            <MainSectionTitle
+                      reverse
+                      className="main-design__title"
+                      eyebrow={<>사무와 현장의 모든 이야기를 들려주시면,<br/>
+단계별로 채워가는 AI 자동화 솔루션을 제안해 드립니다.</>}
+                      title={
+                        <>
+                          Contact Us
+                        </>
+                      }
+                    />
+            
           </div>
 
           <div className="contact-btn-box">

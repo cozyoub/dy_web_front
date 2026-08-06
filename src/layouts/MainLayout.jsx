@@ -69,7 +69,7 @@ export default function MainLayout() {
       <PromotionSlider />
       <MainProcess />
       <Partner />
-      {/* <Contact/> */}
+      <Contact/>
     </main>
   );
 }

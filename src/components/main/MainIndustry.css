@@ -100,8 +100,8 @@
 }
 
 .main-industry__card-desc {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 16px;
+  color: #8b96a8;
+  font-size: 1.0625rem;
   line-height: 1.6;
   margin: 0; word-break: keep-all;
 }

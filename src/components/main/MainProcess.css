@@ -61,7 +61,7 @@
 }
 
 .mp-item__desc {
-  color: rgba(255, 255, 255, 0.55);
+      color: #8b96a8;
   font-size: clamp(1.2rem, 2.5vw + 0.5rem, 1.3rem);
   line-height: 1.6;
   margin: 0;

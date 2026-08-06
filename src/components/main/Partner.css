@@ -1,4 +1,4 @@
-.partner{padding: 7.5rem 0; background:var(--bg-nay-700);}
+.partner{padding: 7.5rem 0; background: linear-gradient(180deg, #081120 0%, #030B18 100%);}
 .partner .main-section-title{margin-bottom:60px;}
 .partner .icon-track > div{overflow: hidden; display:flex; width:250px; height:100px; background:#fff; align-items:center; justify-content:center; border-radius:4px; border:1px solid #f8f8f8;}
 .partner .icon-track div img{max-height:fit-content; max-width:40%; object-fit:contain; object-position:center;}

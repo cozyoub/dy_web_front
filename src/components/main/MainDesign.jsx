@@ -75,7 +75,7 @@ export default function MainDesign() {
             <>
               <b>현장 진단부터 운영고도화</b>까지,
               <br />
-              전과정을 함께합니다
+              전 과정을 함께합니다
             </>
           }
         />

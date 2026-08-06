@@ -521,7 +521,7 @@ export default function MainProcess() {
         }
         eyebrow={
           <>
-            현장 이해를 바탕으로 설계부터 운영, 개선까지 전 과정을 책임집니다.
+            현장 이해를 바탕으로 설계부터 운영, 개선까지
           </>
         }
       />
