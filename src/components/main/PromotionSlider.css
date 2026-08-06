@@ -2,7 +2,7 @@
 
 .promotion-slider {
   padding: 7.5rem 0;
-  background: linear-gradient(180deg, var(--bg-nay-600) 0%, var(--bg-navy-200) 100%);
+  background: linear-gradient(180deg, var(--bg-nay-600) 0%, var(--bg-navy-200) 100%); overflow: hidden;
 }
 
 .ps-head {
