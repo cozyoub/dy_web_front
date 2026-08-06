@@ -118,6 +118,9 @@
 }
 
 @media (max-width: 769px) {
+  .main-case{background:
+  url("/images/main/case_bg.png") center top / auto no-repeat,
+  var(--bg-dark-200);}
   .main-case .inner{flex-direction: column; gap: 1rem;}
   .main-case__content{gap:1rem; margin-top: 60px;;}
   .main-case__text{position:unset; top:unset; align-self:unset;}

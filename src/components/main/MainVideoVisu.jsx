@@ -8,9 +8,6 @@ export default function MainVideoVisu() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.2 });
-
-      // 1. clip-path로 보이는 영역만 얇은 줄 → 전체 화면으로 펼쳐짐
-      // 비디오 자체는 전혀 움직이거나 확대되지 않음
       tl.fromTo(
         ".main-video-visu__vd",
         { clipPath: "inset(49.5% 0% 49.5% 0%)" },
@@ -20,21 +17,18 @@ export default function MainVideoVisu() {
           ease: "power4.inOut",
         }
       )
-        // 2. 오버레이 페이드인
         .fromTo(
           ".main-video-visu__overlay",
           { opacity: 0 },
           { opacity: 1, duration: 1, ease: "sine.out" },
           "-=1.2"
         )
-        // 3. eyebrow 마스크 리빌
         .fromTo(
           ".mvv-eyebrow-inner",
           { yPercent: 100 },
           { yPercent: 0, duration: 0.9, ease: "power3.out" },
           "-=0.8"
         )
-        // 4. 타이틀 한 줄씩 마스크 리빌
         .fromTo(
           ".mvv-title-line-inner",
           { yPercent: 100 },
@@ -46,14 +40,18 @@ export default function MainVideoVisu() {
           },
           "-=0.6"
         )
-        // 5. 서브 텍스트 fade up
         .fromTo(
           ".mvv-desc",
           { opacity: 0, y: 20 },
           { opacity: 1, y: 0, duration: 0.8, ease: "sine.out" },
           "-=0.5"
         )
-        // 6. 스크롤 인디케이터
+        .fromTo(
+          ".mvv-cta",
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.7, ease: "sine.out" },
+          "-=0.4"
+        )
         .fromTo(
           ".mvv-scroll-cue",
           { opacity: 0, y: -10 },
@@ -80,28 +78,39 @@ export default function MainVideoVisu() {
       <div className="main-video-visu__overlay" />
 
       <div className="main-video-visu__txt">
-        <div className="mvv-eyebrow">
+        {/* <div className="mvv-eyebrow">
           <span className="mvv-eyebrow-inner">N·Core Factory AI</span>
-        </div>
+        </div> */}
 
         <h1 className="mvv-title">
-          <span className="mvv-title-line">
+          <span className="mvv-title-line mvv-title-line--sm">
+            <span className="mvv-title-line-inner">현장 데이터부터 ERP·MES·AI까지 연결해</span>
+          </span>
+          <span className="mvv-title-line mvv-title-line--lg">
             <span className="mvv-title-line-inner">
-              디지털 전환을 완성하는
+              제조 운영의 <b>디지털 전환</b>을 완성합니다
             </span>
           </span>
-          <span className="mvv-title-line">
-            <span className="mvv-title-line-inner">
-              새로운 방식
-            </span>
-          </span>
+          {/* <span className="mvv-title-line mvv-title-line--lg">
+            <span className="mvv-title-line-inner">.</span>
+          </span> */}
         </h1>
 
         <p className="mvv-desc">
-          현장 진단부터 시스템 구축, 운영 고도화까지
+          분산된 설비와 업무 데이터를 실시간 운영, 분석, 의사결정에 
           <br />
-          자율제조로 가는 전 과정을 N·Core가 함께합니다.
+           활용할 수 있는 환경으로 전환합니다.
         </p>
+
+        <div className="mvv-cta">
+          <a href="/contact" className="mvv-cta__btn primary">
+            도입 상담
+            <span className="mvv-cta__btn__arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="#case" className="mvv-cta__btn outline">
+            구축 사례
+          </a>
+        </div>
       </div>
 
       <div className="mvv-scroll-cue">

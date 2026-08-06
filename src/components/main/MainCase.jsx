@@ -131,7 +131,7 @@ export default function MainCase() {
   }, []);
 
   return (
-    <div className="main-case" ref={rootRef}>
+    <div className="main-case" ref={rootRef} id="case">
       <div className="inner">
         <div className="main-case__text">
           <MainSectionTitle
