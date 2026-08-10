@@ -33,5 +33,5 @@ export default function MouseFollowBlur() {
     };
   }, []);
 
-  return <div className="mouse-default" ref={blurRef} />;
+  return <div className="mouse-blur" ref={blurRef} />;
 }

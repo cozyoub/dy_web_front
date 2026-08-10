@@ -548,6 +548,7 @@ export default function NcoreFactoryAi() {
             scrub: 1,
           },
         });
+        gsap.set(".nf-card-bg-wrap", { xPercent: -50 });
         gsap.to(".nf-card-bg-wrap", {
           yPercent: 30,
           ease: "none",
