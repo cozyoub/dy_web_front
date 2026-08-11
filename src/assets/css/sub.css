@@ -226,16 +226,16 @@ display: flex; align-items: center; justify-content: center; margin:0 auto 30px 
 /****
   S : 공통
 ****/
-.sub-title h3{font-size:3rem; font-weight:bold; margin-bottom: 30px;}
+.sub-title h3, .sub-title{font-size:3rem; font-weight:bold; margin-bottom: 30px;}
 .sub-title p{color:var(--primary-color); font-family:"Sweet"; font-weight:600; font-size:1.375rem; margin-bottom:10px; display:block;}
 
 @media all and (max-width:851px){
-  .sub-title h3{font-size: 2.25rem; margin-bottom: 20px;}
+  .sub-title h3, .sub-title{font-size: 2.25rem; margin-bottom: 20px;}
   .sub-title p{font-size: 1.125rem;}
 }
 
 @media all and (max-width:576px){
-  .sub-title h3{font-size: 1.875rem; margin-bottom: 16px;}
+  .sub-title h3, .sub-title{font-size: 1.875rem; margin-bottom: 16px;}
   .sub-title p{font-size: 1rem;}
 }
 /****
