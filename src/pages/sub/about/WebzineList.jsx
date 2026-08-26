@@ -8,6 +8,11 @@ import { formatIssueLabel } from "@/common/webzineUtils";
 
 const PAGE_SIZE = 9;
 
+const getCardLabel = (item) => {
+  if (item.category === "초대장") return item.title;
+  return formatIssueLabel(item.publishedDate);
+};
+
 export default function WebzineList() {
   const [list, setList] = useState([]);
   const [filtered, setFiltered] = useState([]);
@@ -17,15 +22,17 @@ export default function WebzineList() {
   const navigate = useNavigate();
 
   const getThumb = (item) => {
-    if (item.sfile) return `${BASE_API_URL}/uploads/webzine/${item.sfile}`;
-    if (item.imageUrl) return item.imageUrl;
+    if (item.imageUrl) {
+      return item.imageUrl.startsWith("http")
+        ? item.imageUrl
+        : `${BASE_API_URL}${item.imageUrl}`;
+    }
     return null;
   };
 
   useEffect(() => {
     getAllWebzineService()
       .then((res) => {
-        // 최신순 정렬: 발행일(publishedDate) 우선, 없으면 등록일(createdAt) 기준
         const sorted = [...res.data].sort((a, b) => {
           const dateA = new Date(a.publishedDate ?? a.createdAt);
           const dateB = new Date(b.publishedDate ?? b.createdAt);
@@ -82,7 +89,7 @@ export default function WebzineList() {
 
   return (
     <div className="webzine-list-wrapper sub-inner">
-      <div className="webzine-filter-bar">
+      <div className="board-filter-bar">
         {categories.map((cat) => (
           <button
             key={cat}
@@ -127,7 +134,7 @@ export default function WebzineList() {
           >
             <div className="webzine-card-thumb">
               {getThumb(item) ? (
-                <img src={getThumb(item)} alt={formatIssueLabel(item.publishedDate)} />
+                <img src={getThumb(item)} alt={getCardLabel(item)} />
               ) : (
                 <div className="webzine-card-thumb-default">
                   <img src="/images/common/logo.svg" alt="" />
@@ -135,8 +142,9 @@ export default function WebzineList() {
               )}
             </div>
             <div className="webzine-card-body">
+              <span className="webzine-card-category">{item.category}</span>
               <span className="webzine-card-issue">
-                {formatIssueLabel(item.publishedDate)}
+                {getCardLabel(item)}
               </span>
             </div>
           </div>

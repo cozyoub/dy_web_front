@@ -1,0 +1,98 @@
+// About03.jsx 의 HISTORY_DATA 와 정확히 같은 구조(연도 → 이벤트 배열 → title/tags)로 미러링한다.
+// 키 경로: `events.<year>.<index>.title`, `events.<year>.<index>.tags.<i>`
+export default {
+  historyTitle: "History",
+  awardsTitle: "Certificates & Awards",
+  awards: [
+    "Korea Copyright Commission Registration Certificate (AAS)",
+    "Korea Copyright Commission Registration Certificate (MLOps)",
+    "Korea Copyright Commission Registration Certificate (Qeye)",
+    "Korea Copyright Commission Registration Certificate (PrismAI)",
+    "Korea Copyright Commission Registration Certificate (CMMS)",
+    "Korea Copyright Commission Registration Certificate (FA)",
+    "Korea Copyright Commission Registration Certificate (HR)",
+    "Korea Copyright Commission Registration Certificate (MES)",
+    "Korea Copyright Commission Registration Certificate (PMS)",
+    "Korea Copyright Commission Registration Certificate (TMS)",
+    "Ministry of Employment and Labor Strong Small Business Certificate",
+    "Ministry of Employment and Labor Excellent Employer Certificate",
+    "Ministry of SMEs and Startups Technology-Innovative SME Certificate",
+    "Busan Metropolitan City Leading Enterprise Certificate",
+  ],
+  events: {
+    2026: [
+      { title: "Appointed Director, Korea Cloud Association" },
+      { title: "Appointed Director, Korea SME Technology Innovation Association, Busan-Ulsan Chapter" },
+      {
+        title: "Software Copyright Registration",
+        tags: [
+          "N·Core AAS — Manufacturing Data Standardization & Asset Management Platform",
+          "N·Core Qeye — Industrial AI Vision Recognition Platform",
+          "N·Core MLOps — Manufacturing AI Model Operations & Training Platform",
+          "N·Core PrismAI — AI Predictive-Model-Based Process Optimization Platform",
+        ],
+      },
+    ],
+    2025: [
+      { title: "Achieved Level 3 Supply Capability Assessment, Smart Manufacturing Innovation Promotion Agency", tags: ["Technology Business Grade A+"] },
+      { title: "Opened Changwon Office" },
+      { title: "Received Busan Metropolitan Mayor's Commendation" },
+      { title: "Signed MOU with Gyeongbuk Technopark" },
+      { title: "Opened Changwon Office" },
+    ],
+    2024: [
+      { title: "Selected as a Busan Leading Enterprise", tags: ["Digital Tech Industry"] },
+      { title: "Obtained Direct Production Certification, Korea Federation of SMEs", tags: ["Operation Outsourcing Service (8111181101)"] },
+    ],
+    2023: [
+      { title: "Obtained Direct Production Certification, Korea Federation of SMEs", tags: ["Big Data Analysis Service (8111200202)"] },
+      { title: "Opened Pohang Office" },
+      { title: "Selected as a Ministry of Employment and Labor Strong Small Business" },
+      { title: "Selected as a Ministry of Employment and Labor Excellent Employer" },
+      { title: "Software Copyright Registration", tags: ["N·Core PMS Procurement Management System", "Korea Copyright Commission"] },
+      { title: "Software Copyright Registration", tags: ["N·Core TMS Transportation Management System", "Korea Copyright Commission"] },
+      { title: "Registered as an Inno-Biz Certified Company, Ministry of SMEs and Startups" },
+    ],
+    2022: [
+      { title: "Signed Partner Agreement with Samsung SDS Brightics (AI/Analytics Solution)" },
+      { title: "Signed MOU with Samsung SDS Brightics AI" },
+      { title: "Signed MOU with Polaris Office" },
+      { title: "Joined Inno-Biz Association" },
+      { title: "Registered as BNK System IT Service Specialist" },
+      { title: "Developed DK·CAS Internal Accounting System" },
+      {
+        title: "Obtained Direct Production Certification, Korea Federation of SMEs",
+        tags: [
+          "Industrial Management Software (4323260801)",
+          "Package Software Development (8111159801)",
+          "Information System Development Service (8111159901)",
+          "Information System Maintenance Service (811118901)",
+          "Software Maintenance & Support Service (8111229901)",
+        ],
+      },
+      { title: "Participated in SME-Specialized High School Workforce Development Program" },
+      { title: "Obtained Bidding Eligibility, Public Procurement Service (Nara Jangteo)" },
+      { title: "Opened Seoul Office" },
+    ],
+    2021: [{ title: "Signed Mutual Cooperation MOU between Chemtopia Co., Ltd. and DONGYEON S&T Co., Ltd." }],
+    2020: [
+      { title: "Added IT Training Curriculum", tags: ["Xisom", "X-SCADA"] },
+      { title: "Software Copyright Registration", tags: ["N·Core CMMS Facility Management System", "Korea Copyright Commission"] },
+      { title: "Software Copyright Registration", tags: ["N·Core FA Finance & Accounting System", "Korea Copyright Commission"] },
+      { title: "Software Copyright Registration", tags: ["N·Core MES", "Korea Copyright Commission"] },
+      { title: "Software Copyright Registration", tags: ["N·Core HR Payroll System", "Korea Copyright Commission"] },
+      { title: "Developed Automatic Judgment System for Cold-Rolled Steel Sheet Surface Defect Detection" },
+    ],
+    2019: [
+      { title: "Signed Xisom Technology Certification Agency Agreement" },
+      { title: "Established In-House R&D Department", tags: ["Korea Industrial Technology Association"] },
+    ],
+    2017: [
+      { title: "Opened IT Training Center", tags: ["TOBESOFT", "Nexacro"] },
+      { title: "New CEO Appointed" },
+    ],
+    2016: [{ title: "Selected as a Smart Factory Task Force Solution Supplier" }],
+    2015: [{ title: "Selected for Smart Factory Advancement Technology Development Project", tags: ["National Project", "Ministry of Trade, Industry and Energy"] }],
+    2006: [{ title: "Capital Increase" }, { title: "Founded DONGYEON SNT Co., Ltd." }],
+  },
+};

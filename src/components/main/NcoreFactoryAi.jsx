@@ -3,7 +3,9 @@ import "./NcoreFactoryAi.css";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Link } from "react-router-dom";
+import LangLink from "@/components/LangLink";
+import useTr from "@/hooks/useTr";
+import en from "@/locales/en/main/NcoreFactoryAi";
 gsap.registerPlugin(ScrollTrigger);
 
 const nodeCards = [
@@ -28,52 +30,52 @@ const nodeCards = [
             <path
               d="M201.5 130L165.75 61.9453H94.25L58.5 130L94.25 198.055H165.75L201.5 130Z"
               stroke="white"
-              stroke-opacity="0.3"
-              stroke-width="3"
+              strokeOpacity="0.3"
+              strokeWidth="3"
             />
-            <path d="M130 130H201.5" stroke="#48CEFF" stroke-width="3" />
+            <path d="M130 130H201.5" stroke="#48CEFF" strokeWidth="3" />
             <path
               d="M130 130L165.75 61.9453"
               stroke="#48CEFF"
-              stroke-width="3"
+              strokeWidth="3"
             />
             <path
               d="M130 130L94.25 61.9453"
               stroke="#48CEFF"
-              stroke-width="3"
+              strokeWidth="3"
             />
-            <path d="M130 130H58.5" stroke="#48CEFF" stroke-width="3" />
+            <path d="M130 130H58.5" stroke="#48CEFF" strokeWidth="3" />
             <path
               d="M130 130L94.25 198.055"
               stroke="#48CEFF"
-              stroke-width="3"
+              strokeWidth="3"
             />
             <path
               d="M130 130L165.75 198.055"
               stroke="#48CEFF"
-              stroke-width="3"
+              strokeWidth="3"
             />
-            <path d="M201.5 130H223.6" stroke="#48CEFF" stroke-width="3" />
+            <path d="M201.5 130H223.6" stroke="#48CEFF" strokeWidth="3" />
             <path
               d="M165.75 61.9451L176.8 41.6001"
               stroke="#48CEFF"
-              stroke-width="3"
+              strokeWidth="3"
             />
             <path
               d="M94.25 61.9451L83.2 41.6001"
               stroke="#48CEFF"
-              stroke-width="3"
+              strokeWidth="3"
             />
-            <path d="M58.5 130H36.4" stroke="#48CEFF" stroke-width="3" />
+            <path d="M58.5 130H36.4" stroke="#48CEFF" strokeWidth="3" />
             <path
               d="M94.25 198.055L83.2 218.4"
               stroke="#48CEFF"
-              stroke-width="3"
+              strokeWidth="3"
             />
             <path
               d="M165.75 198.055L176.8 218.4"
               stroke="#48CEFF"
-              stroke-width="3"
+              strokeWidth="3"
             />
           </g>
           <path
@@ -113,9 +115,9 @@ const nodeCards = [
             width="268"
             height="268"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feColorMatrix
               in="SourceAlpha"
               type="matrix"
@@ -164,26 +166,26 @@ const nodeCards = [
           <path
             d="M130 39L214.5 84.5L130 130L45.5 84.5L130 39Z"
             stroke="#48CEFF"
-            stroke-width="3"
+            strokeWidth="3"
           />
           <path
             d="M130 130L214.5 175.5L130 221L45.5 175.5L130 130Z"
             stroke="#48CEFF"
-            stroke-width="3"
+            strokeWidth="3"
           />
           <path
             d="M130 39V130"
             stroke="white"
-            stroke-opacity="0.3"
-            stroke-width="3"
+            strokeOpacity="0.3"
+            strokeWidth="3"
           />
-          <path d="M214.5 84.5V175.5" stroke="#48CEFF" stroke-width="3" />
-          <path d="M45.5 84.5V175.5" stroke="#48CEFF" stroke-width="3" />
+          <path d="M214.5 84.5V175.5" stroke="#48CEFF" strokeWidth="3" />
+          <path d="M45.5 84.5V175.5" stroke="#48CEFF" strokeWidth="3" />
           <path
             d="M130 130V221"
             stroke="white"
-            stroke-opacity="0.3"
-            stroke-width="3"
+            strokeOpacity="0.3"
+            strokeWidth="3"
           />
         </g>
         <path
@@ -238,19 +240,19 @@ const nodeCards = [
           <path
             d="M130 45.5L71.5 117"
             stroke="white"
-            stroke-opacity="0.3"
-            stroke-width="3"
+            strokeOpacity="0.3"
+            strokeWidth="3"
           />
           <path
             d="M130 45.5L188.5 117"
             stroke="white"
-            stroke-opacity="0.3"
-            stroke-width="3"
+            strokeOpacity="0.3"
+            strokeWidth="3"
           />
-          <path d="M71.5 117L39 195" stroke="#48CEFF" stroke-width="3" />
-          <path d="M71.5 117L104 195" stroke="#48CEFF" stroke-width="3" />
-          <path d="M188.5 117L156 195" stroke="#48CEFF" stroke-width="3" />
-          <path d="M188.5 117L221 195" stroke="#48CEFF" stroke-width="3" />
+          <path d="M71.5 117L39 195" stroke="#48CEFF" strokeWidth="3" />
+          <path d="M71.5 117L104 195" stroke="#48CEFF" strokeWidth="3" />
+          <path d="M188.5 117L156 195" stroke="#48CEFF" strokeWidth="3" />
+          <path d="M188.5 117L221 195" stroke="#48CEFF" strokeWidth="3" />
         </g>
         <path
           d="M130 51.3499C133.231 51.3499 135.85 48.7308 135.85 45.4999C135.85 42.269 133.231 39.6499 130 39.6499C126.769 39.6499 124.15 42.269 124.15 45.4999C124.15 48.7308 126.769 51.3499 130 51.3499Z"
@@ -302,13 +304,13 @@ const nodeCards = [
           <path
             d="M201.5 130L165.75 61.9448H94.25L58.5 130L94.25 198.055H165.75L201.5 130Z"
             stroke="#48CEFF"
-            stroke-width="3"
+            strokeWidth="3"
           />
           <path
             d="M97.5 130L119.6 153.4L166.4 101.4"
             stroke="white"
-            stroke-opacity="0.3"
-            stroke-width="3"
+            strokeOpacity="0.3"
+            strokeWidth="3"
           />
         </g>
         <path
@@ -369,31 +371,31 @@ const nodeCards = [
           <path
             d="M130 208C173.078 208 208 173.078 208 130C208 86.9218 173.078 52 130 52C86.9218 52 52 86.9218 52 130C52 173.078 86.9218 208 130 208Z"
             stroke="#48CEFF"
-            stroke-width="3"
+            strokeWidth="3"
           />
           <path
             d="M130 208C147.949 208 162.5 173.078 162.5 130C162.5 86.9218 147.949 52 130 52C112.051 52 97.5 86.9218 97.5 130C97.5 173.078 112.051 208 130 208Z"
             stroke="#48CEFF"
-            stroke-width="3"
+            strokeWidth="3"
           />
           <path
             d="M130 158.6C173.078 158.6 208 145.795 208 130C208 114.205 173.078 101.4 130 101.4C86.9218 101.4 52 114.205 52 130C52 145.795 86.9218 158.6 130 158.6Z"
             stroke="white"
-            stroke-opacity="0.3"
-            stroke-width="3"
+            strokeOpacity="0.3"
+            strokeWidth="3"
           />
-          <path d="M52 130H208" stroke="#48CEFF" stroke-width="3" />
+          <path d="M52 130H208" stroke="#48CEFF" strokeWidth="3" />
           <path
             opacity="0.7"
             d="M39 78C99.6667 43.3333 160.333 43.3333 221 78"
             stroke="#48CEFF"
-            stroke-width="3"
+            strokeWidth="3"
           />
           <path
             opacity="0.7"
             d="M39 182C99.6667 216.667 160.333 216.667 221 182"
             stroke="#48CEFF"
-            stroke-width="3"
+            strokeWidth="3"
           />
         </g>
         <path
@@ -447,6 +449,7 @@ const platformItems = [
 ];
 
 export default function NcoreFactoryAi() {
+  const tr = useTr(en);
   const rootRef = useRef(null);
 
   useEffect(() => {
@@ -592,11 +595,11 @@ export default function NcoreFactoryAi() {
   return (
     <div className="ncore-factory-ai" ref={rootRef}>
       <MainSectionTitle
-        eyebrow={<>현장 데이터 수집부터 자동화까지</>}
+        eyebrow={<>{tr("eyebrow", "현장 데이터 수집부터 자동화까지")}</>}
         title={
           <>
-            자율제조팩토리를 완성하는 <br />
-            <b>N·Core Factory AI</b>
+            {tr("title1", "자율제조팩토리를 완성하는")} <br />
+            <b>{tr("titleB", "N·Core Factory AI")}</b>
           </>
         }
       />
@@ -607,12 +610,12 @@ export default function NcoreFactoryAi() {
           </div>
           <div className="nf-card-row ">
             {nodeCards.map((card) => (
-              <div key={card.id} className={`glass-effect nf-card`}>
-                <p className="nf-card-title">{card.title}</p>
+              <div key={card.id} className={`glass-effect nf-card border-gradient`}>
+                <p className="nf-card-title">{tr(`cards.${card.id}`, card.title)}</p>
                 <div className="nf-card-icon-wrap">{card.icon}</div>
                 <div className="nf-card-tags">
                   {card.tags.map((tag) => (
-                    <Link key={tag.label} to={tag.href} className="nf-tag">
+                    <LangLink key={tag.label} to={tag.href} className="nf-tag">
                       {tag.label}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -626,7 +629,7 @@ export default function NcoreFactoryAi() {
                           fill="white"
                         />
                       </svg>
-                    </Link>
+                    </LangLink>
                   ))}
                 </div>
               </div>
@@ -637,13 +640,13 @@ export default function NcoreFactoryAi() {
             <span className="nf-platform-logo">
               <img src="/images/common/ncore_wh.svg" />
             </span>
-            <span className="nf-platform-text">통합 데이터 플랫폼</span>
+            <span className="nf-platform-text">{tr("platformText", "통합 데이터 플랫폼")}</span>
           </div>
 
           <div className="nf-platform-pills glass-effect">
-            {platformItems.map((item) => (
+            {platformItems.map((item, i) => (
               <span key={item} className="nf-pill glass-effect">
-                {item}
+                {tr(`platformItems.${i}`, item)}
               </span>
             ))}
           </div>

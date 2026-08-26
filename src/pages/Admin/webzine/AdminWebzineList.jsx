@@ -6,6 +6,11 @@ import {
 } from "@/services/webzine.service";
 import { formatIssueLabel } from "@/common/webzineUtils";
 
+const getIssueLabel = (item) => {
+  if (item.category === "초대장") return item.title;
+  return formatIssueLabel(item.publishedDate);
+};
+
 export default function AdminWebzineList() {
   const [list, setList] = useState([]);
   const navigate = useNavigate();
@@ -52,7 +57,7 @@ export default function AdminWebzineList() {
             {list.map((item) => (
               <tr key={item.id}>
                 <td>{item.id}</td>
-                <td>{formatIssueLabel(item.publishedDate)}</td>
+                <td>{getIssueLabel(item)}</td>
                 <td>{item.category}</td>
                 <td>{item.title}</td>
                 <td>{item.writer}</td>

@@ -2,7 +2,7 @@
 .admin-page-header h2{font-size: 20px; font-weight: 600; color: #1e293b;}
 /* admin buttons*/
 .admin-btn{padding: 8px 16px; border-radius: 6px; font-size: 15px; font-weight: 500; cursor: pointer; border: none; transition: all .3s;}
-.admin-btn:hober{opacity: 0.85;}
+.admin-btn:hover{opacity: 0.85;}
 .admin-btn-primary{background-color: #3b82f6; color: #fff;}
 .admin-btn-secondary{background-color: #f1f5f9; color: #1e293b; border: 1px solid #e2e8f0;}
 .admin-btn-danger{background-color: #fef2f2; color: #dc2626;}
@@ -11,27 +11,43 @@
 .admin-table-wrap {background: #fff;border: 1px solid #e2e8f0;border-radius: 8px;overflow: hidden;}
 .admin-table {width: 100%;border-collapse: collapse;}
 .admin-table th {background: #f8fafc;padding: 11px 16px;font-size: 14px;font-weight: 600;color: #64748b;text-align: left;border-bottom: 1px solid #e2e8f0;}
-.admin-table td {padding: 11px 16px;font-size: 16px;color: #334155;border-bottom: 1px solid #f1f5f9;}
+.admin-table td {padding: 11px 16px;font-size: 16px;color: #334155;border-bottom: 1px solid #f1f5f9; word-break: keep-all;}
 .admin-table tr:last-child td { border-bottom: none; }
 .admin-table tbody tr:hover { background: #f8fafc; }
 .admin-table-btn-cell {display: flex;gap: 6px;}
+
 
 /* 등록/수정 폼 */
 .admin-form-card {background: #fff;border: 1px solid #e2e8f0;border-radius: 8px;padding: 24px;}
 .admin-form-group {margin-bottom: 20px;}
 .admin-form-group label {display: block;font-size: 15px;font-weight: 600;color: #475569;margin-bottom: 8px;}
 .admin-form-group input,
-.admin-form-group textarea {
+.admin-form-group textarea,
+.admin-form-group select {
   width: 100%;padding: 9px 12px;border: 1px solid #e2e8f0;border-radius: 6px;font-size: 14px;color: #1e293b;background: #fff;outline: none;transition: border-color 0.15s;}
 .admin-form-group input:focus,
 .admin-form-group textarea:focus {border-color: #3b82f6;}
 .admin-form-group textarea {height: 200px;resize: vertical;}
 .admin-form-group .admin-current-file {font-size: 13px;color: #64748b;margin-bottom: 8px;}
+.admin-radio-group {display: flex;gap: 10px;}
+.admin-radio-group label {display: flex;align-items: center;gap: 8px;margin-bottom: 0;padding: 10px 18px;border: 1px solid #e2e8f0;border-radius: 8px;cursor: pointer;font-size: 14px;color: #64748b;transition: all 0.15s ease;}
+.admin-radio-group label:hover {border-color: #cbd5e1;background: #f8fafc;}
+.admin-radio-group input {width: auto;margin: 0;accent-color: var(--primary-color);}
+.admin-radio-group label:has(input:checked) {border-color: var(--primary-color); background: #eef2ff;color:var(--primary-color); font-weight: 600;}
 .admin-file-label {display: inline-block;padding: 8px 16px;background: #f1f5f9;border: 1px solid #e2e8f0;border-radius: 6px;font-size: 13px;color: #475569;cursor: pointer;font-weight: 500;}
 .admin-file-label:hover {background: #e2e8f0;}
 .admin-form-group .popup-date-row{display: flex; gap: 10px; align-items: center;}
 .admin-checkform-group label{display: inline-block; vertical-align: middle;}
 .admin-checkform-group input[type="checkbox"] { margin-left: 10px; width: 18px; height: 18px; }
+.admin-form-hint {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #888;
+}
+
+.admin-form-hint strong {
+  color: #333;
+}
 
 /* 상태 뱃지 */
 .admin-status-badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 15px; font-weight: 600;}

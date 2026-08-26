@@ -1,4 +1,3 @@
-// ConstructionCase.jsx
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -137,8 +136,6 @@ const ITEMS = [
   },
 ];
 
-// 마우스 위치를 따라 --fill-x/--fill-y 커스텀 프로퍼티를 갱신하는 훅
-// (원본 jQuery btnAni()의 mouseenter/mousemove 좌표 계산을 대체)
 function useFillPointer() {
   const ref = useRef(null);
 

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { saveContactService } from "@/services/contact.service";
+import useTr from "@/hooks/useTr";
+import en from "@/locales/en/Contact";
 
-const TYPE_CATEGORIES = [
+const KO_TYPE_CATEGORIES = [
   {
     title: "스마트공장",
     items: [
@@ -16,7 +18,7 @@ const TYPE_CATEGORIES = [
   },
   {
     title: "Manufacturing",
-    items: ["DX/AX AI 솔루션", "통합생산 솔루션", "생산스케쥴 최적화 솔루션", 
+    items: ["DX/AX AI 솔루션", "통합생산 솔루션", "생산스케쥴 최적화 솔루션",
       "설비관리 솔루션","통합 설비관제 솔루션","운송관리 솔루션", "환경안전 솔루션",
       "창고관리 솔루션", "에너지관리 솔루션","공정자동화 제어", "X-SCADA", "X-DAS"
     ],
@@ -46,6 +48,23 @@ const TYPE_CATEGORIES = [
 ];
 
 export default function Contact() {
+  const tr = useTr(en);
+
+  const TYPE_CATEGORIES = KO_TYPE_CATEGORIES.map((cat, ci) => ({
+    title: tr(`categories.${ci}.title`, cat.title),
+    items: cat.items.map((item, ii) => {
+      if (typeof item === "string") {
+        return tr(`categories.${ci}.items.${ii}`, item);
+      }
+      return {
+        name: tr(`categories.${ci}.items.${ii}.name`, item.name),
+        subItems: item.subItems.map((sub, si) =>
+          tr(`categories.${ci}.items.${ii}.subItems.${si}`, sub),
+        ),
+      };
+    }),
+  }));
+
   const [form, setForm] = useState({
     type: "",
     company: "",
@@ -58,24 +77,21 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [done, setDone] = useState(false);
   const [privacy, setPrivacy] = useState(false);
-  const [expandedItem, setExpandedItem] = useState(null); // 펼쳐진 상위 item 이름
+  const [expandedItem, setExpandedItem] = useState(null); 
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // 하위 항목이 없는 item 클릭
   const handleTypeSelect = (category, item) => {
     setForm({ ...form, category, type: item });
     setExpandedItem(null);
   };
 
-  // 하위 항목이 있는 item(부모) 클릭 -> 펼치기/접기만
   const handleParentClick = (category, itemName) => {
     setExpandedItem((prev) => (prev === itemName ? null : itemName));
   };
 
-  // 하위 항목(leaf) 선택
   const handleSubItemSelect = (category, parentName, subItem) => {
     setForm({
       ...form,
@@ -105,7 +121,7 @@ export default function Contact() {
     const email = `${form.emailFront}@${form.emailBack}`;
     saveContactService({ ...form, email })
       .then(() => setDone(true))
-      .catch(() => alert("제출 실패. 다시 시도해주세요."));
+      .catch(() => alert(tr("errors.submitFailed", "제출 실패. 다시 시도해주세요.")));
   };
 
   if (done)
@@ -116,8 +132,8 @@ export default function Contact() {
             <p className="contact-done-icon">
               <img src="/images/sub/contact-done-icon.svg" alt="" />
             </p>
-            <h3>문의가 접수되었습니다</h3>
-            <p>빠른 시일 내에 답변 드리겠습니다.</p>
+            <h3>{tr("doneTitle", "문의가 접수되었습니다")}</h3>
+            <p>{tr("doneDesc", "빠른 시일 내에 답변 드리겠습니다.")}</p>
           </div>
         </div>
       </div>
@@ -127,14 +143,14 @@ export default function Contact() {
     <div className="contact-wrapper">
       <div className="sub-inner">
         <div className="solution-title">
-          <h3>도입문의</h3>
-          <p>문의를 남겨주시면 담당자가 빠르게 안내해 드리겠습니다</p>
+          <h3>{tr("title", "도입문의")}</h3>
+          <p>{tr("desc", "문의를 남겨주시면 담당자가 빠르게 안내해 드리겠습니다")}</p>
         </div>
         <form onSubmit={handleSubmit} noValidate>
           <div className="contact-form-card">
             {/* 문의유형 */}
             <div className="contact-form-row">
-              <label className="contact-label required">문의유형</label>
+              <label className="contact-label required">{tr("labels.type", "문의유형")}</label>
               <div className="contact-input-wrap">
                 <div
                   className={`contact-type-grid ${submitted && !form.type ? "error" : ""}`}
@@ -220,55 +236,55 @@ export default function Contact() {
                   ))}
                 </div>
                 {submitted && !form.type && (
-                  <span className="contact-error">문의유형을 선택해주세요</span>
+                  <span className="contact-error">{tr("errors.type", "문의유형을 선택해주세요")}</span>
                 )}
               </div>
             </div>
 
             {/* 회사명 */}
             <div className="contact-form-row">
-              <label className="contact-label required">회사명</label>
+              <label className="contact-label required">{tr("labels.company", "회사명")}</label>
               <div className="contact-input-wrap">
                 <input
                   name="company"
                   value={form.company}
                   onChange={handleChange}
-                  placeholder="회사명을 입력해주세요"
+                  placeholder={tr("placeholders.company", "회사명을 입력해주세요")}
                   className={submitted && !form.company ? "error" : ""}
                 />
                 {submitted && !form.company && (
-                  <span className="contact-error">회사명을 입력해주세요</span>
+                  <span className="contact-error">{tr("errors.company", "회사명을 입력해주세요")}</span>
                 )}
               </div>
             </div>
 
             {/* 이름 */}
             <div className="contact-form-row">
-              <label className="contact-label required">이름</label>
+              <label className="contact-label required">{tr("labels.name", "이름")}</label>
               <div className="contact-input-wrap">
                 <input
                   name="name"
                   value={form.name}
                   onChange={handleChange}
-                  placeholder="이름을 입력해주세요"
+                  placeholder={tr("placeholders.name", "이름을 입력해주세요")}
                   className={submitted && !form.name ? "error" : ""}
                 />
                 {submitted && !form.name && (
-                  <span className="contact-error">이름을 입력해주세요</span>
+                  <span className="contact-error">{tr("errors.name", "이름을 입력해주세요")}</span>
                 )}
               </div>
             </div>
 
             {/* 이메일 */}
             <div className="contact-form-row">
-              <label className="contact-label required">이메일</label>
+              <label className="contact-label required">{tr("labels.email", "이메일")}</label>
               <div className="contact-input-wrap">
                 <div className="contact-email-row">
                   <input
                     name="emailFront"
                     value={form.emailFront}
                     onChange={handleChange}
-                    placeholder="이메일"
+                    placeholder={tr("placeholders.emailFront", "이메일")}
                     className={submitted && !form.emailFront ? "error" : ""}
                   />
                   <span className="contact-at">@</span>
@@ -276,11 +292,11 @@ export default function Contact() {
                     name="emailBack"
                     value={form.emailBack}
                     onChange={handleChange}
-                    placeholder="도메인"
+                    placeholder={tr("placeholders.emailDomain", "도메인")}
                     className={submitted && !form.emailBack ? "error" : ""}
                   />
                   <select onChange={handleDomainSelect} defaultValue="">
-                    <option value="">직접입력</option>
+                    <option value="">{tr("domainCustom", "직접입력")}</option>
                     <option value="gmail.com">gmail.com</option>
                     <option value="naver.com">naver.com</option>
                     <option value="daum.net">daum.net</option>
@@ -288,20 +304,20 @@ export default function Contact() {
                   </select>
                 </div>
                 {submitted && (!form.emailFront || !form.emailBack) && (
-                  <span className="contact-error">이메일을 입력해주세요</span>
+                  <span className="contact-error">{tr("errors.email", "이메일을 입력해주세요")}</span>
                 )}
               </div>
             </div>
 
             {/* 전화번호 */}
             <div className="contact-form-row">
-              <label className="contact-label">전화번호</label>
+              <label className="contact-label">{tr("labels.phone", "전화번호")}</label>
               <div className="contact-input-wrap">
                 <input
                   name="phone"
                   value={form.phone}
                   onChange={handleChange}
-                  placeholder="전화번호를 입력해주세요"
+                  placeholder={tr("placeholders.phone", "전화번호를 입력해주세요")}
                   type="tel"
                 />
               </div>
@@ -309,28 +325,36 @@ export default function Contact() {
 
             {/* 문의내용 */}
             <div className="contact-form-row">
-              <label className="contact-label required">문의내용</label>
+              <label className="contact-label required">{tr("labels.content", "문의내용")}</label>
               <div className="contact-input-wrap">
                 <textarea
                   name="content"
                   value={form.content}
                   onChange={handleChange}
-                  placeholder="문의 내용을 입력해주세요"
+                  placeholder={tr("placeholders.content", "문의 내용을 입력해주세요")}
                   className={submitted && !form.content ? "error" : ""}
                 />
                 {submitted && !form.content && (
-                  <span className="contact-error">문의내용을 입력해주세요</span>
+                  <span className="contact-error">{tr("errors.content", "문의내용을 입력해주세요")}</span>
                 )}
               </div>
             </div>
 
             {/* 개인정보 동의 */}
             <div className="contact-privacy">
-              <strong>개인정보 수집 및 이용동의</strong>
+              <strong>{tr("privacyTitle", "개인정보 수집 및 이용동의")}</strong>
               <div className="contact-privacy-content">
-                수집항목: 회사명, 이름, 이메일, 전화번호, 문의내용{"\n"}
-                수집목적: 문의에 대한 답변 및 처리{"\n"}
-                보유기간: 문의 처리 완료 후 즉시 파기
+                {tr(
+                  "privacyContent",
+                  "수집항목: 회사명, 이름, 이메일, 전화번호, 문의내용\n수집목적: 문의에 대한 답변 및 처리\n보유기간: 문의 처리 완료 후 즉시 파기",
+                )
+                  .split("\n")
+                  .map((line, i, arr) => (
+                    <span key={i}>
+                      {line}
+                      {i < arr.length - 1 && <br />}
+                    </span>
+                  ))}
               </div>
               <div className="contact-privacy-check">
                 <input
@@ -345,19 +369,19 @@ export default function Contact() {
                     submitted && !privacy ? "contact-privacy-error" : ""
                   }
                 >
-                  개인정보 수집 및 이용에 동의합니다 (필수)
+                  {tr("privacyAgree", "개인정보 수집 및 이용에 동의합니다 (필수)")}
                 </label>
               </div>
               {submitted && !privacy && (
                 <span className="contact-error">
-                  개인정보 수집 및 이용에 동의해주세요
+                  {tr("errors.privacy", "개인정보 수집 및 이용에 동의해주세요")}
                 </span>
               )}
             </div>
 
             <div className="contact-submit-wrap">
               <button type="submit" className="contact-submit-btn">
-                문의하기
+                {tr("submit", "문의하기")}
               </button>
             </div>
           </div>

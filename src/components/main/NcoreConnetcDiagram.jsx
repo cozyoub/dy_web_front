@@ -3,40 +3,27 @@ import "./NcoreConnectDiagram.css";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import useTr from "@/hooks/useTr";
+import en from "@/locales/en/main/NcoreConnetcDiagram";
 gsap.registerPlugin(ScrollTrigger);
 
-const PROCESS = [
-  {
-    no: "01",
-    title: "사무업무 자동화",
-    desc: "자료를 분류하고 입력하며 보고서 작성과 반복 업무를 자동화합니다.",
-  },
-  {
-    no: "02",
-    title: "AI 품질 검사",
-    desc: "AI 비전이 제품 상태를 판정하고 품질검사를 자동화합니다.",
-  },
-  {
-    no: "03",
-    title: "이상감지·정비권고",
-    desc: "AI가 지상 징후를 감지하고 점검과 정비 시점을 권고합니다.",
-  },
-  {
-    no: "04",
-    title: "실시간 통합관제",
-    desc: "현장 데이터를 자동 수집하여 실시간으로 통합 관제합니다.",
-  },
-  {
-    no: "05",
-    title: "데이터 기반 의사결정",
-    desc: "AI가 업무 데이터를 분석하고 필요한 정보와 대응 방향을 제안합니다.",
-  },
+const KO_PROCESS = [
+  { no: "01", title: "사무업무 자동화", desc: "자료를 분류하고 입력하며 보고서 작성과 반복 업무를 자동화합니다." },
+  { no: "02", title: "AI 품질 검사", desc: "AI 비전이 제품 상태를 판정하고 품질검사를 자동화합니다." },
+  { no: "03", title: "이상감지·정비권고", desc: "AI가 지상 징후를 감지하고 점검과 정비 시점을 권고합니다." },
+  { no: "04", title: "실시간 통합관제", desc: "현장 데이터를 자동 수집하여 실시간으로 통합 관제합니다." },
+  { no: "05", title: "데이터 기반 의사결정", desc: "AI가 업무 데이터를 분석하고 필요한 정보와 대응 방향을 제안합니다." },
 ];
 
-// 원 하나씩 자동으로 active 시키는 간격 (ms)
 const AUTO_ACTIVE_INTERVAL = 2400;
 
 export default function NcoreConnectDiagram() {
+  const tr = useTr(en);
+  const PROCESS = KO_PROCESS.map((item, i) => ({
+    no: item.no,
+    title: tr(`process.${i}.title`, item.title),
+    desc: tr(`process.${i}.desc`, item.desc),
+  }));
   const rootRef = useRef(null);
 
   useEffect(() => {
@@ -89,7 +76,6 @@ export default function NcoreConnectDiagram() {
         },
       });
 
-      // 일정 시간 간격으로 원을 하나씩 자동 active
       ScrollTrigger.create({
         trigger: ".process-wrap",
         start: "top 80%",
@@ -185,12 +171,13 @@ export default function NcoreConnectDiagram() {
         <MainSectionTitle
           eyebrow={
             <>
-              사무업무부터 실시간 관제, 의사결정까지
+              {tr("eyebrow1", "사무업무부터 실시간 관제, 의사결정까지")}
               <br />
-              <b> N·Core </b>가 하나로 연결합니다
+              <b> {tr("eyebrowB", "N·Core")} </b>
+              {tr("eyebrow2", "가 하나로 연결합니다")}
             </>
           }
-          title={<>하나로 연결되는 스마트 팩토리 솔루션</>}
+          title={<>{tr("title", "하나로 연결되는 스마트 팩토리 솔루션")}</>}
         />
         <ul className="process-wrap">
           {PROCESS.map((item) => (

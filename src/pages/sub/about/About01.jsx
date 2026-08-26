@@ -22,7 +22,6 @@ export default function About01() {
       el.innerHTML = `<span>${el.textContent}</span>`;
     });
 
-    // 두번째 li 처음엔 아래 숨기기
     gsap.set(".about01-visual .tit-box li:nth-child(2) .en span", {
       y: "100%",
     });
@@ -30,7 +29,6 @@ export default function About01() {
       y: "100%",
     });
 
-    // 이미지 펼쳐지기
     gsap
       .timeline({
         scrollTrigger: {
@@ -48,7 +46,6 @@ export default function About01() {
       })
       .to(".about01-visual .img-wrap img", { opacity: 0.4 }, 0);
 
-    // 텍스트 슬라이드
     gsap
       .timeline({
         scrollTrigger: {
@@ -58,14 +55,12 @@ export default function About01() {
           scrub: 3,
         },
       })
-      // 1번 등장
       .to(".about01-visual .tit-box li:nth-child(1) .en span", {
         y: 0,
         stagger: 0.05,
         
       })
       .to(".about01-visual .tit-box li:nth-child(1) .kr span", { y: 0 })
-      // 1번 퇴장 + 2번 등장 동시에
       .to(".about01-visual .tit-box li:nth-child(1) .en span", {
         y: "-100%",
         stagger: 0.05,
@@ -83,7 +78,6 @@ export default function About01() {
       )
       .to(".about01-visual .tit-box li:nth-child(2) .kr span", { y: 0, duration: 3, }, "<");
 
-    // last scene
     gsap
       .timeline({
         scrollTrigger: {
@@ -108,7 +102,6 @@ export default function About01() {
       speed: 700,
     });
 
-    // 탭 클릭
     document.querySelectorAll(".about02 .line-tab").forEach((tab, i) => {
       tab.addEventListener("click", () => {
         document
@@ -122,7 +115,6 @@ export default function About01() {
       });
     });
 
-    // prev/next 버튼
     document
       .querySelector(".about02 .swiper-btn-item.prev")
       .addEventListener("click", () => {

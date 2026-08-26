@@ -1,12 +1,16 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import LangLink from "@/components/LangLink";
+import { useLanguage } from "@/contexts/LanguageContext";
+import useTr from "@/hooks/useTr";
+import en from "@/locales/en/main/Contact";
 import "./Contact.css";
 import MainSectionTitle from "./MainSectionTitle";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const CONTACTS = [
+const KO_CONTACTS = [
   {
     href: "/contact",
     number: "홈페이지로 문의",
@@ -16,6 +20,7 @@ const CONTACTS = [
   },
   {
     href: "tel:051-550-5060",
+    hrefEn: "tel:+82-51-550-5060",
     number: "051-550-5060",
     desc: [{ text: "대표 번호로 문의하기" }, { text: "평일 09:00 ~ 18:00" }],
     icon: "/images/main/ico_call02.svg",
@@ -33,9 +38,12 @@ const isMobileDevice = () =>
   typeof window !== "undefined" &&
   window.matchMedia("(pointer: coarse)").matches;
 
-function ContactBtn({ item, index, activeIndex, setActiveIndex }) {
+function ContactBtn({ item, index, activeIndex, setActiveIndex, number, desc, tr }) {
   const [direction, setDirection] = useState("up");
   const [copied, setCopied] = useState(false);
+  const { lang } = useLanguage();
+  const href = lang === "en" && item.hrefEn ? item.hrefEn : item.href;
+  const isInternal = href.startsWith("/");
 
   const handleMouseEnter = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -52,12 +60,11 @@ function ContactBtn({ item, index, activeIndex, setActiveIndex }) {
   };
 
   const handleClick = (e) => {
-    const isTelOrMail =
-      item.href.startsWith("tel:") || item.href.startsWith("mailto:");
+    const isTelOrMail = href.startsWith("tel:") || href.startsWith("mailto:");
 
     if (isTelOrMail && !isMobileDevice()) {
       e.preventDefault();
-      const value = item.href.replace(/^tel:|^mailto:/, "");
+      const value = href.replace(/^tel:|^mailto:/, "");
       navigator.clipboard.writeText(value).then(() => {
         setCopied(true);
         setTimeout(() => setCopied(false), 1500);
@@ -69,33 +76,56 @@ function ContactBtn({ item, index, activeIndex, setActiveIndex }) {
     ? activeIndex === null || activeIndex === index
     : activeIndex === index;
 
-  return (
-    
-      <a href={item.href}
-      onClick={handleClick}
-      className={`contact-btn-item border-gradient ${isActive ? "active" : ""} ${direction}`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+  const content = (
+    <>
       <span className="cm-fill" />
       <div className="txt-box">
-        <p className="txt01">{item.number}</p>
+        <p className="txt01">{number}</p>
         <p className="txt02">
-          {item.desc.map((d, i) => (
-            <span key={i}>{d.text}</span>
+          {desc.map((text, i) => (
+            <span key={i}>{text}</span>
           ))}
         </p>
-        {copied && <span className="copied-toast">복사되었습니다</span>}
+        {copied && <span className="copied-toast">{tr("copied", "복사되었습니다")}</span>}
       </div>
       <div className="icon-box border-gradient">
         <div className="liquid-effect" />
         <img src={item.icon} alt="" />
       </div>
+    </>
+  );
+
+  const className = `contact-btn-item border-gradient ${isActive ? "active" : ""} ${direction}`;
+
+  if (isInternal) {
+    return (
+      <LangLink
+        to={href}
+        onClick={handleClick}
+        className={className}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        {content}
+      </LangLink>
+    );
+  }
+
+  return (
+    <a
+      href={href}
+      onClick={handleClick}
+      className={className}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {content}
     </a>
   );
 }
 
 export default function Contact() {
+  const tr = useTr(en);
   const [activeIndex, setActiveIndex] = useState(null);
   const sectionRef = useRef(null);
 
@@ -147,22 +177,21 @@ export default function Contact() {
             <MainSectionTitle
                       reverse
                       className="main-design__title"
-                      eyebrow={<>사무와 현장의 모든 이야기를 들려주시면,<br/>
-단계별로 채워가는 AI 자동화 솔루션을 제안해 드립니다.</>}
-                      title={
-                        <>
-                          Contact Us
-                        </>
-                      }
+                      eyebrow={<>{tr("eyebrow1", "사무와 현장의 모든 이야기를 들려주시면,")}<br/>
+{tr("eyebrow2", "단계별로 채워가는 AI 자동화 솔루션을 제안해 드립니다.")}</>}
+                      title={<>{tr("title", "Contact Us")}</>}
                     />
-            
+
           </div>
 
           <div className="contact-btn-box">
-            {CONTACTS.map((item, idx) => (
+            {KO_CONTACTS.map((item, idx) => (
               <ContactBtn
                 key={item.number}
                 item={item}
+                number={tr(`contacts.${idx}.number`, item.number)}
+                desc={item.desc.map((d, di) => tr(`contacts.${idx}.desc.${di}`, d.text))}
+                tr={tr}
                 index={idx}
                 activeIndex={activeIndex}
                 setActiveIndex={setActiveIndex}

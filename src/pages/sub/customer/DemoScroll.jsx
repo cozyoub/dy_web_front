@@ -125,7 +125,6 @@ export default function DemoScrollEx() {
             background: "#111",
           }}
         >
-          {/* 배경 이미지들 */}
           {STEPS.map((step, i) => (
             <img
               key={step.id}
@@ -142,7 +141,6 @@ export default function DemoScrollEx() {
             />
           ))}
 
-          {/* Step 뱃지 */}
           {STEPS.map((step, i) => (
             <div
               key={step.id}
@@ -171,7 +169,6 @@ export default function DemoScrollEx() {
             </div>
           ))}
 
-          {/* SVG Mask 오버레이 */}
           <svg
             viewBox="0 0 1600 900"
             xmlns="http://www.w3.org/2000/svg"
@@ -203,7 +200,6 @@ export default function DemoScrollEx() {
             />
           </svg>
 
-          {/* Alert 말풍선 */}
           <div
             style={{
               position: "absolute",

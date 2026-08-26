@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import { getAllContactService, deleteContactService, updateContactStatusService } from '@/services/contact.service';
 
 export default function AdminContactList() {
   const [list, setList] = useState([]);
   const [selected, setSelected] = useState(null);
-//   const navigate = useNavigate();
 
   useEffect(() => {
     getAllContactService()
@@ -40,6 +38,7 @@ export default function AdminContactList() {
           <thead>
             <tr>
               <th>번호</th>
+              <th>카테고리</th>
               <th>문의유형</th>
               <th>회사명</th>
               <th>이름</th>
@@ -54,6 +53,7 @@ export default function AdminContactList() {
             {list.map(item => (
               <tr key={item.id}>
                 <td>{item.id}</td>
+                <td>{item.category}</td>
                 <td>{item.type}</td>
                 <td>{item.company}</td>
                 <td>{item.name}</td>
@@ -94,6 +94,9 @@ export default function AdminContactList() {
               <button className="admin-modal-close" onClick={() => setSelected(null)}>✕</button>
             </div>
             <div className="admin-modal-body">
+              <div className="admin-modal-row">
+                <span>카테고리</span><p>{selected.category}</p>
+              </div>
               <div className="admin-modal-row">
                 <span>문의유형</span><p>{selected.type}</p>
               </div>

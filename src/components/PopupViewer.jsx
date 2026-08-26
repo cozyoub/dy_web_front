@@ -1,24 +1,20 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { getActivePopupService } from "@/services/popup.service";
+import { BASE_API_URL } from "@/common/constants";
 import './PopupViewer.css';
 
 export default function PopupViewer() {
   const [popups, setPopups] = useState([]);
   const [closed, setClosed] = useState({});
 
-  useEffect(() => {
-    getActivePopupService().then((res) => {
-      const hidden = JSON.parse(localStorage.getItem("hiddenPopups") || "{}");
-      const today = new Date().toDateString();
-      const visible = res.data.filter((p) => hidden[p.id] !== today);
-      setPopups(visible);
-    });
-  }, []);
+  const getImageUrl = (url) => {
+    if (!url) return null;
+    return url.startsWith("http") ? url : `${BASE_API_URL}${url}`;
+  };
 
   useEffect(() => {
-    axios.get("/api/popup/active").then((res) => {
-      // 오늘 하루 안보기 팝업
+    getActivePopupService().then((res) => {
       const hidden = JSON.parse(localStorage.getItem("hiddenPopups") || "{}");
       const today = new Date().toDateString();
       const visible = res.data.filter((p) => hidden[p.id] !== today);
@@ -51,20 +47,15 @@ export default function PopupViewer() {
           >
             <div className="layer-popup-box">
               {popup.linkUrl ? (
-                // 링크 있으면
                 <a href={popup.linkUrl} target="_blank" rel="noreferrer">
                   {popup.imageUrl && (
-                    <img src={popup.imageUrl} alt={popup.title} />
+                    <img src={getImageUrl(popup.imageUrl)} alt={popup.title} />
                   )}
-                  {/* {popup.content && (
-                    <div dangerouslySetInnerHTML={{ __html: popup.content }} />
-                  )} */}
                 </a>
               ) : (
-                // 링크 없으면 이미지만 보여줌 
                 <>
                   {popup.imageUrl && (
-                    <img src={popup.imageUrl} alt={popup.title} />
+                    <img src={getImageUrl(popup.imageUrl)} alt={popup.title} />
                   )}
                   {popup.content && (
                     <div dangerouslySetInnerHTML={{ __html: popup.content }} />

@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MainSectionTitle from "./MainSectionTitle";
+import useTr from "@/hooks/useTr";
+import en from "@/locales/en/main/MainIndustry";
 import "./MainIndustry.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -187,12 +189,18 @@ const industryData = {
   },
 };
 export default function MainIndustry() {
+  const tr = useTr(en);
   const industryKeys = Object.keys(industryData);
   const [activeTab, setActiveTab] = useState(industryKeys[0]);
   const rootRef = useRef(null);
   const gridRef = useRef(null);
 
-  const activeCards = industryData[activeTab].cards;
+  const label = (key) => tr(`industries.${key}.label`, industryData[key].label);
+  const activeCards = industryData[activeTab].cards.map((card, i) => ({
+    ...card,
+    title: tr(`industries.${activeTab}.cards.${i}.title`, card.title),
+    desc: tr(`industries.${activeTab}.cards.${i}.desc`, card.desc),
+  }));
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -267,11 +275,11 @@ export default function MainIndustry() {
   return (
     <div className="main-industry" ref={rootRef}>
       <MainSectionTitle
-        eyebrow="산업별 구축범위"
+        eyebrow={tr("eyebrow", "산업별 구축범위")}
         title={
           <>
-            어떤 산업이든, 제조 현장의 <br />
-            <b>특성에 맞는</b> 구축 경험
+            {tr("title1", "어떤 산업이든, 제조 현장의")} <br />
+            <b>{tr("titleB", "특성에 맞는")}</b> {tr("title2", "구축 경험")}
           </>
         }
       />
@@ -284,7 +292,7 @@ export default function MainIndustry() {
             className={`main-industry__tab${activeTab === key ? " is-active" : ""}`}
             onClick={() => setActiveTab(key)}
           >
-            {industryData[key].label}
+            {label(key)}
           </button>
         ))}
       </div>
@@ -303,7 +311,7 @@ export default function MainIndustry() {
             </div>
           ))
         ) : (
-          <p className="main-industry__empty">준비 중입니다.</p>
+          <p className="main-industry__empty">{tr("empty", "준비 중입니다.")}</p>
         )}
       </div>
     </div>

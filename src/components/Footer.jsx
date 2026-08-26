@@ -1,70 +1,93 @@
+import LangLink from "@/components/LangLink";
+import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { FAMILY_SITES } from "@/common/familySites";
 import "./Footer.css";
+
 export default function Footer() {
+  const { t } = useTranslation();
+  const { lang } = useLanguage();
+  const { company, footer } = t;
+  const familySiteName = (site) => (lang === "en" ? (site.nameEn ?? site.name) : site.name);
+
+  const handleFamilySiteChange = (e) => {
+    const url = e.target.value;
+    if (url && url !== "#") window.open(url, "_blank", "noopener,noreferrer");
+    e.target.value = "";
+  };
+
   return (
     <>
       <footer className="footer">
         <div className="inner">
           <div className="ft-top">
             <h1>
-              <img src="/images/common/footer_logo.svg" />
+              <img src="/images/common/footer_logo.svg" alt={company.name} />
             </h1>
-            <ul>
-              <li>
-                <a href="/about/about02">오시는길</a>
-              </li>
-              <li>
-                <a href="/sitemap">사이트맵</a>
-              </li>
-            </ul>
+            <div className="ft-top-right">
+              <ul>
+                <li>
+                  <LangLink to="/about/about02">{footer.directions}</LangLink>
+                </li>
+                <li>
+                  <LangLink to="/sitemap">{footer.sitemap}</LangLink>
+                </li>
+              </ul>
+              <select
+                className="family-site-select"
+                defaultValue=""
+                onChange={handleFamilySiteChange}
+                aria-label={footer.familySite}
+              >
+                <option value="" disabled>
+                  {footer.familySite}
+                </option>
+                {FAMILY_SITES.map((site) => (
+                  <option key={site.name} value={site.url}>
+                    {familySiteName(site)}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
           <div className="ft-bottom">
             <ul>
               <li>
                 <ul>
                   <li>
-                    <span>상호명</span>
-                    <p>동연에스엔티</p>
+                    <span>{footer.labelCompany}</span>
+                    <p>{company.name}</p>
                   </li>
                   <li>
-                    <span>대표자</span>
-                    <p>김문섭</p>
+                    <span>{footer.labelCeo}</span>
+                    <p>{company.ceo}</p>
                   </li>
                   <li>
-                    <span>사업자 등록번호</span>
-                    <p>104-81-99352</p>
+                    <span>{footer.labelBizNo}</span>
+                    <p>{company.bizNo}</p>
                   </li>
                 </ul>
               </li>
               <li>
                 <ul>
                   <li>
-                    <span>전화번호</span>
-                    <p>051-550-5060</p>
+                    <span>{footer.labelTel}</span>
+                    <p>{company.tel}</p>
                   </li>
                   <li>
-                    <span>대표메일</span>
-                    <p>dysnt@dkpia.com</p>
+                    <span>{footer.labelEmail}</span>
+                    <p>{company.email}</p>
                   </li>
                 </ul>
               </li>
               <li>
                 <ul>
-                  <li>
-                    <span>본사(지사)</span>
-                    <p>부산광역시 동래구 온천장로 107번길 10</p>
-                  </li>
-                  <li>
-                    <span>지사(서울)</span>
-                    <p>서울특별시 중구 다동길 46</p>
-                  </li>
-                  <li>
-                    <span>지사(포항)</span>
-                    <p>경상북도 포항시 남구 대송로 62</p>
-                  </li>
-                  <li>
-                    <span>지사(창원)</span>
-                    <p>경상남도 창원시 의창구 차룡로 48번길 44</p>
-                  </li>
+                  {footer.offices.map((office) => (
+                    <li key={office.label}>
+                      <span>{office.label}</span>
+                      <p>{office.address}</p>
+                    </li>
+                  ))}
                 </ul>
               </li>
             </ul>

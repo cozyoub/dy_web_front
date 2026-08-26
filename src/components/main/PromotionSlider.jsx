@@ -1,47 +1,56 @@
-// PromotionSlider.jsx
 import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import VideoModal from "@/components/main/VideoModal";
 import MainSectionTitle from "./MainSectionTitle";
+import useTr from "@/hooks/useTr";
+import en from "@/locales/en/main/PromotionSlider";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./PromotionSlider.css";
 
-const SLIDES = [
+const KO_SLIDES = [
   {
     thumb: "/images/main/promotion_thumb01.jpg",
     title: "유니티 엔진 기반 DT",
-    desc: (
-      <>
-        Unity 엔진 기반의 Digital Twin 기술로 현실 공간을
-        <br />
-        3D 환경에 구현하여 설비와 공정을 직관적으로 모니터링합니다.
-      </>
-    ),
+    d1: "Unity 엔진 기반의 Digital Twin 기술로 현실 공간을",
+    d2: "3D 환경에 구현하여 설비와 공정을 직관적으로 모니터링합니다.",
     videoUrl: "/images/main/promotion01.mp4",
   },
   {
     thumb: "/images/main/promotion_thumb02.jpg",
     title: "동연에스엔티 TMS",
-    desc: (
-      <>
-        운송 관리의 모든 과정을 하나의 시스템으로.
-        <br />
-        TMS의 핵심 기능과 활용 사례를 영상으로 확인해 보세요.
-      </>
-    ),
+    d1: "운송 관리의 모든 과정을 하나의 시스템으로.",
+    d2: "TMS의 핵심 기능과 활용 사례를 영상으로 확인해 보세요.",
     videoUrl: "/images/main/promotion02.mp4",
   },
   {
     thumb: "/images/main/promotion_thumb03.jpg",
     title: "동국산업 설비 점검 데모",
-    desc: <>동국산업 설비 점검 데모</>,
+    d1: "동국산업 설비 점검 데모",
+    d2: "",
     videoUrl: "/images/main/promotion03.mp4",
   },
 ];
 
 export default function PromotionSlider() {
+  const tr = useTr(en);
+  const SLIDES = KO_SLIDES.map((s, i) => ({
+    thumb: s.thumb,
+    videoUrl: s.videoUrl,
+    title: tr(`slides.${i}.title`, s.title),
+    desc: (
+      <>
+        {tr(`slides.${i}.d1`, s.d1)}
+        {s.d2 && (
+          <>
+            <br />
+            {tr(`slides.${i}.d2`, s.d2)}
+          </>
+        )}
+      </>
+    ),
+  }));
   const [activeVideo, setActiveVideo] = useState(null);
   const [progress, setProgress] = useState((1 / SLIDES.length) * 100);
   const prevRef = useRef(null);
@@ -53,7 +62,6 @@ export default function PromotionSlider() {
     setProgress(((current + 1) / SLIDES.length) * 100);
   };
 
-  // 썸네일 이미지 로드가 끝난 뒤 실제 크기 기준으로 센터 위치 재계산
   const handleThumbLoad = () => {
     swiperRef.current?.update();
     swiperRef.current?.slideToLoop(swiperRef.current.realIndex, 0);
@@ -64,12 +72,13 @@ export default function PromotionSlider() {
       <section className="promotion-slider">
         <div className="inner">
           <MainSectionTitle
-            eyebrow="데모영상"
+            eyebrow={tr("eyebrow", "데모영상")}
             title={
               <>
-                AI가 <b>실제 현장</b>을 어떻게
+                {tr("title1", "AI가")} <b>{tr("titleB", "실제 현장")}</b>
+                {tr("titleAfter", "을 어떻게")}
                 <br />
-                연결하는지 확인하세요
+                {tr("title2", "연결하는지 확인하세요")}
               </>
             }
           />
@@ -103,7 +112,6 @@ export default function PromotionSlider() {
               }}
               onSlideChange={handleSlideChange}
               onInit={handleSlideChange}
-              // 브레이크포인트가 바뀌면서 슬라이드 폭이 달라질 때도 다시 센터 정렬
               onBreakpoint={(swiper) => {
                 swiper.update();
                 swiper.slideToLoop(swiper.realIndex, 0);

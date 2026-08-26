@@ -44,7 +44,6 @@ export default function HorizonGlow() {
       });
 
       tl
-        // 1. 사무 카드 등장
         .to(".hz-office-card", {
           opacity: 1,
           y: 0,
@@ -63,7 +62,6 @@ export default function HorizonGlow() {
         .add("swap1")
         .to(".hz-group--office", { autoAlpha: 0, duration: 0.3 }, "swap1")
         .to(".hz-group--field", { autoAlpha: 1, duration: 0.3 }, "swap1+=0.05")
-        // 2. 현장 카드 등장
         .to(
           ".hz-field-card",
           {
@@ -85,8 +83,6 @@ export default function HorizonGlow() {
         })
         .add("swap2")
         .to(".hz-group--field", { autoAlpha: 0, duration: 0.3 }, "swap2")
-
-        // 3. 원(circle-group)이 화면 전체로 펼쳐짐
         .to(
           ".circle-group",
           { clipPath: MID, duration: 0.3, ease: "power2.in" },
@@ -112,7 +108,6 @@ export default function HorizonGlow() {
   return (
     <section className="horizon-wrap" ref={rootRef}>
       <div className="horizon-stage">
-        {/* 참고 SVG 그대로, 색상만 사이트 팔레트로 교체 */}
         <div className="circle-group">
           <svg
             width="100%"

@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { MENU_LIST } from "@/common/menuData";
 import { Link, useLocation } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/hooks/useTranslation";
+import LangLink from "@/components/LangLink";
 import "./TopNavi.css";
 
 const SUB_PATHS = ["/about", "/customer", "/sitemap"];
@@ -11,9 +14,13 @@ const TopNavi = ({ revealed = true }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMobileIdx, setOpenMobileIdx] = useState(null);
   const [openMobileSubIdx, setOpenMobileSubIdx] = useState(null);
+  const [langOpen, setLangOpen] = useState(false);
 
   const lastScrollY = useRef(0);
   const { pathname } = useLocation();
+  const { lang, getPathForLang } = useLanguage();
+  const { t, menuTitle } = useTranslation();
+  const langRef = useRef(null);
 
   const [isTop, setIsTop] = useState(() => window.scrollY === 0);
   const [hidden, setHidden] = useState(false);
@@ -48,6 +55,18 @@ const TopNavi = ({ revealed = true }) => {
     };
   }, [mobileOpen]);
 
+  // 언어 드롭다운 바깥 클릭 시 닫기
+  useEffect(() => {
+    if (!langOpen) return;
+    const handleClickOutside = (e) => {
+      if (langRef.current && !langRef.current.contains(e.target)) {
+        setLangOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [langOpen]);
+
   return (
     <>
       <nav
@@ -58,11 +77,15 @@ const TopNavi = ({ revealed = true }) => {
         }}
       >
         <div className="gnb-container inner">
-          <Link to="/" className="logo">
-            <img src="/images/common/logo.svg" alt="로고" className="th-dark" />
+          <Link to={lang === "en" ? "/en" : "/"} className="logo">
+            <img
+              src="/images/common/logo.svg"
+              alt={t.ui.logoAlt}
+              className="th-dark"
+            />
             <img
               src="/images/common/logo_wh.svg"
-              alt="로고"
+              alt={t.ui.logoAlt}
               className="th-light"
             />
           </Link>
@@ -77,7 +100,9 @@ const TopNavi = ({ revealed = true }) => {
                   setActiveSubMenu(null);
                 }}
               >
-                <Link to={menu.defaultPath ?? menu.path}>{menu.title}</Link>
+                <LangLink to={menu.defaultPath ?? menu.path}>
+                  {menuTitle(menu)}
+                </LangLink>
 
                 {menu.subMenu?.length > 0 && (
                   <div
@@ -100,14 +125,14 @@ const TopNavi = ({ revealed = true }) => {
                               target="_blank"
                               rel="noopener noreferrer"
                             >
-                              {sub.title}
+                              {menuTitle(sub)}
                               <span className="arrow">›</span>
                             </a>
                           ) : (
-                            <Link to={sub.defaultPath ?? sub.path}>
-                              {sub.title}
+                            <LangLink to={sub.defaultPath ?? sub.path}>
+                              {menuTitle(sub)}
                               <span className="arrow">›</span>
-                            </Link>
+                            </LangLink>
                           )}
                           {sub.subMenu?.length > 0 && (
                             <div
@@ -116,7 +141,9 @@ const TopNavi = ({ revealed = true }) => {
                               <ul className="sub-sub-menu">
                                 {sub.subMenu.map((subSub, ssIdx) => (
                                   <li key={ssIdx}>
-                                    <Link to={subSub.path}>{subSub.title}</Link>
+                                    <LangLink to={subSub.path}>
+                                      {menuTitle(subSub)}
+                                    </LangLink>
                                   </li>
                                 ))}
                               </ul>
@@ -132,30 +159,66 @@ const TopNavi = ({ revealed = true }) => {
           </ul>
 
           <div className="gnb-utils">
-            <Link to="/sitemap" className="sitemap-btn">
+            <div className="lang-switch" ref={langRef}>
+              <button
+                className="lang-switch-btn"
+                onClick={() => setLangOpen((prev) => !prev)}
+                aria-haspopup="true"
+                aria-expanded={langOpen}
+              >
+                <img
+                  src="/images/common/lang_dark.svg"
+                  alt={t.ui.selectLanguage}
+                  className="th-dark"
+                />
+                <img
+                  src="/images/common/lang_white.svg"
+                  alt={t.ui.selectLanguage}
+                  className="th-light"
+                />
+                {/* <span className="lang-switch-label">{lang.toUpperCase()}</span> */}
+              </button>
+
+              {langOpen && (
+                <ul className="lang-dropdown">
+                  <li className={lang === "ko" ? "active" : ""}>
+                    <Link to={getPathForLang("ko")} onClick={() => setLangOpen(false)}>
+                      KO
+                    </Link>
+                  </li>
+                  <li className={lang === "en" ? "active" : ""}>
+                    <Link to={getPathForLang("en")} onClick={() => setLangOpen(false)}>
+                      EN
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </div>
+
+            <LangLink to="/sitemap" className="sitemap-btn">
               <img
                 src="/images/common/menu_dark.svg"
-                alt="사이트맵 바로가기"
+                alt={t.ui.goToSitemap}
                 className="th-dark"
               />
               <img
                 src="/images/common/menu_white.svg"
-                alt="사이트맵 바로가기"
+                alt={t.ui.goToSitemap}
                 className="th-light"
               />
-            </Link>
+            </LangLink>
             <button
               className="open-menu-btn"
               onClick={() => setMobileOpen(true)}
             >
               <img
                 src="/images/common/menu_dark.svg"
-                alt="메뉴 열기"
+                alt={t.ui.openMenu}
                 className="th-dark"
               />
               <img
                 src="/images/common//menu_white.svg"
-                alt="메뉴 열기"
+                alt={t.ui.openMenu}
                 className="th-light"
               />
             </button>
@@ -166,8 +229,8 @@ const TopNavi = ({ revealed = true }) => {
       {/* 모바일 메뉴 .. */}
       <div className={`mobile-menu ${mobileOpen ? "open" : ""}`}>
         <div className="mobile-menu-header">
-          <Link to="/" className="logo" onClick={() => setMobileOpen(false)}>
-            <img src="/images/common/logo.svg" alt="로고" />
+          <Link to={lang === "en" ? "/en" : "/"} className="logo" onClick={() => setMobileOpen(false)}>
+            <img src="/images/common/logo.svg" alt={t.ui.logoAlt} />
           </Link>
           <button
             className="mobile-close-btn"
@@ -176,6 +239,26 @@ const TopNavi = ({ revealed = true }) => {
             ✕
           </button>
         </div>
+
+        {/* 모바일 언어 전환 */}
+        <div className="mobile-lang-switch">
+          <Link
+            to={getPathForLang("ko")}
+            className={lang === "ko" ? "active" : ""}
+            onClick={() => setMobileOpen(false)}
+          >
+            KO
+          </Link>
+          <span className="divider">/</span>
+          <Link
+            to={getPathForLang("en")}
+            className={lang === "en" ? "active" : ""}
+            onClick={() => setMobileOpen(false)}
+          >
+            EN
+          </Link>
+        </div>
+
         <ul className="mobile-menu-list">
           {MENU_LIST.map((menu, idx) => (
             <li key={idx} className="mobile-menu-item">
@@ -187,17 +270,17 @@ const TopNavi = ({ revealed = true }) => {
                     setOpenMobileSubIdx(null);
                   }}
                 >
-                  {menu.title}
+                  {menuTitle(menu)}
                   <span>{openMobileIdx === idx ? "-" : "+"}</span>
                 </button>
               ) : (
-                <Link
+                <LangLink
                   to={menu.defaultPath ?? menu.path}
                   className="mobile-parent"
                   onClick={() => setMobileOpen(false)}
                 >
-                  {menu.title}
-                </Link>
+                  {menuTitle(menu)}
+                </LangLink>
               )}
 
               {openMobileIdx === idx && menu.subMenu?.length > 0 && (
@@ -211,7 +294,7 @@ const TopNavi = ({ revealed = true }) => {
                           rel="noopener noreferrer"
                           onClick={() => setMobileOpen(false)}
                         >
-                          {sub.title}
+                          {menuTitle(sub)}
                         </a>
                       ) : sub.subMenu?.length > 0 ? (
                         <button
@@ -224,18 +307,18 @@ const TopNavi = ({ revealed = true }) => {
                             )
                           }
                         >
-                          {sub.title}
+                          {menuTitle(sub)}
                           <span>
                             {openMobileSubIdx === `${idx}-${sIdx}` ? "-" : "+"}
                           </span>
                         </button>
                       ) : (
-                        <Link
+                        <LangLink
                           to={sub.path}
                           onClick={() => setMobileOpen(false)}
                         >
-                          {sub.title}
-                        </Link>
+                          {menuTitle(sub)}
+                        </LangLink>
                       )}
 
                       {sub.subMenu?.length > 0 &&
@@ -243,12 +326,12 @@ const TopNavi = ({ revealed = true }) => {
                           <ul className="mobile-sub-sub-list">
                             {sub.subMenu.map((subSub, ssIdx) => (
                               <li key={ssIdx}>
-                                <Link
+                                <LangLink
                                   to={subSub.path}
                                   onClick={() => setMobileOpen(false)}
                                 >
-                                  {subSub.title}
-                                </Link>
+                                  {menuTitle(subSub)}
+                                </LangLink>
                               </li>
                             ))}
                           </ul>

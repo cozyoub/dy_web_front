@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
-import "./MouseFollowBlur.css"; // 아래 CSS 그대로
+import "./MouseFollowBlur.css"; 
 
 export default function MouseFollowBlur() {
   const blurRef = useRef(null);
@@ -9,7 +9,6 @@ export default function MouseFollowBlur() {
     const el = blurRef.current;
     if (!el) return;
 
-    // 모바일(800px 이하)에선 아예 동작 안 시킴 - 불필요한 리스너 방지
     if (window.matchMedia("(max-width: 800px)").matches) return;
 
     const xTo = gsap.quickTo(el, "x", {

@@ -1,0 +1,52 @@
+export default {
+  intro: {
+    label: "ICMS",
+    d1: "The optimal internal accounting control solution for establishing internal control procedures",
+    d2: "and efficiently responding to revisions of the External Audit Act",
+  },
+  features: {
+    title: "Internal control, made more systematic and smarter",
+    items: [
+      "See work status and overall evaluation results for every control item at a glance on the dashboard",
+      "Enterprise-wide RCM registration and management",
+      "RCM registration by control type, deficiency management, design records, and linked approval",
+      "Operating evaluation at both the enterprise and process level",
+    ],
+  },
+  mokup: {
+    title1: "Key features that support",
+    title2: "efficient internal accounting management",
+    items: [
+      { title: "Dashboard", desc: "Check work status and overall evaluation results for every control item from the dashboard." },
+      { title: "Design (RCM) Registration - ELC", desc: "Provides enterprise-level RCM registration." },
+    ],
+  },
+  diagram: {
+    title: "A closer look at the architecture",
+    userLabel: "Users",
+    userItems: ["CEO", "Audit Committee Member", "Internal Accounting Manager", "Internal Accounting Team Member", "Control-Performing Team Lead", "Control-Performing Team Member", "Administrator"],
+    mainLabel: "Internal Control Management System (ICMS)",
+    myWorkLabel: "My Work",
+    myWorkItems: ["Progress Dashboard", "Delegation Management"],
+    prepLabel: "Evaluation Prep",
+    prepItems: ["Control Period Management", "Schedule Management", "Scoping", "Risk Assessment Management"],
+    designLabel: "Design Evaluation",
+    designItems: ["Enterprise Level (ELC)", "Design RCM Management", "Process Level (PLC)"],
+    operateLabel: "Operating Evaluation",
+    operateItems: ["Enterprise Level (ELC)", "RCM Sample Confirmation", "Evaluation Exception Management", "Evaluation Approval Management", "Evaluation Deficiency Management"],
+    reportLabel: "Evaluation Reporting",
+    reportItems: ["Report Registration", "Operating Status Report", "Evaluation Report"],
+    standardLabel: "Standards",
+    standardItems: ["Code Management", "Menu Management", "Permission Management", "Payment Management"],
+    gwLabel: "Groupware (G/W)",
+    gwModule: "e-Approval",
+    nworksLabel: "N·Works Messenger",
+    erpLabel: "ERP",
+    erpModules: ["Sales", "Procurement", "MES", "HR/Payroll", "Accounting", "Costing"],
+    ifLabel: "I/F",
+  },
+  itgc: {
+    title: "Information Technology General Controls (ITGC)",
+    desc: "Supports the IT general controls (ITGC) needed to meet internal accounting control objectives, in response to the 2018 revision of the External Audit Act.",
+  },
+};

@@ -1,4 +1,3 @@
-// components/common/VideoModal.jsx
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import "./VideoModal.css";

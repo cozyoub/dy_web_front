@@ -5,8 +5,9 @@ import "./SubLayout.css";
 import "@/assets/css/sub.css";
 import SubNavi from "@/components/SubNavi";
 import { MENU_LIST } from "@/common/menuData";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/hooks/useTranslation";
 
-// 각 1뎁스별 대표 비주얼 이미지
 const DEPTH1_VISUAL = {
   "/business":    "/images/sub/visual-about.jpg",
   "/service":  "/images/sub/visual-service.jpg",
@@ -17,10 +18,9 @@ const DEPTH1_VISUAL = {
   "/customer": "/images/sub/visual-customer.jpg",
 };
 
-// 특수 페이지 따로 관리
 const SPECIAL_PAGES = {
-  "/sitemap": { title: "사이트맵", subtitle: "Sitemap", bg: "/images/sub/visual-service.jpg" },
-  "/contact": { title: "Contact", subtitle: "Contact Us", bg: "/images/sub/visual-service.jpg" },
+  "/sitemap": { title: "사이트맵", titleEn: "Sitemap", subtitle: "Sitemap", bg: "/images/sub/visual-service.jpg" },
+  "/contact": { title: "Contact", titleEn: "Contact", subtitle: "Contact Us", bg: "/images/sub/visual-service.jpg" },
 };
 
 const findMenuTitle = (menus, pathname) => {
@@ -38,16 +38,24 @@ const findMenuTitle = (menus, pathname) => {
 
 export default function SubLayout() {
   const { pathname } = useLocation();
+  const { lang } = useLanguage();
+  const { t } = useTranslation();
   const bgRef       = useRef(null);
   const subtitleRef = useRef(null);
   const titleRef    = useRef(null);
   const naviRef     = useRef(null);
 
-  const isSpecial = SPECIAL_PAGES[pathname];
-  const depth1    = MENU_LIST.find(m => pathname.startsWith(m.path));
+  // /en 접두어를 떼어낸 경로로 메뉴 데이터와 매칭한다 (메뉴 경로엔 /en이 없으므로).
+  const matchPath = lang === "en" ? pathname.replace(/^\/en/, "") || "/" : pathname;
+
+  const isSpecial = SPECIAL_PAGES[matchPath];
+  const depth1    = MENU_LIST.find(m => matchPath.startsWith(m.path));
+
+  const rawTitle = findMenuTitle(MENU_LIST, matchPath);
+  const translatedTitle = rawTitle && (t.menu?.[matchPath] ?? rawTitle);
 
   const subtitle = isSpecial?.subtitle ?? depth1?.title ?? "";
-  const title    = isSpecial?.title ?? findMenuTitle(MENU_LIST, pathname) ?? subtitle;
+  const title    = (isSpecial && (lang === "en" ? isSpecial.titleEn : isSpecial.title)) ?? translatedTitle ?? subtitle;
   const bg       = isSpecial?.bg ?? DEPTH1_VISUAL[depth1?.path] ?? "";
 
   useEffect(() => {

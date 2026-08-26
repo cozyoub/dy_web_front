@@ -2,39 +2,24 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FileText, Share2, Eye, Wrench, ClipboardList } from "lucide-react";
+import useTr from "@/hooks/useTr";
+import en from "@/locales/en/main/MainProblem";
 import "./MainProblem.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const officeItems = [
-  {
-    icon: FileText,
-    title: ["반복되는 문서 작업,", "쌓여만 가는 인적 비용"],
-    desc: "자료 분류와 입력, 보고서 작성까지 매번 사람 손을 거치는 반복 업무는 결국 인건비 낭비와 휴먼 에러로 이어집니다.",
-  },
-  {
-    icon: Share2,
-    title: ["흩어진 업무 정보,", "늦어지는 의사결정"],
-    desc: "부서마다 파편화된 데이터 속에서 필요한 정보를 찾느라 정작 중요한 순간의 의사결정이 지연됩니다.",
-  },
+const officeIcons = [FileText, Share2];
+const fieldIcons = [Eye, Wrench, ClipboardList];
+
+const koOffice = [
+  { title: ["반복되는 문서 작업,", "쌓여만 가는 인적 비용"], desc: "자료 분류와 입력, 보고서 작성까지 매번 사람 손을 거치는 반복 업무는 결국 인건비 낭비와 휴먼 에러로 이어집니다." },
+  { title: ["흩어진 업무 정보,", "늦어지는 의사결정"], desc: "부서마다 파편화된 데이터 속에서 필요한 정보를 찾느라 정작 중요한 순간의 의사결정이 지연됩니다." },
 ];
 
-const fieldItems = [
-  {
-    icon: Eye,
-    title: ["사람 눈에 의존한 품질검사,", "놓치는 불량"],
-    desc: "육안·수작업 검사는 검사자의 컨디션과 숙련도에 따라 편차가 크고, 미세한 불량을 놓칠 위험이 항상 존재합니다.",
-  },
-  {
-    icon: Wrench,
-    title: ["설비 이상 징후 포착 실패,", "사후 대응의 함정"],
-    desc: "이상 징후를 사전에 감지하지 못한 채 고장이 난 후에야 대응하다 보니, 골든타임을 놓치고 정비 비용은 커집니다.",
-  },
-  {
-    icon: ClipboardList,
-    title: ["수기로 기록되는 생산 현황,", "실시간 파악 불가"],
-    desc: "현장 데이터가 종이와 개인 기록에 의존하다 보니 실시간 통합 관제가 불가능하고, 문제 발생 시 대응이 항상 한 박자 늦습니다.",
-  },
+const koField = [
+  { title: ["사람 눈에 의존한 품질검사,", "놓치는 불량"], desc: "육안·수작업 검사는 검사자의 컨디션과 숙련도에 따라 편차가 크고, 미세한 불량을 놓칠 위험이 항상 존재합니다." },
+  { title: ["설비 이상 징후 포착 실패,", "사후 대응의 함정"], desc: "이상 징후를 사전에 감지하지 못한 채 고장이 난 후에야 대응하다 보니, 골든타임을 놓치고 정비 비용은 커집니다." },
+  { title: ["수기로 기록되는 생산 현황,", "실시간 파악 불가"], desc: "현장 데이터가 종이와 개인 기록에 의존하다 보니 실시간 통합 관제가 불가능하고, 문제 발생 시 대응이 항상 한 박자 늦습니다." },
 ];
 
 function ProblemCard({ icon: Icon, title, desc }) {
@@ -57,6 +42,7 @@ function ProblemCard({ icon: Icon, title, desc }) {
 }
 
 export default function MainProblem() {
+  const tr = useTr(en);
   const sectionRef = useRef(null);
   const eyebrowRef = useRef(null);
   const headlineRef = useRef(null);
@@ -151,23 +137,35 @@ export default function MainProblem() {
     return () => ctx.revert();
   }, []);
 
+  const officeItems = koOffice.map((item, i) => ({
+    icon: officeIcons[i],
+    title: [tr(`office.${i}.title1`, item.title[0]), tr(`office.${i}.title2`, item.title[1])],
+    desc: tr(`office.${i}.desc`, item.desc),
+  }));
+
+  const fieldItems = koField.map((item, i) => ({
+    icon: fieldIcons[i],
+    title: [tr(`field.${i}.title1`, item.title[0]), tr(`field.${i}.title2`, item.title[1])],
+    desc: tr(`field.${i}.desc`, item.desc),
+  }));
+
   return (
     <section className="problem-section" ref={sectionRef}>
       <div className="problem-section__head">
         <p className="problem-section__eyebrow" ref={eyebrowRef}>
-          사무실엔 쌓여만 가는 문서, 현장엔 감으로 하는 품질검사...
+          {tr("eyebrow", "사무실엔 쌓여만 가는 문서, 현장엔 감으로 하는 품질검사...")}
         </p>
         <h2 className="problem-section__headline" ref={headlineRef}>
-          이대로 괜찮을까요?
+          {tr("headline", "이대로 괜찮을까요?")}
         </h2>
         <p className="problem-section__body" ref={bodyRef}>
-          설비 이상을 사전에 감지하지 못해 발생하는 비계획 정지 비용은 연간 수억 원*에 달하지만
+          {tr("body1", "설비 이상을 사전에 감지하지 못해 발생하는 비계획 정지 비용은 연간 수억 원*에 달하지만")}
           <br />
-          많은 제조 기업은 아직도 반복 업무를 수작업으로, 설비 상태를 사후 대응으로 관리하고 있습니다.
+          {tr("body2", "많은 제조 기업은 아직도 반복 업무를 수작업으로, 설비 상태를 사후 대응으로 관리하고 있습니다.")}
           <br />
-          그러나 데이터 없이 이뤄지는 사무·현장 관리는 의사결정 지연과 품질 리스크를 초래하며
+          {tr("body3", "그러나 데이터 없이 이뤄지는 사무·현장 관리는 의사결정 지연과 품질 리스크를 초래하며")}
           <br />
-          기업에 보이지 않는 손실을 만듭니다.
+          {tr("body4", "기업에 보이지 않는 손실을 만듭니다.")}
         </p>
       </div>
 
@@ -176,7 +174,7 @@ export default function MainProblem() {
         ref={(el) => (groupRefs.current[0] = el)}
       >
         <div className="problem-section__label">
-          <span>사무</span>
+          <span>{tr("officeLabel", "사무")}</span>
         </div>
         <div className="problem-section__grid problem-section__grid--office">
           {officeItems.map((item, i) => (
@@ -190,7 +188,7 @@ export default function MainProblem() {
         ref={(el) => (groupRefs.current[1] = el)}
       >
         <div className="problem-section__label">
-          <span>현장</span>
+          <span>{tr("fieldLabel", "현장")}</span>
         </div>
         <div className="problem-section__grid problem-section__grid--field">
           {fieldItems.map((item, i) => (

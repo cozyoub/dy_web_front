@@ -1,0 +1,58 @@
+export default {
+  features: {
+    title1: "Customization tailored to each company's workflow",
+    title2: "for the optimal collaboration environment",
+    items: [
+      "Customization and additional development tailored to each company's workflow",
+      "Improved efficiency through flexible integration with legacy systems",
+      "Fast, reliable maintenance from a dedicated support team",
+      "A workflow environment spanning both PC and mobile",
+    ],
+  },
+  visual: {
+    title1: "Build a more efficient workflow",
+    title2: "with N·Core Groupware.",
+  },
+  table: {
+    title: "N·Core Groupware Specifications",
+    headers: ["", "N·Core G/W", "Specialized G/W Vendors", "Notes"],
+    rows: [
+      ["G/W features (specialization)", "B+ or higher", "A+ / A / B+ / B / C+", "Varies by product/service"],
+      ["Customization & additional development", "Supported", "Limited support (costly)", ""],
+      ["System integration", "Supported", "Limited support (costly)", ""],
+      ["Maintenance", "Dedicated support staff", "Limited support (costly)", ""],
+    ],
+  },
+  diagram: {
+    title: "User Workflow Diagram",
+    mailTitle: "Mail",
+    mailItems: ["HTML5 webmail", "SMTP/IMAP4/POP3"],
+    approvalTitle: "e-Approval",
+    approvalItems: ["Form library", "Concurrent positions (multi-entity support)"],
+    edmsTitle: "EDMS",
+    edmsItems: ["e-Approval documents, company policies, manuals, and more"],
+    boardTitle: "Bulletin Board",
+    boardItems: ["In-house notices (alerts, personnel announcements)", "Meeting materials, internal/external information"],
+    linkedTitle: "Linked Business Services",
+    linkedItems: ["SSO across business systems"],
+    scheduleTitle: "Schedule / Resource Management",
+    scheduleItems: ["Meeting room booking: attendance requests (mail/SMS/shared schedule)", "Vehicle booking · visitor management (registration/approval)", "Integrated schedule (meetings, business trips, leave)"],
+    extraTitle: "Additional Features",
+    extraItems: ["Web fax", "SMS/MMS", "Web disk"],
+    approvalInfo1: "Approval info",
+    approvalInfo2: "Send info",
+    approvalChannel1: "e-Approval",
+    approvalChannel2: "SMS / FAX",
+    erpBox: "ERP/MES (linked)",
+    notifyLabel: "Notification (URL delivery)",
+    notifyTop: "Approval alerts, notification API",
+    messengerBox: "MAIL, N·Works (Messenger)",
+  },
+  mokup: {
+    title: "Core features for faster communication",
+    items: [
+      { title: "Channels by Task", desc: "Organize channels by task for systematic collaboration and efficient information sharing." },
+      { title: "Threaded Conversations", desc: "Threaded conversations keep discussions organized by topic and preserve workflow context." },
+    ],
+  },
+};

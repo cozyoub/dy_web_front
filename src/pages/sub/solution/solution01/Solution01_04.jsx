@@ -2,59 +2,78 @@ import SolutionFlow from "@/components/sub/SoluitionFlow";
 import SolutionFetures from "@/components/sub/SolutionFetures";
 import SolutionIntro from "@/components/sub/SolutionIntro";
 import SolutionMokup from "@/components/sub/SolutionMokup";
+import SolutionNoticeCards from "@/components/sub/SolutionNoticeCards";
+import useTr from "@/hooks/useTr";
+import en from "@/locales/en/solution01_04";
 
-const pmsFeatures = [
-  "구매요구에서 입고까지 전단계에 걸친 첨부파일 연계를 통한 업무 효율성 향상",
-  "다양한 형태의 통계 데이터 표시를 통한 실적관리 편의성 제공",
-];
-
-const pmsMokups = [
-  {
-    title: "하나의 시스템에서 모든 구매 업무 정리",
-    imgSrc: "/images/sub/pms_flow02.svg",
-  },
-  {
-    title: "표준화된 구매업무 프로세스",
-    imgSrc: "/images/sub/pms_flow03.svg",
-  },
-];
 export default function Solution01_04() {
+  const tr = useTr(en);
+
+  const pmsFeatures = [
+    tr("features.items.0", "구매요구에서 입고까지 전단계에 걸친 첨부파일 연계를 통한 업무 효율성 향상"),
+    tr("features.items.1", "다양한 형태의 통계 데이터 표시를 통한 실적관리 편의성 제공"),
+  ];
+
+  const pmsMokups = [
+    { title: tr("mokup.items.0.title", "하나의 시스템에서 모든 구매 업무 정리"), imgSrc: "/images/sub/pms_flow02.svg" },
+    { title: tr("mokup.items.1.title", "표준화된 구매업무 프로세스"), imgSrc: "/images/sub/pms_flow03.svg" },
+  ];
+
+  const fiveRightCircles = ["공급자\nSupplier", "품질\nQuality", "가격\nPrice", "수량\nQuantity", "시간\nTime"].map(
+    (item, i) => tr(`right.circles.${i}`, item),
+  );
+
+  const fiveRightBullets = [
+    "자재/서비스의 원활한 공급",
+    "경쟁력 있는 구매 : 시장분석 및 개선 능력",
+    "현명한 구매 : Total cost of ownership, 기업 전략",
+    "재고비용의 최소화 추구 : 노후, 단종, 멸실",
+    "협력적인 공급선의 발굴 : 공급선의 제품 구매 → 공급선의 능력 구매로의 경향",
+    "공급선과 협력관계 구축 및 유지",
+    "사내 타부서와의 협력활동 활성화",
+    "구매/공급 기능의 proactive and efficient 수행",
+  ].map((item, i) => tr(`right.bullets.${i}`, item));
+
   return (
     <>
       <div className="solution-wrap">
         <SolutionIntro
           imageSrc="/images/sub/solution01-04.jpg"
-          label="PMS"
+          label={tr("intro.label", "PMS")}
           description={
             <>
-              전사 표준 구매 프로세스를 기반으로 구매 업무의 투명성과 공정성을
-              확보하고, <br />
-              전자입찰·전자계약 연계를 통해 업무 효율성과 편의성을 향상시키는
-              솔루션
+              {tr(
+                "intro.d1",
+                "전사 표준 구매 프로세스를 기반으로 구매 업무의 투명성과 공정성을 확보하고,",
+              )}{" "}
+              <br />
+              {tr(
+                "intro.d2",
+                "전자입찰·전자계약 연계를 통해 업무 효율성과 편의성을 향상시키는 솔루션",
+              )}
             </>
           }
         />
-       
-        <SolutionFetures items={pmsFeatures} title={<>효율적인 구매 관리의 시작</>}/>
-         <SolutionFlow
-        title="사용자 업무 흐름도" imgSrc="/images/sub/pms_flow.svg"/>
+
+        <SolutionFetures
+          items={pmsFeatures}
+          title={<>{tr("features.title", "효율적인 구매 관리의 시작")}</>}
+        />
+        <SolutionFlow
+          title={tr("flow.title", "사용자 업무 흐름도")}
+          imgSrc="/images/sub/pms_flow.svg"
+        />
 
         <div className="pms-right-wrap">
           <div className="sub-inner">
             <h1>
-              업무 프로세스 및 개발 기술력을 <br />
-              갖춘 안정적인 시스템 공급
+              {tr("right.h1", "업무 프로세스 및 개발 기술력을")} <br />
+              {tr("right.h2", "갖춘 안정적인 시스템 공급")}
             </h1>
             <div className="pms-5right">
-              <h2>구매관리 목적 5 Right</h2>
+              <h2>{tr("right.fiveRightTitle", "구매관리 목적 5 Right")}</h2>
               <ul className="pms-5right-circles">
-                {[
-                  "공급자\nSupplier",
-                  "품질\nQuality",
-                  "가격\nPrice",
-                  "수량\nQuantity",
-                  "시간\nTime",
-                ].map((item, i) => (
+                {fiveRightCircles.map((item, i) => (
                   <li key={i}>
                     {item.split("\n").map((t, j) => (
                       <span key={j}>{t}</span>
@@ -63,39 +82,31 @@ export default function Solution01_04() {
                 ))}
               </ul>
               <ul className="pms-5right-bullets">
-                {[
-                  "자재/서비스의 원활한 공급",
-                  "경쟁력 있는 구매 : 시장분석 및 개선 능력",
-                  "현명한 구매 : Total cost of ownership, 기업 전략",
-                  "재고비용의 최소화 추구 : 노후, 단종, 멸실",
-                  "협력적인 공급선의 발굴 : 공급선의 제품 구매 → 공급선의 능력 구매로의 경향",
-                  "공급선과 협력관계 구축 및 유지",
-                  "사내 타부서와의 협력활동 활성화",
-                  "구매/공급 기능의 proactive and efficient 수행",
-                ].map((item, i) => (
+                {fiveRightBullets.map((item, i) => (
                   <li key={i}>{item}</li>
                 ))}
               </ul>
             </div>
           </div>
         </div>
-         <div className="solution-mokup-wrapper">
-                  <div className="sub-inner">
-                    <div className="solution-title">
-                      <h3>N·Core PMS 주요기능</h3>
-                    </div>
-                    <div className="solution-mokup-items">
-                      {pmsMokups.map(({ title, desc, imgSrc }, index) => (
-                        <SolutionMokup
-                          key={index}
-                          title={title}
-                          desc={desc}
-                          imgSrc={imgSrc}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
+        <div className="solution-mokup-wrapper">
+          <div className="sub-inner">
+            <div className="solution-title">
+              <h3>{tr("mokup.title", "N·Core PMS 주요기능")}</h3>
+            </div>
+            <div className="solution-mokup-items">
+              {pmsMokups.map(({ title, desc, imgSrc }, index) => (
+                <SolutionMokup
+                  key={index}
+                  title={title}
+                  desc={desc}
+                  imgSrc={imgSrc}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+        <SolutionNoticeCards />
       </div>
     </>
   );

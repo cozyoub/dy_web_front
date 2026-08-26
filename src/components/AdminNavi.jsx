@@ -26,7 +26,7 @@ const AdminTopNavi = () => {
   return (
     <nav className="admin-sidebar">
       <Link to="/admin" className="admin-logo">
-        <img src="/images/logo.png" alt="" />
+        <img src="/images/common/logo.svg" alt="" />
         <span>관리자 페이지</span>
       </Link>
 

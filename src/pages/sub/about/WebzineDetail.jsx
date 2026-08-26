@@ -6,6 +6,16 @@ import { BASE_API_URL } from "@/common/constants";
 import { Viewer } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 
+const fixImagePaths = (html) => {
+  if (!html) return html;
+  return html.replace(/src="\/uploads\//g, `src="${BASE_API_URL}/uploads/`);
+};
+
+const getDetailLabel = (item) => {
+  if (item.category === "초대장") return item.title;
+  return item.publishedDate ? formatIssueLabel(item.publishedDate) : item.title;
+};
+
 export default function WebzineDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -25,25 +35,28 @@ export default function WebzineDetail() {
         {item.category && (
           <span className="board-detail-category">{item.category}</span>
         )}
-        {item.publishedDate && <h2>{formatIssueLabel(item.publishedDate)}</h2>}
+        <h2>{getDetailLabel(item)}</h2>
         <div className="board-detail-meta">
           <span>{item.publishedDate ?? item.createdAt?.slice(0, 10)}</span>
           <span>조회 {item.count}</span>
         </div>
       </div>
 
-      {/* {item.sfile && (
-        <div className="board-detail-thumb">
-          <img
-            src={`${BASE_API_URL}/uploads/webzine/${item.sfile}`}
-            alt={item.title}
-          />
-        </div>
-      )} */}
-
       <div className="board-detail-content">
-        <Viewer initialValue={item.content} />
+        <Viewer initialValue={fixImagePaths(item.content)} />
       </div>
+
+      {item.ofile && (
+        <div className="board-detail-file">
+          첨부파일:
+          
+            <a href={`${BASE_API_URL}/uploads/webzine/${item.sfile}`}
+            download={item.ofile}
+          >
+            {item.ofile}
+          </a>
+        </div>
+      )}
 
       <div className="board-detail-footer">
         <button

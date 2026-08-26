@@ -4,6 +4,7 @@ import {
 } from "@/services/popup.service";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { BASE_API_URL } from "@/common/constants";
 
 export default function AdminPopupEdit() {
   const { id } = useParams();
@@ -20,6 +21,13 @@ export default function AdminPopupEdit() {
   });
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
+
+  const getPreviewUrl = (url) => {
+    if (!url) return null;
+    return url.startsWith("http") || url.startsWith("blob:")
+      ? url
+      : `${BASE_API_URL}${url}`;
+  };
 
   useEffect(() => {
     getPopupByIdService(id).then((res) => {
@@ -148,7 +156,7 @@ export default function AdminPopupEdit() {
             <div className="admin-form-group">
               <label>미리보기</label>
               <div className="preview-box">
-                <img src={preview} alt="미리보기" className="popup-preview-img" />
+                <img src={getPreviewUrl(preview)} alt="미리보기" className="popup-preview-img" />
               </div>
             </div>
           )}

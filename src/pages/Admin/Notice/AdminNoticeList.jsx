@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllNotiService, deleteNotiService } from "@/services/noti.service";
+import { getSolutionLabel } from "@/common/solutionMap";
 
 export default function AdminNoticeList() {
   const [list, setList] = useState([]);
@@ -8,7 +9,10 @@ export default function AdminNoticeList() {
 
   useEffect(() => {
     getAllNotiService()
-      .then((res) => setList(res.data))
+      .then((res) => {
+        const sorted = [...res.data].sort((a, b) => b.id - a.id);
+        setList(sorted);
+      })
       .catch(() => alert("목록 불러오기 실패"));
   }, []);
 
@@ -35,7 +39,10 @@ export default function AdminNoticeList() {
           <thead>
             <tr>
               <th>번호</th>
+              <th>구분</th>
               <th>제목</th>
+              <th>솔루션</th>
+              <th>카테고리</th>
               <th>작성자</th>
               <th>조회수</th>
               <th>등록일</th>
@@ -46,7 +53,16 @@ export default function AdminNoticeList() {
             {list.map((item) => (
               <tr key={item.id}>
                 <td>{item.id}</td>
+                <td>{item.postType === "NOTICE" ? "공지사항" : "솔루션"}</td>
                 <td>{item.title}</td>
+                <td>
+                  {item.postType === "SOLUTION"
+                    ? getSolutionLabel(item.category)
+                    : "-"}
+                </td>
+                <td>
+                  {item.postType === "SOLUTION" ? item.categoryType : "-"}
+                </td>
                 <td>{item.writer}</td>
                 <td>{item.count}</td>
                 <td>{item.createdAt?.slice(0, 10)}</td>

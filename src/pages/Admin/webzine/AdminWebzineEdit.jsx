@@ -8,6 +8,8 @@ import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import axiosInstance from "@/common/axiosInstance";
 import { WEBZINE_CATEGORIES } from "@/common/webzineCategories";
+import { BASE_API_URL } from "@/common/constants";
+import { formatIssueLabel } from "@/common/webzineUtils";
 
 export default function AdminWebzineEdit() {
   const { id } = useParams();
@@ -21,7 +23,14 @@ export default function AdminWebzineEdit() {
   });
   const [file, setFile] = useState(null);
   const [currentFile, setCurrentFile] = useState(null);
+  const [thumbPreview, setThumbPreview] = useState(null);
+  const [thumbUploading, setThumbUploading] = useState(false);
   const editorRef = useRef(null);
+
+  const getPreviewUrl = (url) => {
+    if (!url) return null;
+    return url.startsWith("http") ? url : `${BASE_API_URL}${url}`;
+  };
 
   useEffect(() => {
     getWebzineByIdService(id)
@@ -56,6 +65,29 @@ export default function AdminWebzineEdit() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handleThumbUpload = async (e) => {
+    const selected = e.target.files[0];
+    if (!selected) return;
+
+    setThumbPreview(URL.createObjectURL(selected));
+
+    setThumbUploading(true);
+    const formData = new FormData();
+    formData.append("image", selected);
+
+    try {
+      const res = await axiosInstance.post("/api/webzine/image", formData);
+      const fullUrl = res.data.url.startsWith("http")
+        ? res.data.url
+        : `${BASE_API_URL}${res.data.url}`;
+      setForm((prev) => ({ ...prev, imageUrl: fullUrl }));
+    } catch {
+      alert("썸네일 업로드 실패");
+    } finally {
+      setThumbUploading(false);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const content = editorRef.current.getInstance().getHTML();
@@ -80,16 +112,6 @@ export default function AdminWebzineEdit() {
       <form onSubmit={handleSubmit}>
         <div className="admin-form-card">
           <div className="admin-form-group">
-            <label>제목</label>
-            <input
-              name="title"
-              value={form.title}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="admin-form-group">
             <label>카테고리</label>
             <select
               name="category"
@@ -107,6 +129,32 @@ export default function AdminWebzineEdit() {
           </div>
 
           <div className="admin-form-group">
+            <label>제목</label>
+            <input
+              name="title"
+              value={form.title}
+              onChange={handleChange}
+              placeholder={
+                form.category === "초대장"
+                  ? "카드/상세에 표시될 제목을 입력하세요"
+                  : "관리용 제목 (카드에는 발행일 기준 이슈명이 표시됩니다)"
+              }
+              required
+            />
+            {form.category && form.category !== "초대장" && (
+              <p className="admin-form-hint">
+                ※ '{form.category}' 카테고리는 카드에 제목 대신{" "}
+                <strong>
+                  {form.publishedDate
+                    ? formatIssueLabel(form.publishedDate)
+                    : "발행일 기준 이슈명"}
+                </strong>
+                이 표시됩니다.
+              </p>
+            )}
+          </div>
+
+          <div className="admin-form-group">
             <label>발행일</label>
             <input
               type="date"
@@ -114,6 +162,12 @@ export default function AdminWebzineEdit() {
               value={form.publishedDate}
               onChange={handleChange}
             />
+            {form.publishedDate && (
+              <p className="admin-form-hint">
+                카드에 표시될 타이틀명:{" "}
+                <strong>{formatIssueLabel(form.publishedDate)}</strong>
+              </p>
+            )}
           </div>
 
           <div className="admin-form-group">
@@ -133,10 +187,46 @@ export default function AdminWebzineEdit() {
                     "/api/webzine/image",
                     formData,
                   );
-                  callback(res.data.url, "이미지");
+                  const fullUrl = res.data.url.startsWith("http")
+                    ? res.data.url
+                    : `${BASE_API_URL}${res.data.url}`;
+                  callback(fullUrl, "이미지");
                 },
               }}
             />
+          </div>
+
+          <div className="admin-form-group">
+            <label>썸네일 이미지</label>
+            <label className="admin-file-label">
+              {thumbUploading ? "업로드 중..." : "파일 선택"}
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={handleThumbUpload}
+                disabled={thumbUploading}
+              />
+            </label>
+            <input
+              name="imageUrl"
+              value={form.imageUrl}
+              onChange={handleChange}
+              placeholder="또는 URL 직접 입력 (https://example.com/image.jpg)"
+              style={{ marginTop: 8 }}
+            />
+            {(thumbPreview || form.imageUrl) && (
+              <img
+                src={thumbPreview || getPreviewUrl(form.imageUrl)}
+                alt="썸네일 미리보기"
+                style={{
+                  marginTop: 8,
+                  maxHeight: 160,
+                  borderRadius: 6,
+                  objectFit: "cover",
+                }}
+              />
+            )}
           </div>
 
           <div className="admin-form-group">
@@ -152,28 +242,6 @@ export default function AdminWebzineEdit() {
                 onChange={(e) => setFile(e.target.files[0])}
               />
             </label>
-          </div>
-
-          <div className="admin-form-group">
-            <label>이미지 URL</label>
-            <input
-              name="imageUrl"
-              value={form.imageUrl}
-              onChange={handleChange}
-              placeholder="https://example.com/image.jpg"
-            />
-            {form.imageUrl && (
-              <img
-                src={form.imageUrl}
-                alt="미리보기"
-                style={{
-                  marginTop: 8,
-                  maxHeight: 160,
-                  borderRadius: 6,
-                  objectFit: "cover",
-                }}
-              />
-            )}
           </div>
 
           <div className="admin-btn-row">

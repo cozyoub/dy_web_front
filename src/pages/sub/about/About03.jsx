@@ -8,6 +8,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import SubTitle from "@/components/sub/common/SubTitle";
 import BusinessAreaTab from "@/components/sub/BusinessAreaTab";
+import useTr from "@/hooks/useTr";
+import en from "@/locales/en/About03";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -207,9 +209,24 @@ const AWARDS = [
 ];
 
 export default function About03() {
+  const tr = useTr(en);
   const wrapRef = useRef(null);
   const lineRef = useRef(null);
   const yearNumRef = useRef(null);
+
+  const historyData = HISTORY_DATA.map((group) => ({
+    year: group.year,
+    events: group.events.map((ev, i) => ({
+      ...ev,
+      title: tr(`events.${group.year}.${i}.title`, ev.title),
+      tags: ev.tags?.map((tag, ti) => tr(`events.${group.year}.${i}.tags.${ti}`, tag)),
+    })),
+  }));
+
+  const awards = AWARDS.map((a, i) => ({
+    ...a,
+    title: tr(`awards.${i}`, a.title),
+  }));
 
   useLayoutEffect(() => {
     const wrap = wrapRef.current;
@@ -497,17 +514,17 @@ export default function About03() {
             <div className="history-body">
               <div className="hist-yr-track">
                 <div className="history-head">
-                  <SubTitle title="연혁" desc="History" />
+                  <SubTitle title={tr("historyTitle", "연혁")} desc="History" />
                 </div>
                 <div className="hist-yr-num" ref={yearNumRef}>
-                  {HISTORY_DATA[0].year}
+                  {historyData[0].year}
                 </div>
               </div>
               <div className="hist-tl">
                 <div className="hist-line-wrap">
                   <div className="hist-line" ref={lineRef}></div>
                 </div>
-                {HISTORY_DATA.map((group) => (
+                {historyData.map((group) => (
                   <div
                     className="hist-yg"
                     key={group.year}
@@ -548,11 +565,11 @@ export default function About03() {
 
         <div className="award-wrap">
           <div className="sub-inner">
-            <SubTitle title="인증 및 수상" desc="Certificates & Awards" />
+            <SubTitle title={tr("awardsTitle", "인증 및 수상")} desc="Certificates & Awards" />
           </div>
           <div className="award-slider swiper">
             <div className="swiper-wrapper">
-              {AWARDS.map((award, i) => (
+              {awards.map((award, i) => (
                 <div className="swiper-slide" key={i}>
                   <div className="award-item">
                     <div className="award-placeholder">

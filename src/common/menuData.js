@@ -299,7 +299,7 @@ export const MENU_LIST = [{
         title: "Customer Center",
         externalLink: "https://support.dkpia.com/login"
       }, {
-        title: "공지사항",
+        title: "동연에스엔티 소식",
         path: "/about/notice",
         component: NoticeList
       },

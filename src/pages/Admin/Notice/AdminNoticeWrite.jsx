@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { saveNotiService } from "@/services/noti.service";
-import axiosInstance from '@/common/axiosInstance';
+import axiosInstance from "@/common/axiosInstance";
+import { solutionOptions } from "@/common/solutionMap";
+import { BASE_API_URL } from "@/common/constants";
 
 export default function AdminNoticeWrite() {
   const navigate = useNavigate();
@@ -12,24 +14,67 @@ export default function AdminNoticeWrite() {
     title: "",
     writer: "관리자",
     imageUrl: "",
+    postType: "NOTICE",
+    category: "",
+    categoryType: "",
   });
   const [file, setFile] = useState(null);
+  const [thumbFile, setThumbFile] = useState(null);
   const [thumbPreview, setThumbPreview] = useState(null);
+  const [thumbUploading, setThumbUploading] = useState(false);
+
+  const getPreviewUrl = (url) => {
+    if (!url) return null;
+    return url.startsWith("http") ? url : `${BASE_API_URL}${url}`;
+  };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleThumbChange = (e) => {
+  const handlePostTypeChange = (type) => {
+    setForm((prev) => ({
+      ...prev,
+      postType: type,
+      category: type === "NOTICE" ? "" : prev.category,
+      categoryType: type === "NOTICE" ? "" : prev.categoryType || "구축사례",
+    }));
+  };
+
+  const handleThumbUpload = async (e) => {
     const selected = e.target.files[0];
-    setFile(selected);
-    if (selected) {
-      setThumbPreview(URL.createObjectURL(selected));
+    if (!selected) return;
+
+    setThumbFile(selected);
+    setThumbPreview(URL.createObjectURL(selected));
+
+    setThumbUploading(true);
+    const formData = new FormData();
+    formData.append("image", selected);
+
+    try {
+      const res = await axiosInstance.post("/api/noti/image", formData);
+      const fullUrl = res.data.url.startsWith("http")
+        ? res.data.url
+        : `${BASE_API_URL}${res.data.url}`;
+      setForm((prev) => ({ ...prev, imageUrl: fullUrl }));
+    } catch {
+      alert("썸네일 업로드 실패");
+    } finally {
+      setThumbUploading(false);
     }
+  };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (form.postType === "SOLUTION" && !form.category) {
+      alert("솔루션을 선택해주세요.");
+      return;
+    }
     const content = editorRef.current.getInstance().getHTML();
     saveNotiService({ ...form, content }, file)
       .then(() => {
@@ -46,7 +91,69 @@ export default function AdminNoticeWrite() {
       </div>
       <form onSubmit={handleSubmit}>
         <div className="admin-form-card">
-          {/* 제목 */}
+          <div className="admin-form-group">
+            <label>구분</label>
+            <div className="admin-radio-group">
+              <label>
+                <input
+                  type="radio"
+                  checked={form.postType === "NOTICE"}
+                  onChange={() => handlePostTypeChange("NOTICE")}
+                />
+                공지사항
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  checked={form.postType === "SOLUTION"}
+                  onChange={() => handlePostTypeChange("SOLUTION")}
+                />
+                솔루션
+              </label>
+            </div>
+          </div>
+
+          {form.postType === "SOLUTION" && (
+            <>
+              <div className="admin-form-group">
+                <label>솔루션 선택</label>
+                <select
+                  name="category"
+                  value={form.category}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">선택하세요</option>
+                  {["Management", "Manufacturing", "DX/AX"].map((group) => (
+                    <optgroup key={group} label={group}>
+                      {solutionOptions
+                        .filter((opt) => opt.group === group)
+                        .map((opt) => (
+                          <option key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </option>
+                        ))}
+                    </optgroup>
+                  ))}
+                </select>
+              </div>
+
+              <div className="admin-form-group">
+                <label>글 종류</label>
+                <select
+                  name="categoryType"
+                  value={form.categoryType}
+                  onChange={handleChange}
+                >
+                  <option value="구축사례">구축사례</option>
+                  <option value="보도자료">보도자료</option>
+                  <option value="솔루션소식">솔루션소식</option>
+                  <option value="FAQ">FAQ</option>
+                </select>
+              </div>
+            </>
+          )}
+
           <div className="admin-form-group">
             <label>제목</label>
             <input
@@ -72,26 +179,38 @@ export default function AdminNoticeWrite() {
                   const res = await axiosInstance.post(
                     "/api/noti/image",
                     formData,
-                  ); 
-                  callback(res.data.url, "이미지");
+                  );
+                  const fullUrl = res.data.url.startsWith("http")
+                    ? res.data.url
+                    : `${BASE_API_URL}${res.data.url}`;
+                  callback(fullUrl, "이미지");
                 },
               }}
             />
           </div>
+
           <div className="admin-form-group">
             <label>썸네일 이미지</label>
             <label className="admin-file-label">
-              {file ? file.name : "파일 선택"}
+              {thumbUploading ? "업로드 중..." : "파일 선택"}
               <input
                 type="file"
                 accept="image/*"
                 style={{ display: "none" }}
-                onChange={handleThumbChange}
+                onChange={handleThumbUpload}
+                disabled={thumbUploading}
               />
             </label>
-            {thumbPreview && (
+            <input
+              name="imageUrl"
+              value={form.imageUrl}
+              onChange={handleChange}
+              placeholder="또는 URL 직접 입력 (https://example.com/image.jpg)"
+              style={{ marginTop: 8 }}
+            />
+            {(thumbPreview || form.imageUrl) && (
               <img
-                src={thumbPreview}
+                src={thumbPreview || getPreviewUrl(form.imageUrl)}
                 alt="썸네일 미리보기"
                 style={{
                   marginTop: 8,
@@ -102,26 +221,17 @@ export default function AdminNoticeWrite() {
               />
             )}
           </div>
+
           <div className="admin-form-group">
-            <label>이미지 URL</label>
-            <input
-              name="imageUrl"
-              value={form.imageUrl}
-              onChange={handleChange}
-              placeholder="https://example.com/image.jpg"
-            />
-            {form.imageUrl && (
-              <img
-                src={form.imageUrl}
-                alt="미리보기"
-                style={{
-                  marginTop: 8,
-                  maxHeight: 160,
-                  borderRadius: 6,
-                  objectFit: "cover",
-                }}
+            <label>첨부파일</label>
+            <label className="admin-file-label">
+              {file ? file.name : "파일 선택"}
+              <input
+                type="file"
+                style={{ display: "none" }}
+                onChange={handleFileChange}
               />
-            )}
+            </label>
           </div>
 
           <div className="admin-btn-row">

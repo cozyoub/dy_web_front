@@ -3,10 +3,13 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SubTitle from "@/components/sub/common/SubTitle";
 import BusinessAreaTab from "@/components/sub/BusinessAreaTab";
+import useTr from "@/hooks/useTr";
+import en from "@/locales/en/Business01";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Business01() {
+  const tr = useTr(en);
   const rootRef = useRef(null);
 
   useLayoutEffect(() => {
@@ -153,8 +156,8 @@ export default function Business01() {
           <div className="about-intro-tit">
             <div className="sub-inner">
               <SubTitle
-                desc="디지털 기술로 더 나은 산업 현장을 만듭니다."
-                title="동연에스엔티 소개"
+                desc={tr("intro.desc", "디지털 기술로 더 나은 산업 현장을 만듭니다.")}
+                title={tr("intro.title", "동연에스엔티 소개")}
               />
             </div>
           </div>
@@ -165,15 +168,11 @@ export default function Business01() {
             <ul className="tit-box">
               <li>
                 <p className="en">DIGITAL</p>
-                <p className="kr">
-                  디지털 기술로 더 나은 산업 현장을 만듭니다.
-                </p>
+                <p className="kr">{tr("visual.kr1", "디지털 기술로 더 나은 산업 현장을 만듭니다.")}</p>
               </li>
               <li>
                 <p className="en">SMART</p>
-                <p className="kr">
-                  효율적인 업무 운영과 지속 가능한 성장을 제공합니다.
-                </p>
+                <p className="kr">{tr("visual.kr2", "효율적인 업무 운영과 지속 가능한 성장을 제공합니다.")}</p>
               </li>
             </ul>
           </div>
@@ -193,37 +192,33 @@ export default function Business01() {
         </div>
         <div className="overview-wrap">
           <div className="sub-inner">
-            <SubTitle title="동연에스엔티 개요" desc="Overview" />
+            <SubTitle title={tr("overview.title", "동연에스엔티 개요")} desc="Overview" />
             <div className="about-ov">
               <ul>
-                <li>
-                  <span>회사명</span>
-                  <div className="img">
-                    <img src="/images/sub/icon_cp01.png" alt="" />
-                  </div>
-                  <p>(주)동연에스엔티</p>
-                </li>
-                <li>
-                  <span>설립일</span>
-                  <div className="img">
-                    <img src="/images/sub/icon_cp02.png" alt="" />
-                  </div>
-                  <p>2006년 2월 14일</p>
-                </li>
-                <li>
-                  <span>대표이사</span>
-                  <div className="img">
-                    <img src="/images/sub/icon_cp03.png" alt="" />
-                  </div>
-                  <p>김문섭</p>
-                </li>
-                <li>
-                  <span>본사소재</span>
-                  <div className="img">
-                    <img src="/images/sub/icon_cp04.png" alt="" />
-                  </div>
-                  <p>부산광역시 동래구 온천장로 107번길 10 혜원빌딩 7층</p>
-                </li>
+                {["icon_cp01.png", "icon_cp02.png", "icon_cp03.png", "icon_cp04.png"].map((icon, i) => (
+                  <li key={icon}>
+                    <span>
+                      {tr(
+                        `overview.labels.${i}`,
+                        ["회사명", "설립일", "대표이사", "본사소재"][i],
+                      )}
+                    </span>
+                    <div className="img">
+                      <img src={`/images/sub/${icon}`} alt="" />
+                    </div>
+                    <p>
+                      {tr(
+                        `overview.values.${i}`,
+                        [
+                          "(주)동연에스엔티",
+                          "2006년 2월 14일",
+                          "김문섭",
+                          "부산광역시 동래구 온천장로 107번길 10 혜원빌딩 7층",
+                        ][i],
+                      )}
+                    </p>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -237,28 +232,28 @@ export default function Business01() {
               <img src="/images/sub/dk_logo.svg" className="logo" />
               <div className="con">
                 <div className="intro">
-                  <p>동국산업 계열사 솔루션 개발 및 운영</p>
+                  <p>{tr("dk.title", "동국산업 계열사 솔루션 개발 및 운영")}</p>
                   <span>
-                    동국산업 계열사의 다양한 비즈니스 환경에 맞춘 IT 솔루션을
-                    개발·운영하며,
+                    {tr(
+                      "dk.desc1",
+                      "동국산업 계열사의 다양한 비즈니스 환경에 맞춘 IT 솔루션을 개발·운영하며,",
+                    )}
                     <br />
-                    안정적인 시스템과 지속적인 기술 지원을 제공합니다.
+                    {tr("dk.desc2", "안정적인 시스템과 지속적인 기술 지원을 제공합니다.")}
                   </span>
 
                   <ul className="dk-list ">
-                    <li className="border-gradient">
-                      계열사 S/W 개발 자급률 95%{" "}
-                    </li>
-                    <li className="border-gradient">
-                      철강업 ERP (냉연특수강, 칼라인쇄강판, 파이프)
-                    </li>
-                    <li className="border-gradient">
-                      건설(플랜트) / 신재생에너지 / 풍력타워 제조 ERP
-                    </li>
-                    <li className="border-gradient">내화물 / 세라믹 ERP</li>
-                    <li className="border-gradient">
-                      해외공장, 국∙내외 고객사 SCM 구축
-                    </li>
+                    {[
+                      "계열사 S/W 개발 자급률 95%",
+                      "철강업 ERP (냉연특수강, 칼라인쇄강판, 파이프)",
+                      "건설(플랜트) / 신재생에너지 / 풍력타워 제조 ERP",
+                      "내화물 / 세라믹 ERP",
+                      "해외공장, 국∙내외 고객사 SCM 구축",
+                    ].map((item, i) => (
+                      <li className="border-gradient" key={item}>
+                        {tr(`dk.list.${i}`, item)}
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -268,7 +263,7 @@ export default function Business01() {
         <div className="business-area-wrap">
           <div className="sub-inner">
             <SubTitle
-              title="통합 IT솔루션 개발 및 서비스 사업"
+              title={tr("business.title", "통합 IT솔루션 개발 및 서비스 사업")}
               desc="Business Area"
             />
             <BusinessAreaTab />

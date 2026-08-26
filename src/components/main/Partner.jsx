@@ -1,6 +1,8 @@
 import MainSectionTitle from "./MainSectionTitle";
 import "./Partner.css";
 import MainTitle from "./backup/MainTitle";
+import useTr from "@/hooks/useTr";
+import en from "@/locales/en/main/Partner";
 
 const partners = [
   "partner01.png",
@@ -37,6 +39,7 @@ function IconTrack() {
 }
 
 export default function Partner() {
+  const tr = useTr(en);
   return (
     <div className="Partner-wrap partner">
       <div className="inner">
@@ -44,14 +47,12 @@ export default function Partner() {
                 className="main-process__title"
                 title={
                   <>
-                    <b>다양한 환경</b>에서 함께하며 <br/>검증된 역량을 보유합니다
+                    <b>{tr("titleB", "다양한 환경")}</b>
+                    {tr("title1", "에서 함께하며")} <br/>
+                    {tr("title2", "검증된 역량을 보유합니다")}
                   </>
                 }
-                eyebrow={
-                  <>
-                    든든한 협력 파트너사들
-                  </>
-                }
+                eyebrow={<>{tr("eyebrow", "든든한 협력 파트너사들")}</>}
               />
       </div>
 

@@ -1,11 +1,19 @@
-// MainProcess.jsx
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MainSectionTitle from "./MainSectionTitle";
+import useTr from "@/hooks/useTr";
+import en from "@/locales/en/main/MainProcess";
 import "./MainProcess.css";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const KO_STEPS_TEXT = [
+  { title: "현장진단", desc: "사무·현장의 자동화 대상을 정의하고, 설비와 업무의 우선순위를 설정합니다." },
+  { title: "통합 설계", desc: "현장 데이터를 수집·구조화하여 설비·생산·경영 시스템과 AI를 연결합니다." },
+  { title: "구축 및 검증", desc: "최적의 시스템과 현장 환경을 구축하고, 실제 운영자와 함께 안정성을 검증합니다." },
+  { title: "운영 및 개선", desc: "AI 분석과 개선 권고를 제공하며, 자율 운영 수준으로 지속적으로 고도화합니다." },
+];
 
 const steps = [
   {
@@ -199,7 +207,7 @@ const steps = [
         <path
           d="M325 272C325 272.356 324.81 272.686 324.502 272.865L200.502 344.865C200.192 345.045 199.808 345.045 199.498 344.865L75.498 272.865C75.1898 272.686 75 272.356 75 272V128C75 127.644 75.1898 127.314 75.498 127.135L199.498 55.1348L199.617 55.0762C199.903 54.9578 200.23 54.9772 200.502 55.1348L324.502 127.135C324.81 127.314 325 127.644 325 128V272Z"
           stroke="white"
-          strstrokeOpacity="1"
+          strokeOpacity="1"
           strokeWidth="5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -284,7 +292,7 @@ const steps = [
           <path
             d="M200 336C275.111 336 336 275.111 336 200C336 124.889 275.111 64 200 64C124.889 64 64 124.889 64 200C64 275.111 124.889 336 200 336Z"
             stroke="white"
-            strstrokeOpacity="1"
+            strokeOpacity="1"
             strokeWidth="5"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -292,7 +300,7 @@ const steps = [
           <path
             d="M200 252C275.111 252 336 228.719 336 200C336 171.281 275.111 148 200 148C124.889 148 64 171.281 64 200C64 228.719 124.889 252 200 252Z"
             stroke="white"
-            strstrokeOpacity="1"
+            strokeOpacity="1"
             strokeWidth="5"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -300,7 +308,7 @@ const steps = [
           <path
             d="M200 336C228.719 336 252 275.111 252 200C252 124.889 228.719 64 200 64C171.281 64 148 124.889 148 200C148 275.111 171.281 336 200 336Z"
             stroke="white"
-            strstrokeOpacity="1"
+            strokeOpacity="1"
             strokeWidth="5"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -346,6 +354,12 @@ const steps = [
 ];
 
 export default function MainProcess() {
+  const tr = useTr(en);
+  const translatedSteps = steps.map((s, i) => ({
+    ...s,
+    title: tr(`steps.${i}.title`, KO_STEPS_TEXT[i].title),
+    desc: tr(`steps.${i}.desc`, KO_STEPS_TEXT[i].desc),
+  }));
   const sectionRef = useRef(null);
   const circleRefs = useRef([]);
   const progressRefs = useRef([]);
@@ -379,6 +393,7 @@ export default function MainProcess() {
         const lines = svg ? svg.querySelectorAll('path[stroke="white"]') : [];
         const dots = svg ? svg.querySelectorAll('path[fill="#49CFFF"]') : [];
 
+        // 라인은 안 그려진 상태로 초기화
         lines.forEach((line) => {
           const length = line.getTotalLength();
           gsap.set(line, {
@@ -387,84 +402,17 @@ export default function MainProcess() {
           });
         });
 
-        gsap.set(dots, { scale: 0, transformOrigin: "center center" });
-        if (svg) gsap.set(svg, { filter: "drop-shadow(0 0 0px rgba(73,207,255,0))" });
+        // 점은 처음부터 그냥 보이게 (팝업 없음)
+        gsap.set(dots, { scale: 1 });
 
-        let ambientTl = null;
-
-        // ★ 라인은 지우지 않고 유지한 채로, 점이 은은하게 맥동 + 아이콘 전체 글로우가 숨쉬는 앰비언트 루프
-        const startAmbientLoop = () => {
-          stopAmbientLoop();
-
-          ambientTl = gsap.timeline({ repeat: -1 });
-
-          if (dots.length) {
-            ambientTl.to(
-              dots,
-              {
-                scale: 1.22,
-                duration: 1,
-                ease: "sine.inOut",
-                yoyo: true,
-                repeat: 1,
-                stagger: {
-                  each: 0.14,
-                  yoyo: true,
-                },
-              },
-              0,
-            );
-          }
-
-          if (svg) {
-            ambientTl.to(
-              svg,
-              {
-                filter: "drop-shadow(0 0 16px rgba(73,207,255,0.6))",
-                duration: 1.6,
-                ease: "sine.inOut",
-                yoyo: true,
-                repeat: 1,
-              },
-              0,
-            );
-          }
-        };
-
-        const stopAmbientLoop = () => {
-          if (ambientTl) {
-            ambientTl.kill();
-            ambientTl = null;
-          }
-          gsap.set(dots, { scale: 1 });
-          if (svg) {
-            gsap.set(svg, {
-              filter: "drop-shadow(0 0 0px rgba(73,207,255,0))",
-            });
-          }
-        };
-
-        const iconTl = gsap.timeline({
-          paused: true,
-          onComplete: startAmbientLoop, // ★ 다 그려지면 은은한 맥동 루프 시작
+        // 라인 드로잉만 하는 단순 타임라인
+        const iconTl = gsap.timeline({ paused: true });
+        iconTl.to(lines, {
+          strokeDashoffset: 0,
+          duration: 1.2,
+          ease: "power2.inOut",
+          stagger: 0.06,
         });
-        iconTl
-          .to(lines, {
-            strokeDashoffset: 0,
-            duration: 1,
-            ease: "power2.inOut",
-            stagger: 0.05,
-          })
-          .to(
-            dots,
-            {
-              scale: 1,
-              duration: 0.5,
-              ease: "back.out(2)",
-              stagger: 0.04,
-            },
-            "-=0.4",
-          );
 
         ScrollTrigger.create({
           trigger: li,
@@ -481,7 +429,6 @@ export default function MainProcess() {
           },
           onLeaveBack: () => {
             circle.classList.remove("is-active");
-            stopAmbientLoop();
             iconTl.reverse();
           },
         });
@@ -507,7 +454,6 @@ export default function MainProcess() {
 
     return () => ctx.revert();
   }, []);
-
   return (
     <section className="main-process" ref={sectionRef}>
       {/* <article></article> */}
@@ -515,19 +461,16 @@ export default function MainProcess() {
         className="main-process__title"
         title={
           <>
-            설계, 구축, 운영, 고도화까지
-            <br /> 안정적인 <b>디지털 전환</b>을 제공합니다
+            {tr("title1", "설계, 구축, 운영, 고도화까지")}
+            <br /> {tr("title2a", "안정적인")} <b>{tr("titleB", "디지털 전환")}</b>
+            {tr("title2b", "을 제공합니다")}
           </>
         }
-        eyebrow={
-          <>
-            현장 이해를 바탕으로 설계부터 운영, 개선까지
-          </>
-        }
+        eyebrow={<>{tr("eyebrow", "현장 이해를 바탕으로 설계부터 운영, 개선까지")}</>}
       />
 
       <ul className="mp-list">
-        {steps.map((item, i) => (
+        {translatedSteps.map((item, i) => (
           <li key={item.id} className="mp-item">
             <div className="mp-item__txt">
               <span className="mp-item__step">{item.step}</span>

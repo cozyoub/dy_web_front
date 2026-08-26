@@ -33,7 +33,6 @@ export default function NcoreInteAni() {
         },
       });
 
-      // 로고 리빌
       tl.to(
         progress,
         {
@@ -50,7 +49,6 @@ export default function NcoreInteAni() {
         0,
       );
 
-      // pre 태그: 살짝 시차 두고 사라짐 (blur out + scale down)
       tl.to(
         preTags,
         {
@@ -63,7 +61,6 @@ export default function NcoreInteAni() {
         0,
       );
 
-      // after 태그: 살짝 늦게, 시차 두고 또렷하게 나타남
       tl.to(
         afterTags,
         {
@@ -74,7 +71,7 @@ export default function NcoreInteAni() {
           stagger: 0.06,
         },
         0.1,
-      ); // pre보다 살짝 늦게 시작 → 겹치는 구간에 여운이 생김
+      ); 
     }, containerRef);
 
     return () => ctx.revert();

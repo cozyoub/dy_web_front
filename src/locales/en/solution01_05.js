@@ -1,0 +1,56 @@
+export default {
+  intro: {
+    label: "CRM",
+    d: "A CRM solution that unifies customer information and interaction data to strengthen relationships and drive revenue growth",
+  },
+  features: {
+    title: "Connecting customers and sales as one",
+    items: [
+      "A customer relationship management system built for manufacturing",
+      "Automatic collection of email/SMS/fax documents and use of the resulting analytics",
+      "Secure document management with internal/external document search",
+      "Every sales task in one place",
+      "A wide range of statistical analysis reports",
+      "Cross-browser support",
+    ],
+  },
+  effect: {
+    title1: "A smarter business environment,",
+    title2: "built by CRM to drive customer and business growth",
+    desc: "From reinventing the customer experience to improving operational efficiency, CRM strengthens competitiveness across the enterprise.",
+    items: [
+      { title: "Better Customer Experience", desc: "Account managers and field service technicians get a full 360-degree view of the customer, enabling a personalized experience." },
+      { title: "Higher Customer Retention", desc: "Personalized service and real-time analysis build customer loyalty and establish the best possible customer touchpoints." },
+      { title: "Revenue Growth", desc: "Automated sales history and lead management increase pipeline visibility and support revenue growth." },
+      { title: "Greater Process Efficiency", desc: "Automated processes reduce workload for sales, marketing, and service teams while driving stronger results." },
+    ],
+  },
+  diagram: {
+    title: "N·Core CRM System Architecture",
+    crmLabel: "CRM",
+    customerLabel: "Customer Management",
+    customerModules: ["Customer Registration", "Contact Management", "Contact Status", "Activity Management", "Schedule Management", "Email Management"],
+    salesLabel: "Sales Management",
+    salesModules: ["Order Registration", "Order Progress Status", "Shipping Request Registration", "Shipping Status", "Sales Registration", "Sales Status", "Shipping Status", "Sales Registration"],
+    clientLabel: "Customer",
+    clientTall: "Inspection Terms\nSales Management",
+    clientSingle: "Sales Confirmation",
+    commonLabel: "Common",
+    commonModules: ["Common Code Management", "Menu Registration", "Permission Registration", "User Management", "Notice Lookup", "Program Lookup", "Log Management"],
+    ifLabel: "I/F",
+    erpLabel: "ERP",
+    erpModules: ["Sales", "Production", "Procurement", "Quality", "Master Data"],
+    groupwareLabel: "Groupware",
+    groupwareModules: ["e-Approval"],
+  },
+  card: {
+    title: "Key CRM Screens & Features",
+    desc: "N·Core CRM builds strong customer relationships while growing revenue and profit.",
+    items: [
+      { title: "Customer Management", bullets: ["Turns existing-customer ERP data and prospect management into a company data asset"] },
+      { title: "Contact Management", bullets: ["Manage progress by contact type and stage"] },
+      { title: "Email Management", bullets: ["Recognizes sent/received email as sales activity for the account manager"] },
+      { title: "Status Management", bullets: [] },
+    ],
+  },
+};

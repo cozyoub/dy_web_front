@@ -1,8 +1,11 @@
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
+import useTr from "@/hooks/useTr";
+import en from "@/locales/en/main/MainVideoVisu";
 import "./MainVideoVisu.css";
 
 export default function MainVideoVisu() {
+  const tr = useTr(en);
   const rootRef = useRef(null);
 
   useEffect(() => {
@@ -84,31 +87,31 @@ export default function MainVideoVisu() {
 
         <h1 className="mvv-title">
           <span className="mvv-title-line mvv-title-line--sm">
-            <span className="mvv-title-line-inner">현장 데이터부터 ERP·MES·AI까지 연결해</span>
+            <span className="mvv-title-line-inner">
+              {tr("titleSm", "현장 데이터부터 ERP·MES·AI까지 연결해")}
+            </span>
           </span>
           <span className="mvv-title-line mvv-title-line--lg">
             <span className="mvv-title-line-inner">
-              제조 운영의 <b>디지털 전환</b>을 완성합니다
+              {tr("titleLg1", "제조 운영의")} <b>{tr("titleLgB", "디지털 전환")}</b>
+              {tr("titleLg2", "을 완성합니다")}
             </span>
           </span>
-          {/* <span className="mvv-title-line mvv-title-line--lg">
-            <span className="mvv-title-line-inner">.</span>
-          </span> */}
         </h1>
 
         <p className="mvv-desc">
-          분산된 설비와 업무 데이터를 실시간 운영, 분석, 의사결정에 
+          {tr("desc1", "분산된 설비와 업무 데이터를 실시간 운영, 분석, 의사결정에")}
           <br />
-           활용할 수 있는 환경으로 전환합니다.
+          {tr("desc2", "활용할 수 있는 환경으로 전환합니다.")}
         </p>
 
         <div className="mvv-cta">
           <a href="/contact" className="mvv-cta__btn primary">
-            도입 상담
+            {tr("ctaPrimary", "도입 상담")}
             <span className="mvv-cta__btn__arrow" aria-hidden="true">→</span>
           </a>
           <a href="#case" className="mvv-cta__btn outline">
-            구축 사례
+            {tr("ctaOutline", "구축 사례")}
           </a>
         </div>
       </div>

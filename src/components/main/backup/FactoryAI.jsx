@@ -99,7 +99,6 @@ function DiagramCard({ item }) {
 export default function FactoryAI() {
   const wrapRef = useRef(null);
 
-  // 배경 블러 떠다니는 애니메이션
   useEffect(() => {
     function random(min, max) {
       const delta = max - min;

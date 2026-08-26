@@ -1,14 +1,20 @@
 // components/SubNavi.jsx
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { forwardRef } from "react";
 import { MENU_LIST } from "@/common/menuData";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/hooks/useTranslation";
+import LangLink from "@/components/LangLink";
 import "./SubNavi.css";
 
 const MenuItem = ({ item, depth = 0 }) => {
   const { pathname } = useLocation();
+  const { lang } = useLanguage();
+  const { menuTitle } = useTranslation();
+  const matchPath = lang === "en" ? pathname.replace(/^\/en/, "") || "/" : pathname;
   const hasChildren = item.subMenu?.length > 0;
-  const isActive = pathname.startsWith(item.path);
+  const isActive = matchPath.startsWith(item.path);
   const [isOpen, setIsOpen] = useState(isActive);
 
   return (
@@ -16,10 +22,10 @@ const MenuItem = ({ item, depth = 0 }) => {
       <div onClick={() => hasChildren && setIsOpen(!isOpen)}>
         {hasChildren ? (
           <span>
-            {item.title} {isOpen ? "▲" : "▼"}
+            {menuTitle(item)} {isOpen ? "▲" : "▼"}
           </span>
         ) : (
-          <Link to={item.defaultPath ?? item.path}>{item.title}</Link>
+          <LangLink to={item.defaultPath ?? item.path}>{menuTitle(item)}</LangLink>
         )}
       </div>
       {hasChildren && isOpen && (
@@ -35,21 +41,26 @@ const MenuItem = ({ item, depth = 0 }) => {
 
 const SubNavi = forwardRef((props, ref) => {
   const { pathname } = useLocation();
+  const { lang } = useLanguage();
+  const { menuTitle } = useTranslation();
   const [openIdx, setOpenIdx] = useState(null);
+
+  // /en 접두어를 떼어낸 경로로 메뉴 데이터와 매칭한다 (메뉴 경로엔 /en이 없으므로).
+  const matchPath = lang === "en" ? pathname.replace(/^\/en/, "") || "/" : pathname;
 
   // 현재 경로 1depth
   const activeMenu = MENU_LIST.find(
     (menu) =>
-      pathname.startsWith(menu.path) || 
-      menu.subMenu?.some((sub) => pathname.startsWith(sub.path)), 
+      matchPath.startsWith(menu.path) ||
+      menu.subMenu?.some((sub) => matchPath.startsWith(sub.path)),
   );
   // 현재 경로 2depth
   const activeSubMenu = activeMenu?.subMenu?.find((sub) =>
-    pathname.startsWith(sub.path),
+    matchPath.startsWith(sub.path),
   );
   // 현재 경로 3depth
   const activeSubSubMenu = activeSubMenu?.subMenu?.find((sub) =>
-    pathname.startsWith(sub.path),
+    matchPath.startsWith(sub.path),
   );
 
   const breadcrumb = [activeMenu, activeSubMenu, activeSubSubMenu].filter(
@@ -76,7 +87,7 @@ const SubNavi = forwardRef((props, ref) => {
                 className={`select-btn ${isOpen ? "active" : ""}`}
                 onClick={() => setOpenIdx(isOpen ? null : bIdx)}
               >
-                {current.title}
+                {menuTitle(current)}
               </button>
               <ul
                 className="select-list"
@@ -87,16 +98,16 @@ const SubNavi = forwardRef((props, ref) => {
                 }}
               >
                 {listItems?.map((item, idx) => {
-                  const isActive = pathname.startsWith(item.path);
+                  const isActive = matchPath.startsWith(item.path);
                   return (
                     <li key={idx}>
-                      <Link
+                      <LangLink
                         to={item.defaultPath ?? item.path}
                         style={{ color: isActive ? "#fff" : "#fff" }}
                         onClick={() => setOpenIdx(null)}
                       >
-                        {item.title}
-                      </Link>
+                        {menuTitle(item)}
+                      </LangLink>
                     </li>
                   );
                 })}

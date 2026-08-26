@@ -3,9 +3,12 @@ import MainSectionTitle from "./MainSectionTitle";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import useTr from "@/hooks/useTr";
+import en from "@/locales/en/main/MainDesign";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function MainDesign() {
+  const tr = useTr(en);
   const rootRef = useRef(null);
 
   useEffect(() => {
@@ -70,12 +73,13 @@ export default function MainDesign() {
         <MainSectionTitle
           reverse
           className="main-design__title"
-          eyebrow={<>시스템 구축을 넘어 제조운영 변화를 설계</>}
+          eyebrow={<>{tr("eyebrow", "시스템 구축을 넘어 제조운영 변화를 설계")}</>}
           title={
             <>
-              <b>현장 진단부터 운영고도화</b>까지,
+              <b>{tr("titleB", "현장 진단부터 운영고도화")}</b>
+              {tr("title2a", "까지,")}
               <br />
-              전 과정을 함께합니다
+              {tr("title2b", "전 과정을 함께합니다")}
             </>
           }
         />
@@ -83,31 +87,25 @@ export default function MainDesign() {
         <div className="main-design__content inner">
           <article></article>
           <div className="main-design__itm">
-            <h3 className="main-design__itm-title">현장진단</h3>
+            <h3 className="main-design__itm-title">{tr("items.0.title", "현장진단")}</h3>
             <i className="main-design__itm-ico">
               <img src="/images/main/design_ico01.svg" />
             </i>
-            <p>
-              자동화가 필요한 사무와 현장 업무를 정의하고 우선순위를 제안합니다.
-            </p>
+            <p>{tr("items.0.desc", "자동화가 필요한 사무와 현장 업무를 정의하고 우선순위를 제안합니다.")}</p>
           </div>
           <div className="main-design__itm">
-            <h3 className="main-design__itm-title">통합 구축</h3>
+            <h3 className="main-design__itm-title">{tr("items.1.title", "통합 구축")}</h3>
             <i className="main-design__itm-ico">
               <img src="/images/main/design_ico02.svg" />
             </i>
-            <p>
-              설비, 생산, 경영, AI시스템을 하나의 데이터 흐름으로 연결합니다.
-            </p>
+            <p>{tr("items.1.desc", "설비, 생산, 경영, AI시스템을 하나의 데이터 흐름으로 연결합니다.")}</p>
           </div>
           <div className="main-design__itm">
-            <h3 className="main-design__itm-title">운영 고도화</h3>
+            <h3 className="main-design__itm-title">{tr("items.2.title", "운영 고도화")}</h3>
             <i className="main-design__itm-ico">
               <img src="/images/main/design_ico03.svg" />
             </i>
-            <p>
-              AI 분석 결과를 권고와 제어에 활용해 자율 운영 수준을 높입니다.
-            </p>
+            <p>{tr("items.2.desc", "AI 분석 결과를 권고와 제어에 활용해 자율 운영 수준을 높입니다.")}</p>
           </div>
         </div>
       </div>

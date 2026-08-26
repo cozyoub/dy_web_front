@@ -1,29 +1,29 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { getAllNotiService } from "@/services/noti.service";
-import { BASE_API_URL } from "@/common/constants";
 import Pagination from "@/components/sub/Pagination";
+import NoticeCard from "@/components/sub/NoticeCard";
+import { solutionOptions } from "@/common/solutionMap";
 
 const PAGE_SIZE = 9;
+
+const POST_TYPE_TABS = [
+  { value: "all", label: "전체" },
+  { value: "NOTICE", label: "공지사항" },
+  { value: "SOLUTION", label: "솔루션" },
+];
 
 export default function NoticeList() {
   const [list, setList] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [sfl, setSfl] = useState("title");
   const [stx, setStx] = useState("");
+  const [postType, setPostType] = useState("all");
+  const [solutionFilter, setSolutionFilter] = useState("all");
   const [page, setPage] = useState(1);
-  const navigate = useNavigate();
-
-  const getThumb = (item) => {
-    if (item.sfile) return `${BASE_API_URL}/uploads/${item.sfile}`;
-    if (item.imageUrl) return item.imageUrl;
-    return null;
-  };
 
   useEffect(() => {
     getAllNotiService()
       .then((res) => {
-        // 최신순(createdAt 내림차순) 정렬
         const sorted = [...res.data].sort(
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
         );
@@ -33,36 +33,98 @@ export default function NoticeList() {
       .catch(() => alert("목록 불러오기 실패"));
   }, []);
 
-  const handleSearch = () => {
-    setPage(1);
-    if (!stx.trim()) {
-      setFiltered(list);
-      return;
+  const applyFilter = (type, solution, keyword = stx, field = sfl) => {
+    let result = list;
+
+    if (type === "NOTICE") {
+      result = result.filter((item) => item.postType === "NOTICE");
+    } else if (type === "SOLUTION") {
+      result = result.filter((item) => item.postType === "SOLUTION");
+      if (solution !== "all") {
+        result = result.filter((item) => item.category === solution);
+      }
     }
-    const result = list.filter((item) => {
-      if (sfl === "title") return item.title.includes(stx);
-      if (sfl === "content") return item.content.includes(stx);
-      if (sfl === "both")
-        return item.title.includes(stx) || item.content.includes(stx);
-    });
+
+    if (keyword.trim()) {
+      result = result.filter((item) => {
+        if (field === "title") return item.title.includes(keyword);
+        if (field === "content") return item.content.includes(keyword);
+        if (field === "both")
+          return (
+            item.title.includes(keyword) || item.content.includes(keyword)
+          );
+      });
+    }
+
     setFiltered(result);
+    setPage(1);
+  };
+
+  const handlePostTypeTab = (type) => {
+    setPostType(type);
+    setSolutionFilter("all");
+    applyFilter(type, "all");
+  };
+
+  const handleSolutionFilter = (value) => {
+    setSolutionFilter(value);
+    applyFilter(postType, value);
+  };
+
+  const handleSearch = () => {
+    applyFilter(postType, solutionFilter);
   };
 
   const handleReset = () => {
     setStx("");
+    setPostType("all");
+    setSolutionFilter("all");
     setPage(1);
     setFiltered(list);
   };
 
-  // filtered(필터링된 전체 결과)에서 현재 페이지 분량만 잘라서 화면에 렌더링
   const pageItems = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
     <div className="notice-list-wrapper sub-inner">
-      {/* 검색 */}
+      <div className="board-filter-bar">
+        {POST_TYPE_TABS.map((tab) => (
+          <button
+            key={tab.value}
+            className={
+              "notice-filter-btn" +
+              (postType === tab.value ? " is-active" : "")
+            }
+            onClick={() => handlePostTypeTab(tab.value)}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
       <div className="notice-search-bar">
         <span className="notice-total">Total {filtered.length}</span>
         <div className="notice-search-inner">
+          {postType === "SOLUTION" && (
+            <select
+              value={solutionFilter}
+              onChange={(e) => handleSolutionFilter(e.target.value)}
+            >
+              <option value="all">전체 솔루션</option>
+              {["Management", "Manufacturing", "DX/AX"].map((group) => (
+                <optgroup key={group} label={group}>
+                  {solutionOptions
+                    .filter((opt) => opt.group === group)
+                    .map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </option>
+                    ))}
+                </optgroup>
+              ))}
+            </select>
+          )}
+
           <select value={sfl} onChange={(e) => setSfl(e.target.value)}>
             <option value="title">제목</option>
             <option value="content">내용</option>
@@ -89,24 +151,7 @@ export default function NoticeList() {
           <p className="notice-empty">검색 결과가 없습니다.</p>
         )}
         {pageItems.map((item) => (
-          <div
-            key={item.id}
-            className="notice-card"
-            onClick={() => navigate(`/about/notice/${item.id}`)}
-          >
-            <div className="notice-card-thumb">
-              {getThumb(item) ? (
-                <img src={getThumb(item)} alt={item.title} />
-              ) : (
-                <div className="notice-card-thumb-default">
-                  <img src="/images/logo.png" alt="" />
-                </div>
-              )}
-            </div>
-            <div className="notice-card-body">
-              <p className="notice-card-title">{item.title}</p>
-            </div>
-          </div>
+          <NoticeCard key={item.id} item={item} />
         ))}
       </div>
 

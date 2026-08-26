@@ -3,9 +3,55 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Swiper from "swiper";
 import { EffectFade } from "swiper/modules";
 import "swiper/css";
+import useTr from "@/hooks/useTr";
+import en from "@/locales/en/BusinessAreaTab";
+
+const koTabs = ["솔루션 서비스", "공공/금융 서비스", "IOT/AI/RPA", "Other"];
+
+const koSlides = [
+  {
+    title: "솔루션 서비스",
+    desc: "산업별 업무 환경에 최적화된 솔루션으로 경영 혁신과 디지털 전환을 지원합니다.",
+    tags: ["통합경영관리(ERP)", "인사관리(HR)", "재무회계(FA)", "구매관리(PMS)", "고객관리(CRM)", "실제 원가관리(AC)", "내부회계(ICMS)", "렌탈(RS)", "IT 서비스관리(ITSM)", "그룹웨어(EKP)&메신저"],
+    imgSrc: "/images/sub/about-tab-img01.jpg",
+  },
+  {
+    title: "공공/금융 서비스",
+    desc: "공공기관 및 금융사에 특화된 안정적인 시스템을 제공합니다.",
+    tags: ["정보화전략(ISP)", "업무재설계(BPR)", "시스템종합(SI)", "유지보수(SM)"],
+    imgSrc: "/images/sub/about-tab-img02.jpg",
+  },
+  {
+    title: "IOT/AI/RPA",
+    desc: "스마트팩토리 구현을 위한 IOT, AI, RPA 기술을 통합 제공합니다.",
+    tags: [
+      "빅데이터기반 AI 분석",
+      "통합설비제어관제",
+      "DX/AX(통합설비관제, 통합설비보전, 생산공정최적화, 통합품질관리, 환경안전경영, 통합물류운송, 기업경영관리)",
+      "X-SCADA",
+      "X-DAS",
+    ],
+    imgSrc: "/images/sub/about-tab-img03.jpg",
+  },
+  {
+    title: "Other",
+    desc: "기타 맞춤형 솔루션을 제공합니다.",
+    tags: ["Package 판매", "Brightis AI ", "Cloudium", "폴라리스 오피스", "PDA", "키오스크 장비"],
+    imgSrc: "/images/sub/about-tab-img04.jpg",
+  },
+];
 
 export default function BusinessAreaTab() {
+  const tr = useTr(en);
   const rootRef = useRef(null);
+
+  const tabs = koTabs.map((t, i) => tr(`tabs.${i}`, t));
+  const slides = koSlides.map((s, i) => ({
+    title: tr(`slides.${i}.title`, s.title),
+    desc: tr(`slides.${i}.desc`, s.desc),
+    tags: s.tags.map((tag, ti) => tr(`slides.${i}.tags.${ti}`, tag)),
+    imgSrc: s.imgSrc,
+  }));
 
   useLayoutEffect(() => {
     const root = rootRef.current;
@@ -82,110 +128,40 @@ export default function BusinessAreaTab() {
     <div className="cont-wrap" ref={rootRef}>
       <div className="line-tab-wrap">
         <div className="line-tab-box">
-          <button className="line-tab active" type="button" data-idx="0">
-            솔루션 서비스
-          </button>
-          <button className="line-tab" type="button" data-idx="1">
-            공공/금융 서비스
-          </button>
-          <button className="line-tab" type="button" data-idx="2">
-            IOT/AI/RPA
-          </button>
-          <button className="line-tab" type="button" data-idx="3">
-            Other
-          </button>
+          {tabs.map((tab, i) => (
+            <button
+              key={tab}
+              className={`line-tab${i === 0 ? " active" : ""}`}
+              type="button"
+              data-idx={i}
+            >
+              {tab}
+            </button>
+          ))}
         </div>
       </div>
 
       <div className="tab-cont">
         <div className="swiper about02-swiper">
           <div className="swiper-wrapper">
-            <div className="swiper-slide item">
-              <div className="txt-box">
-                <h3 className="tit">솔루션 서비스</h3>
-                <p className="txt">
-                  산업별 업무 환경에 최적화된 솔루션으로 경영 혁신과 디지털
-                  전환을 지원합니다.
-                </p>
-                <ul className="tag-box">
-                  <li className="tag">통합경영관리(ERP)</li>
-                  <li className="tag">인사관리(HR)</li>
-                  <li className="tag">재무회계(FA)</li>
-                  <li className="tag">구매관리(PMS)</li>
-                  <li className="tag">고객관리(CRM)</li>
-                  <li className="tag">실제 원가관리(AC)</li>
-                  <li className="tag">내부회계(ICMS)</li>
-                  <li className="tag">렌탈(RS)</li>
-                  <li className="tag">IT 서비스관리(ITSM)</li>
-                  <li className="tag">그룹웨어(EKP)&메신저</li>
-                </ul>
+            {slides.map((slide) => (
+              <div className="swiper-slide item" key={slide.title}>
+                <div className="txt-box">
+                  <h3 className="tit">{slide.title}</h3>
+                  <p className="txt">{slide.desc}</p>
+                  <ul className="tag-box">
+                    {slide.tags.map((tag) => (
+                      <li className="tag" key={tag}>
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="img-box">
+                  <img src={slide.imgSrc} alt={slide.title} />
+                </div>
               </div>
-              <div className="img-box">
-                <img src="/images/sub/about-tab-img01.jpg" alt="솔루션 서비스" />
-              </div>
-            </div>
-
-            <div className="swiper-slide item">
-              <div className="txt-box">
-                <h3 className="tit">공공/금융 서비스</h3>
-                <p className="txt">
-                  공공기관 및 금융사에 특화된 안정적인 시스템을 제공합니다.
-                </p>
-                <ul className="tag-box">
-                  <li className="tag">정보화전략(ISP)</li>
-                  <li className="tag">업무재설계(BPR)</li>
-                  <li className="tag">시스템종합(SI)</li>
-                  <li className="tag">유지보수(SM)</li>
-                </ul>
-              </div>
-              <div className="img-box">
-                <img
-                  src="/images/sub/about-tab-img02.jpg"
-                  alt="공공/금융 서비스"
-                />
-              </div>
-            </div>
-
-            <div className="swiper-slide item">
-              <div className="txt-box">
-                <h3 className="tit">IOT/AI/RPA</h3>
-                <p className="txt">
-                  스마트팩토리 구현을 위한 IOT, AI, RPA 기술을 통합
-                  제공합니다.
-                </p>
-                <ul className="tag-box">
-                  <li className="tag">빅데이터기반 AI 분석</li>
-                  <li className="tag">통합설비제어관제</li>
-                  <li className="tag">
-                    DX/AX(통합설비관제, 통합설비보전, 생산공정최적화,
-                    통합품질관리, 환경안전경영, 통합물류운송, 기업경영관리)
-                  </li>
-                  <li className="tag">X-SCADA</li>
-                  <li className="tag">X-DAS</li>
-                </ul>
-              </div>
-              <div className="img-box">
-                <img src="/images/sub/about-tab-img03.jpg" alt="IOT/AI/RPA" />
-              </div>
-            </div>
-
-            <div className="swiper-slide item">
-              <div className="txt-box">
-                <h3 className="tit">Other</h3>
-                <p className="txt">기타 맞춤형 솔루션을 제공합니다.</p>
-                <ul className="tag-box">
-                  <li className="tag">Package 판매</li>
-                  <li className="tag">Brightis AI </li>
-                  <li className="tag">Cloudium</li>
-                  <li className="tag">폴라리스 오피스</li>
-                  <li className="tag">PDA</li>
-                  <li className="tag">키오스크 장비</li>
-                </ul>
-              </div>
-              <div className="img-box">
-                <img src="/images/sub/about-tab-img04.jpg" alt="Other" />
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
