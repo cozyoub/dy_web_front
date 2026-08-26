@@ -1,16 +1,16 @@
 export default {
   intro: {
     desc: "We build a better industrial workplace with digital technology.",
-    title: "About DONGYEON SNT",
+    title: "About DONGYEON S&T",
   },
   visual: {
     kr1: "We build a better industrial workplace with digital technology.",
     kr2: "We deliver efficient operations and sustainable growth.",
   },
   overview: {
-    title: "DONGYEON SNT Overview",
+    title: "DONGYEON S&T Overview",
     labels: ["Company Name", "Founded", "CEO", "Headquarters"],
-    values: ["DONGYEON SNT Co., Ltd.", "February 14, 2006", "Kim Moon-seob", "7F, Hyewon Bldg., 10, Oncheonjang-ro 107beon-gil, Dongnae-gu, Busan, Korea"],
+    values: ["DONGYEON S&T Co., Ltd.", "February 14, 2006", "KIM MUN SUB", "7F, Hyewon Bldg., 10, Oncheonjang-ro 107beon-gil, Dongnae-gu, Busan, Korea"],
   },
   dk: {
     title: "Developing and Operating Solutions for Dongkuk Industries Group Affiliates",

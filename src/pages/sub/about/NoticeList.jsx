@@ -3,16 +3,21 @@ import { getAllNotiService } from "@/services/noti.service";
 import Pagination from "@/components/sub/Pagination";
 import NoticeCard from "@/components/sub/NoticeCard";
 import { solutionOptions } from "@/common/solutionMap";
+import useTr from "@/hooks/useTr";
+import { useTranslation } from "@/hooks/useTranslation";
+import en from "@/locales/en/NoticeList";
+
+const POST_TYPE_TABS = [
+  { value: "all", labelKey: "tabs.all", label: "전체" },
+  { value: "NOTICE", labelKey: "tabs.notice", label: "공지사항" },
+  { value: "SOLUTION", labelKey: "tabs.solution", label: "솔루션" },
+];
 
 const PAGE_SIZE = 9;
 
-const POST_TYPE_TABS = [
-  { value: "all", label: "전체" },
-  { value: "NOTICE", label: "공지사항" },
-  { value: "SOLUTION", label: "솔루션" },
-];
-
 export default function NoticeList() {
+  const tr = useTr(en);
+  const { menuTitle } = useTranslation();
   const [list, setList] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [sfl, setSfl] = useState("title");
@@ -30,7 +35,7 @@ export default function NoticeList() {
         setList(sorted);
         setFiltered(sorted);
       })
-      .catch(() => alert("목록 불러오기 실패"));
+      .catch(() => alert(tr("fetchFailed", "목록 불러오기 실패")));
   }, []);
 
   const applyFilter = (type, solution, keyword = stx, field = sfl) => {
@@ -97,7 +102,7 @@ export default function NoticeList() {
             }
             onClick={() => handlePostTypeTab(tab.value)}
           >
-            {tab.label}
+            {tr(tab.labelKey, tab.label)}
           </button>
         ))}
       </div>
@@ -110,14 +115,14 @@ export default function NoticeList() {
               value={solutionFilter}
               onChange={(e) => handleSolutionFilter(e.target.value)}
             >
-              <option value="all">전체 솔루션</option>
+              <option value="all">{tr("allSolutions", "전체 솔루션")}</option>
               {["Management", "Manufacturing", "DX/AX"].map((group) => (
                 <optgroup key={group} label={group}>
                   {solutionOptions
                     .filter((opt) => opt.group === group)
                     .map((opt) => (
                       <option key={opt.value} value={opt.value}>
-                        {opt.label}
+                        {menuTitle({ path: `/solution/${opt.value}`, title: opt.label })}
                       </option>
                     ))}
                 </optgroup>
@@ -126,19 +131,19 @@ export default function NoticeList() {
           )}
 
           <select value={sfl} onChange={(e) => setSfl(e.target.value)}>
-            <option value="title">제목</option>
-            <option value="content">내용</option>
-            <option value="both">제목+내용</option>
+            <option value="title">{tr("sortField.title", "제목")}</option>
+            <option value="content">{tr("sortField.content", "내용")}</option>
+            <option value="both">{tr("sortField.both", "제목+내용")}</option>
           </select>
           <input
             type="text"
             value={stx}
             onChange={(e) => setStx(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-            placeholder="검색어"
+            placeholder={tr("searchPlaceholder", "검색어")}
           />
           <button className="notice-sch-btn" onClick={handleSearch}>
-            검색
+            {tr("searchBtn", "검색")}
           </button>
           <button className="notice-sch-reset" onClick={handleReset}>
             ✕
@@ -148,7 +153,7 @@ export default function NoticeList() {
 
       <div className="notice-card-grid">
         {pageItems.length === 0 && (
-          <p className="notice-empty">검색 결과가 없습니다.</p>
+          <p className="notice-empty">{tr("empty", "검색 결과가 없습니다.")}</p>
         )}
         {pageItems.map((item) => (
           <NoticeCard key={item.id} item={item} />

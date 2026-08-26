@@ -50,8 +50,8 @@ const common = {
 
   en: {
     company: {
-      name: "DONGYEON SNT", // CONFIRM: 공식 영문 사명
-      ceo: "Kim Moon-seob", // CONFIRM: 대표자 영문 표기
+      name: "DONGYEON S&T", // CONFIRM: 공식 영문 사명
+      ceo: "KIM MUN SUB", // CONFIRM: 대표자 영문 표기
       bizNo: "104-81-99352",
       tel: "+82-51-550-5060",
       email: "dysnt@dkpia.com",

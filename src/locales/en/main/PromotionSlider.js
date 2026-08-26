@@ -11,7 +11,7 @@ export default {
       d2: "a 3D environment, so equipment and processes can be monitored intuitively.",
     },
     {
-      title: "DONGYEON SNT TMS",
+      title: "DONGYEON S&T TMS",
       d1: "Every step of transportation management, in a single system.",
       d2: "Watch a video of TMS's core features and use cases.",
     },

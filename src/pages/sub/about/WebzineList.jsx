@@ -5,6 +5,8 @@ import { BASE_API_URL } from "@/common/constants";
 import { WEBZINE_CATEGORIES } from "@/common/webzineCategories";
 import Pagination from "@/components/sub/Pagination";
 import { formatIssueLabel } from "@/common/webzineUtils";
+import useTr from "@/hooks/useTr";
+import en from "@/locales/en/WebzineList";
 
 const PAGE_SIZE = 9;
 
@@ -14,6 +16,7 @@ const getCardLabel = (item) => {
 };
 
 export default function WebzineList() {
+  const tr = useTr(en);
   const [list, setList] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [category, setCategory] = useState("all");
@@ -41,7 +44,7 @@ export default function WebzineList() {
         setList(sorted);
         setFiltered(sorted);
       })
-      .catch(() => alert("목록 불러오기 실패"));
+      .catch(() => alert(tr("fetchFailed", "목록 불러오기 실패")));
   }, []);
 
   const categories = ["all", ...WEBZINE_CATEGORIES];
@@ -98,7 +101,7 @@ export default function WebzineList() {
             }
             onClick={() => handleCategoryFilter(cat)}
           >
-            {cat === "all" ? "전체" : cat}
+            {cat === "all" ? tr("all", "전체") : tr(`categories.${cat}`, cat)}
           </button>
         ))}
       </div>
@@ -109,7 +112,7 @@ export default function WebzineList() {
           value={issue}
           onChange={(e) => handleIssueFilter(e.target.value)}
         >
-          <option value="all">전체보기</option>
+          <option value="all">{tr("viewAll", "전체보기")}</option>
 
           {issues.map((item) => (
             <option
@@ -124,7 +127,7 @@ export default function WebzineList() {
 
       <div className="webzine-card-grid">
         {pageItems.length === 0 && (
-          <p className="webzine-empty">등록된 웹진이 없습니다.</p>
+          <p className="webzine-empty">{tr("empty", "등록된 웹진이 없습니다.")}</p>
         )}
         {pageItems.map((item) => (
           <div

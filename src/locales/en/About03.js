@@ -93,6 +93,6 @@ export default {
     ],
     2016: [{ title: "Selected as a Smart Factory Task Force Solution Supplier" }],
     2015: [{ title: "Selected for Smart Factory Advancement Technology Development Project", tags: ["National Project", "Ministry of Trade, Industry and Energy"] }],
-    2006: [{ title: "Capital Increase" }, { title: "Founded DONGYEON SNT Co., Ltd." }],
+    2006: [{ title: "Capital Increase" }, { title: "Founded DONGYEON S&T Co., Ltd." }],
   },
 };
