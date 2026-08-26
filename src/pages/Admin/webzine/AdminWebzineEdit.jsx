@@ -11,6 +11,13 @@ import { WEBZINE_CATEGORIES } from "@/common/webzineCategories";
 import { BASE_API_URL } from "@/common/constants";
 import { formatIssueLabel } from "@/common/webzineUtils";
 
+// content가 완전한 HTML 문서(<html ...> 로 시작)인지 판별
+// 에디터로 작성한 글은 <p>, <img> 등 조각 HTML/마크다운이라 이 조건에 안 걸림
+const isRawHtmlDocument = (html) => {
+  if (!html) return false;
+  return /^\s*<(!doctype|html)/i.test(html);
+};
+
 export default function AdminWebzineEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -26,6 +33,10 @@ export default function AdminWebzineEdit() {
   const [thumbPreview, setThumbPreview] = useState(null);
   const [thumbUploading, setThumbUploading] = useState(false);
   const editorRef = useRef(null);
+
+  // 원본 HTML 그대로 저장 모드 (표 기반 뉴스레터 등 복잡한 레이아웃용)
+  const [rawHtmlMode, setRawHtmlMode] = useState(false);
+  const [rawHtml, setRawHtml] = useState("");
 
   const getPreviewUrl = (url) => {
     if (!url) return null;
@@ -53,7 +64,14 @@ export default function AdminWebzineEdit() {
           publishedDate: publishedDate ?? "",
         });
         setCurrentFile(ofile ?? null);
-        editorRef.current?.getInstance().setHTML(content ?? "");
+
+        // 기존 글이 원본 HTML 방식으로 저장돼있으면 그 모드로 자동 전환
+        if (isRawHtmlDocument(content)) {
+          setRawHtmlMode(true);
+          setRawHtml(content ?? "");
+        } else {
+          editorRef.current?.getInstance().setHTML(content ?? "");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -90,7 +108,13 @@ export default function AdminWebzineEdit() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const content = editorRef.current.getInstance().getHTML();
+
+    if (rawHtmlMode && !rawHtml.trim()) {
+      alert("HTML 내용을 입력해주세요.");
+      return;
+    }
+
+    const content = rawHtmlMode ? rawHtml : editorRef.current.getInstance().getHTML();
     const payload = {
       ...form,
       content,
@@ -170,31 +194,57 @@ export default function AdminWebzineEdit() {
             )}
           </div>
 
-          <div className="admin-form-group">
-            <label>내용</label>
-            <Editor
-              ref={editorRef}
-              initialValue=" "
-              previewStyle="vertical"
-              height="400px"
-              initialEditType="wysiwyg"
-              useCommandShortcut={true}
-              hooks={{
-                addImageBlobHook: async (blob, callback) => {
-                  const formData = new FormData();
-                  formData.append("image", blob);
-                  const res = await axiosInstance.post(
-                    "/api/webzine/image",
-                    formData,
-                  );
-                  const fullUrl = res.data.url.startsWith("http")
-                    ? res.data.url
-                    : `${BASE_API_URL}${res.data.url}`;
-                  callback(fullUrl, "이미지");
-                },
-              }}
-            />
+          <div className="admin-checkform-group">
+            <label>
+              원본 HTML 그대로 삽입 (표 기반 뉴스레터 등 복잡한 레이아웃)
+              <input
+                type="checkbox"
+                checked={rawHtmlMode}
+                onChange={(e) => setRawHtmlMode(e.target.checked)}
+              />
+            </label>
+            <p className="admin-form-hint">
+              체크하면 에디터 대신 HTML 코드를 직접 편집합니다.
+            </p>
           </div>
+
+          {rawHtmlMode ? (
+            <div className="admin-form-group">
+              <label>HTML 원본</label>
+              <textarea
+                className="admin-code-textarea"
+                value={rawHtml}
+                onChange={(e) => setRawHtml(e.target.value)}
+                placeholder="<html>...</html> 전체를 그대로 붙여넣으세요"
+              />
+            </div>
+          ) : (
+            <div className="admin-form-group">
+              <label>내용</label>
+              <Editor
+                ref={editorRef}
+                initialValue=" "
+                previewStyle="vertical"
+                height="400px"
+                initialEditType="wysiwyg"
+                useCommandShortcut={true}
+                hooks={{
+                  addImageBlobHook: async (blob, callback) => {
+                    const formData = new FormData();
+                    formData.append("image", blob);
+                    const res = await axiosInstance.post(
+                      "/api/webzine/image",
+                      formData,
+                    );
+                    const fullUrl = res.data.url.startsWith("http")
+                      ? res.data.url
+                      : `${BASE_API_URL}${res.data.url}`;
+                    callback(fullUrl, "이미지");
+                  },
+                }}
+              />
+            </div>
+          )}
 
           <div className="admin-form-group">
             <label>썸네일 이미지</label>

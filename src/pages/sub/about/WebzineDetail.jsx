@@ -16,6 +16,13 @@ const getDetailLabel = (item) => {
   return item.publishedDate ? formatIssueLabel(item.publishedDate) : item.title;
 };
 
+// content가 완전한 HTML 문서(<html ...> 로 시작)인지 판별
+// 에디터로 작성한 글은 <p>, <img> 등 조각 HTML/마크다운이라 이 조건에 안 걸림
+const isRawHtmlDocument = (html) => {
+  if (!html) return false;
+  return /^\s*<(!doctype|html)/i.test(html);
+};
+
 export default function WebzineDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -28,6 +35,8 @@ export default function WebzineDetail() {
   }, [id]);
 
   if (!item) return <div className="webzine-loading">로딩 중...</div>;
+
+  const rawHtml = isRawHtmlDocument(item.content);
 
   return (
     <div className="board-detail-wrapper sub-inner">
@@ -43,7 +52,33 @@ export default function WebzineDetail() {
       </div>
 
       <div className="board-detail-content">
-        <Viewer initialValue={fixImagePaths(item.content)} />
+        {rawHtml ? (
+          // 표 기반 뉴스레터 등 완전한 HTML 문서는 iframe으로 그대로 렌더링
+          // (사이트 전역 CSS와 충돌 없이, 원본 레이아웃 그대로 보여줌)
+          <iframe
+            title={getDetailLabel(item)}
+            srcDoc={item.content}
+            style={{
+              width: "100%",
+              minHeight: "1200px",
+              border: "none",
+              display: "block",
+            }}
+            onLoad={(e) => {
+              try {
+                const doc = e.target.contentDocument;
+                if (doc) {
+                  const h = doc.documentElement.scrollHeight;
+                  e.target.style.height = `${h}px`;
+                }
+              } catch {
+                // cross-origin 등으로 접근 안 되면 기본 높이 유지
+              }
+            }}
+          />
+        ) : (
+          <Viewer initialValue={fixImagePaths(item.content)} />
+        )}
       </div>
 
       {item.ofile && (
