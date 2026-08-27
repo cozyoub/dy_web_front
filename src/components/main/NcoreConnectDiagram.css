@@ -6,13 +6,13 @@ position: absolute;
     border-radius: 50%;
     filter: blur(10rem);
     left: -10%;
-    bottom: 30%;
+    bottom: 0%;
     z-index: 2; opacity: 0.3;
 }
 .ncore-connect{
   position: relative;
   background: var(--bg-navy-200);
-  padding: 7.5rem 0; 
+  padding: 7.5rem 0; overflow: hidden; z-index: -1;
 }
 @media (max-width: 1024px) {
   .ncore-connect{ padding: 16rem 0; }
