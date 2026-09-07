@@ -17,6 +17,7 @@ const HISTORY_DATA = [
   {
     year: 2026,
     events: [
+      { title : "한동대학교 AX/DX 산학협력 MOU"},
       { title: "(사)한국클라우드협회 이사사 위촉" },
       { title: "(사)중소기업기술혁신협회 부산울산지회 이사 위촉" },
       {
@@ -33,14 +34,13 @@ const HISTORY_DATA = [
   {
     year: 2025,
     events: [
-      {
+      {title:"KMAC(한국능률협회컨설팅)-㈜동연S&T 상호협력 (DX/AX/AI, ESG 등)"},      {
         title: "스마트제조혁신추진단 공급기업 역량진단 Level 3- 획득",
         tags: ["기술사업등급 A+"],
       },
       { title: "창원사무소 개소" },
       { title: "부산광역시장 표창장 수상" },
-      { title: "경북테크노파트 MOU 체결" },
-      { title: "창원사무소 개소" },
+      { title: "경북테크노파크 AX/DX 및 스마트 제조혁신 MOU" },
     ],
   },
   {

@@ -21,6 +21,7 @@ export default {
   ],
   events: {
     2026: [
+      {title:"Handong Global University AX/DX Industry-Academia Cooperation MOU"},
       { title: "Appointed Director, Korea Cloud Association" },
       { title: "Appointed Director, Korea SME Technology Innovation Association, Busan-Ulsan Chapter" },
       {
@@ -34,6 +35,7 @@ export default {
       },
     ],
     2025: [
+      { title : "Mutual Cooperation between KMAC (Korea Management Association Consulting) and Dongyeon S&T Co., Ltd. (DX/AX/AI, ESG, etc.)"},
       { title: "Achieved Level 3 Supply Capability Assessment, Smart Manufacturing Innovation Promotion Agency", tags: ["Technology Business Grade A+"] },
       { title: "Opened Changwon Office" },
       { title: "Received Busan Metropolitan Mayor's Commendation" },
