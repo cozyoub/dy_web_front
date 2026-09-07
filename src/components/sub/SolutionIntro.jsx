@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function SolutionIntro({ imageSrc, label, description }) {
+export default function SolutionIntro({ imageSrc, label, description, showLogo = true }) {
   const sectionRef = useRef(null);
   const imgWrapRef = useRef(null);
   const imgRef = useRef(null);
@@ -49,11 +49,11 @@ export default function SolutionIntro({ imageSrc, label, description }) {
       <div ref={overlayRef} className="solution-intro-overlay" />
       <div className="solution-intro-main-title">
         <h2 className="h2-ghost">
-          <img src="/images/sub/ncore-logo-wh.svg" alt="" />
+          {showLogo && <img src="/images/sub/ncore-logo-wh.svg" alt="" />}
           <span>{label}</span>
         </h2>
         <h2 ref={h2MaskRef} className="h2-reveal">
-          <img src="/images/sub/ncore-logo-wh.svg" alt="" />
+          {showLogo && <img src="/images/sub/ncore-logo-wh.svg" alt="" />}
           <span>{label}</span>
         </h2>
       </div>

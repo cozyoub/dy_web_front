@@ -41,6 +41,8 @@ const Solution03_05 = lazy(() => import("@/pages/sub/solution/solution03/Solutio
 const Solution03_06 = lazy(() => import("@/pages/sub/solution/solution03/Solution03_06"));
 const Solution03_07 = lazy(() => import("@/pages/sub/solution/solution03/Solution03_07"));
 
+const CadMira = lazy(() => import("@/pages/sub/solution/CadMira"));
+
 const Industry01 = lazy(() => import("@/pages/sub/industry/Industry01"))
 const Industry02 = lazy(() => import("@/pages/sub/industry/Industry02"))
 const Industry03 = lazy(() => import("@/pages/sub/industry/Industry03"))
@@ -109,121 +111,127 @@ export const MENU_LIST = [{
     path: "/solution",
     defaultPath: "/solution/solution01_01",
     subMenu: [{
-      title: "Management",
-      path: "/solution/solution01",
-      defaultPath: "/solution/solution01_01",
-      subMenu: [{
-        title: "통합경영관리 솔루션(ERP)",
-        path: "/solution/solution01_01",
-        component: Solution01_01
+        title: "Management",
+        path: "/solution/solution01",
+        defaultPath: "/solution/solution01_01",
+        subMenu: [{
+          title: "통합경영관리 솔루션(ERP)",
+          path: "/solution/solution01_01",
+          component: Solution01_01
+        }, {
+          title: "인사관리 솔루션(HR)",
+          path: "/solution/solution01_02",
+          component: Solution01_02
+        }, {
+          title: "재무회계 솔루션(FA)",
+          path: "/solution/solution01_03",
+          component: Solution01_03
+        }, {
+          title: "구매관리 솔루션(PMS)",
+          path: "/solution/solution01_04",
+          component: Solution01_04
+        }, {
+          title: "고객관리 솔루션(CRM)",
+          path: "/solution/solution01_05",
+          component: Solution01_05
+        }, {
+          title: "실제 원가관리 솔루션(AC)",
+          path: "/solution/solution01_06",
+          component: Solution01_06
+        }, {
+          title: "내부회계 솔루션(ICMS)",
+          path: "/solution/solution01_07",
+          component: Solution01_07
+        }, {
+          title: "렌탈 솔루션(RS)",
+          path: "/solution/solution01_08",
+          component: Solution01_08
+        }, {
+          title: "IT 서비스관리 솔루션(ITSM)",
+          path: "/solution/solution01_09",
+          component: Solution01_09
+        }, {
+          title: "그룹웨어(EKP)&메신저",
+          path: "/solution/solution01_10",
+          component: Solution01_10
+        }]
       }, {
-        title: "인사관리 솔루션(HR)",
-        path: "/solution/solution01_02",
-        component: Solution01_02
+        title: "Manufacturing",
+        path: "/solution/solution02",
+        defaultPath: "/solution/solution02_01",
+        subMenu: [{
+          title: "통합 생산 솔루션(MES)",
+          path: "/solution/solution02_01",
+          component: Solution02_01
+        }, {
+          title: "생산스케쥴 최적화 솔루션(APS)",
+          path: "/solution/solution02_02",
+          component: Solution02_02
+        }, {
+          title: "설비관리 솔루션(CMMS)",
+          path: "/solution/solution02_03",
+          component: Solution02_03
+        }, {
+          title: "통합 설비관제 솔루션(ICS)",
+          path: "/solution/solution02_04",
+          component: Solution02_04
+        }, {
+          title: "운송관리 솔루션(TMS)",
+          path: "/solution/solution02_05",
+          component: Solution02_05
+        }, {
+          title: "환경안전 솔루션(ESH)",
+          path: "/solution/solution02_06",
+          component: Solution02_06
+        }, {
+          title: "창고관리 솔루션(WMS)",
+          path: "/solution/solution02_07",
+          component: Solution02_07
+        }, {
+          title: "에너지관리 솔루션(FEMS)",
+          path: "/solution/solution02_08",
+          component: Solution02_08
+        }]
       }, {
-        title: "재무회계 솔루션(FA)",
-        path: "/solution/solution01_03",
-        component: Solution01_03
-      }, {
-        title: "구매관리 솔루션(PMS)",
-        path: "/solution/solution01_04",
-        component: Solution01_04
-      }, {
-        title: "고객관리 솔루션(CRM)",
-        path: "/solution/solution01_05",
-        component: Solution01_05
-      }, {
-        title: "실제 원가관리 솔루션(AC)",
-        path: "/solution/solution01_06",
-        component: Solution01_06
-      }, {
-        title: "내부회계 솔루션(ICMS)",
-        path: "/solution/solution01_07",
-        component: Solution01_07
-      }, {
-        title: "렌탈 솔루션(RS)",
-        path: "/solution/solution01_08",
-        component: Solution01_08
-      }, {
-        title: "IT 서비스관리 솔루션(ITSM)",
-        path: "/solution/solution01_09",
-        component: Solution01_09
-      }, {
-        title: "그룹웨어(EKP)&메신저",
-        path: "/solution/solution01_10",
-        component: Solution01_10
-      }]
-    }, {
-      title: "Manufacturing",
-      path: "/solution/solution02",
-      defaultPath: "/solution/solution02_01",
-      subMenu: [{
-        title: "통합 생산 솔루션(MES)",
-        path: "/solution/solution02_01",
-        component: Solution02_01
-      }, {
-        title: "생산스케쥴 최적화 솔루션(APS)",
-        path: "/solution/solution02_02",
-        component: Solution02_02
-      }, {
-        title: "설비관리 솔루션(CMMS)",
-        path: "/solution/solution02_03",
-        component: Solution02_03
-      }, {
-        title: "통합 설비관제 솔루션(ICS)",
-        path: "/solution/solution02_04",
-        component: Solution02_04
-      }, {
-        title: "운송관리 솔루션(TMS)",
-        path: "/solution/solution02_05",
-        component: Solution02_05
-      }, {
-        title: "환경안전 솔루션(ESH)",
-        path: "/solution/solution02_06",
-        component: Solution02_06
-      }, {
-        title: "창고관리 솔루션(WMS)",
-        path: "/solution/solution02_07",
-        component: Solution02_07
-      }, {
-        title: "에너지관리 솔루션(FEMS)",
-        path: "/solution/solution02_08",
-        component: Solution02_08
-      }]
-    }, {
-      title: "DX/AX",
-      path: "/solution/solution03",
-      defaultPath: "/solution/solution03_01",
-      subMenu: [{
-        title: "통합 설비관제 AI",
-        path: "/solution/solution03_01",
-        component: Solution03_01
-      }, {
-        title: "통합 설비보전 AI",
-        path: "/solution/solution03_02",
-        component: Solution03_02
-      }, {
-        title: "생산공정 최적화 AI",
-        path: "/solution/solution03_03",
-        component: Solution03_03
-      }, {
-        title: "통합 품질관리 AI",
-        path: "/solution/solution03_04",
-        component: Solution03_04
-      }, {
-        title: "환경안전경영 AI",
-        path: "/solution/solution03_05",
-        component: Solution03_05
-      }, {
-        title: "통합 물류운송 AI",
-        path: "/solution/solution03_06",
-        component: Solution03_06
-      }, {
-        title: "기업 경영관리 AI",
-        path: "/solution/solution03_07",
-        component: Solution03_07
-      }]
-    }]
+        title: "DX/AX",
+        path: "/solution/solution03",
+        defaultPath: "/solution/solution03_01",
+        subMenu: [{
+          title: "통합 설비관제 AI",
+          path: "/solution/solution03_01",
+          component: Solution03_01
+        }, {
+          title: "통합 설비보전 AI",
+          path: "/solution/solution03_02",
+          component: Solution03_02
+        }, {
+          title: "생산공정 최적화 AI",
+          path: "/solution/solution03_03",
+          component: Solution03_03
+        }, {
+          title: "통합 품질관리 AI",
+          path: "/solution/solution03_04",
+          component: Solution03_04
+        }, {
+          title: "환경안전경영 AI",
+          path: "/solution/solution03_05",
+          component: Solution03_05
+        }, {
+          title: "통합 물류운송 AI",
+          path: "/solution/solution03_06",
+          component: Solution03_06
+        }, {
+          title: "기업 경영관리 AI",
+          path: "/solution/solution03_07",
+          component: Solution03_07
+        }]
+      },
+      {
+        title: "CADMira",
+        path: "/solution/cadmira",
+        component: CadMira
+      },
+    ]
   },
   // {
   //   title: "Industry",
@@ -295,7 +303,7 @@ export const MENU_LIST = [{
       //   // component:About05
       //   externalLink: "https://support.dkpia.com/login"
       // },
-       {
+      {
         title: "Customer Center",
         externalLink: "https://support.dkpia.com/login"
       }, {
