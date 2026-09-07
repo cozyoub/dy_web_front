@@ -154,11 +154,11 @@ export default function CadMira() {
     sub: tr(`evidence.callouts.${i}.sub`, c.sub),
   }));
 
-  const calloutMarkers = [
-    { num: 1, top: "27%", left: "55%" },
-    { num: 2, top: "48%", left: "17%" },
-    { num: 3, top: "38%", left: "80%" },
-  ];
+//   const calloutMarkers = [
+//     { num: 1, top: "27%", left: "55%" },
+//     { num: 2, top: "48%", left: "17%" },
+//     { num: 3, top: "38%", left: "80%" },
+//   ];
 
   const featureIconsKo = [
     {
