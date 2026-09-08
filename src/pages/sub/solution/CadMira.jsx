@@ -162,14 +162,14 @@ export default function CadMira() {
 
   const featureIconsKo = [
     {
-      title: "DWG",
-      sub: "Editing",
+      title: "DWG Editing",
+    //   sub: "",
       desc: "도면 편집",
       icon: "/images/sub/ico_cad_edit.svg",
     },
     {
-      title: "Layer",
-      sub: "Management",
+      title: "Layer Management",
+    //   sub: "",
       desc: "레이어 관리",
       icon: "/images/sub/ico_cad_layer.svg",
     },
@@ -617,7 +617,9 @@ export default function CadMira() {
           <div className="we-feature-grid">
             {featureIcons.map((f) => (
               <div className="we-feature-item" key={f.title}>
-                <img src={f.icon} alt={f.title} />
+                <div className="we-feature-icon">
+                    <img src={f.icon} alt={f.title} />
+                </div>
                 <div className="we-feature-text">
                   <strong>
                     {f.title}
